@@ -185,7 +185,6 @@ def main():
         update_to_github()
     else:
         logging.info("内容未变更，无需提交")
-    logging.info("脚本执行完毕")
 
 if __name__ == "__main__":
     main()
