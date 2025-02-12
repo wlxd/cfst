@@ -132,7 +132,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-o", result_file,
                 "-httping",
                 "-cfcolo", cfcolo,
-                "-tl", "200",
+                "-tl", "300",
                 "-tll", "10",
                 "-tp", str(random_port),
                 "-dn", "10",
@@ -164,8 +164,8 @@ def process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_tx
     write_to_file(output_txt, [f"{ip}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}" for ip in ip_addresses])
     logging.info(f"提取的 IP 地址和 colo 信息已保存到 {output_txt}")
     
-    write_to_file(port_txt, [f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}┃IPV6┃⚡{speed}(MB/s)" for ip, speed in zip(ip_addresses, download_speeds)])
-    logging.info(f"IP 地址、端口、colo 信息和下载速度已追加到 {port_txt}")
+    write_to_file(port_txt, [f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}┃IPV6" for ip, speed in zip(ip_addresses, download_speeds)])
+    logging.info(f"IP 地址、端口、colo 信息已追加到 {port_txt}")
     
     fast_ips = [f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}┃IPV6┃⚡{speed}(MB/s)" for ip, speed in zip(ip_addresses, download_speeds) if float(speed) > 10]
     if fast_ips:
