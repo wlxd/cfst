@@ -132,7 +132,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-o", result_file,
                 "-httping",
                 "-cfcolo", cfcolo,
-                "-tl", "999",
+                "-tl", "300",
                 "-tll", "10",
                 "-tp", str(random_port),
                 "-dn", "10",
@@ -289,6 +289,15 @@ def main():
         new_md5 = calculate_md5(cfip_file)
         logging.info(f"新 MD5: {new_md5 if new_md5 else '文件不存在'}")
 
+        # 执行 dns_check.py
+        logging.info("正在执行 DNS 记录检查脚本...")
+        try:
+            subprocess.run([sys.executable, "dns_check.py"], check=True)
+            logging.info("DNS 记录检查脚本执行完成。")
+        except subprocess.CalledProcessError as e:
+            logging.error(f"执行 DNS 检查脚本失败: {e}")
+            sys.exit(1)
+    
         logging.info("脚本执行完成。")
         update_to_github(cfip_file, original_md5, new_md5)
 
