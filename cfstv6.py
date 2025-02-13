@@ -273,10 +273,10 @@ def main():
         new_md5 = calculate_md5(cfip_file)
         logging.info(f"新 MD5: {new_md5 if new_md5 else '文件不存在'}")
 
-        # 执行 dns_check.py
+        # 执行 dns_checker.py
         logging.info("正在执行 DNS 记录检查脚本...")
         try:
-            subprocess.run([sys.executable, "dns_check.py"], check=True)
+            subprocess.run([sys.executable, "dns_checker.py"], check=True)
             logging.info("DNS 记录检查脚本执行完成。")
         except subprocess.CalledProcessError as e:
             logging.error(f"执行 DNS 检查脚本失败: {e}")

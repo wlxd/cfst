@@ -90,7 +90,7 @@ python autoddnsfd.py     # 更新反代IP主域名记录（如 proxy.lax.616049.
 
 ### 4. 健康检查
 ```bash
-python dns_check.py
+python dns_checker.py
 ```
 - **检测逻辑**：Ping + TCP端口检测（443, 2053等）。
 - **自动清理**：删除不可达的DNS记录。
@@ -109,7 +109,7 @@ python dns_check.py
 | `autoddns.py`    | 更新IPV4主域名DNS记录                      | `cfip/ip.txt`           | Cloudflare DNS          |
 | `autoddnsv6.py`    | 更新IPV6主域名DNS记录                      | `cfip/ipv6.txt`           | Cloudflare DNS          |
 | `autoddnsfd.py`  | 更新反代IP主域名的DNS记录                | `cfip/fd.txt`           | Cloudflare DNS          |
-| `dns_check.py`   | 检查DNS记录健康状态并清理              | Cloudflare API          | 日志文件                |
+| `dns_checker.py`   | 检查DNS记录健康状态并清理              | Cloudflare API          | 日志文件                |
 | `checker.py`     | 校验IP连通性并过滤无效IP               | `cfip/fd.txt`           | 更新后的`cfip/fd.txt`   |
 | `cfip.py`        | 从网页抓取IP数据并格式化保存           | 网页数据                | `speed/cfip.txt`        |
 

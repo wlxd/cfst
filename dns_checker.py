@@ -15,14 +15,14 @@ if not os.path.exists(logs_dir):
     os.makedirs(logs_dir)
 
 # 删除旧的日志文件（使用通配符匹配）
-log_pattern = os.path.join('logs', 'dns_check_*.log')
+log_pattern = os.path.join('logs', 'dns_checker_*.log')
 old_log_files = glob(log_pattern)
 for old_log_file in old_log_files:
     os.remove(old_log_file)
 
 # 生成新的日志文件名，包含日期和时间
-current_time = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-log_file = os.path.join('logs', f'dns_check_{current_time}.log')
+current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file = os.path.join('logs', f'dns_checker_{current_time}.log')
 
 # 配置日志
 logging.basicConfig(
@@ -36,7 +36,7 @@ logging.basicConfig(
 logger = logging.getLogger()
 
 # 现在可以安全地使用 logger
-logger.info("已删除旧的日志文件并创建新的日志文件: dns_check.log")
+logger.info(f"已删除旧的日志文件并创建新的日志文件: {log_file}")
 
 # 加载 .env 文件中的环境变量
 load_dotenv()

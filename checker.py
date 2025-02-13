@@ -139,8 +139,8 @@ def process_ip_list(input_file, log_file):
         time.sleep(1)
 
 def main():
-    input_file = "cfip/fd.txt"  # 输入文件路径
-    log_file = "logs/fdlog.txt"  # 日志文件路径
+    input_file = "cfip/ip.txt"  # 输入文件路径
+    log_file = "logs/checker.txt"  # 日志文件路径
     process_ip_list(input_file, log_file)
 
 if __name__ == "__main__":
