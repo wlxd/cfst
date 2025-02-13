@@ -66,6 +66,10 @@ LOCATION_TO_DOMAIN = {
     "🇩🇪FRA": "proxy.fra.616049.xyz",  # 法兰克福 
     "🇩🇪DE": "proxy.de.616049.xyz",  # 德国
 
+    # 法国
+    "🇫🇷CDG": "proxy.cdg.616049.xyz",  # 巴黎戴高乐机场
+    "🇫🇷FR": "proxy.fr.616049.xyz",  # 法国
+
     # 英国
     "🇬🇧LHR": "proxy.lhr.616049.xyz",  # 伦敦
     "🇬🇧UK": "proxy.uk.616049.xyz",  # 英国

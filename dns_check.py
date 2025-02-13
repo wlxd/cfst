@@ -83,7 +83,7 @@ def ping_ip(ip, retries=3):
     return False
 
 # 定义TCP检测函数
-def tcp_check(ip, ports=[80, 443, 2053, 2083, 2087, 2096, 8443], retries=3):
+def tcp_check(ip, ports=[443, 2053, 2083, 2087, 2096, 8443], retries=3):
     for port in ports:
         for attempt in range(retries):
             try:

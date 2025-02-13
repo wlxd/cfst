@@ -66,6 +66,10 @@ LOCATION_TO_DOMAIN = {
     "🇩🇪FRA": "frav6.616049.xyz",  # 法兰克福机场
     "🇩🇪DE": "dev6.616049.xyz",  # 德国
 
+    # 法国
+    "🇫🇷CDG": "cdgv6.616049.xyz",  # 巴黎戴高乐机场
+    "🇫🇷FR": "frv6.616049.xyz",  # 法国
+
     # 英国
     "🇬🇧LHR": "lhrv6.616049.xyz",  # 伦敦
     "🇬🇧UK": "ukv6.616049.xyz",  # 英国

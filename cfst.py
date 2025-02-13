@@ -259,7 +259,7 @@ def main():
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
 
-        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA", "ICN", "TPE", "NRT", "SIN"]
+        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA", "CDG"]
         cf_ports = [443, 2053, 2083, 2087, 2096, 8443]
 
         for cfcolo in cfcolo_list:
