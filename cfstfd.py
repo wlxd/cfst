@@ -290,7 +290,6 @@ def main():
             logging.error(f"proxy.txt 下载失败: {e}")
             sys.exit(1)
         # +++ 新增代码结束 +++
-
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
 
