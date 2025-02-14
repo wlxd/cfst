@@ -131,7 +131,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-f", "proxy.txt",
                 "-o", result_file,
                 "-cfcolo", cfcolo,
-                "-tl", "200",
+                "-tl", "150",
                 "-tll", "10",
                 "-tp", str(random_port),
                 "-dn", "10",
@@ -274,7 +274,7 @@ def main():
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
 
-        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA", "ICN", "TPE", "NRT", "SIN"]
+        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA", "ICN", "TPE", "NRT", "SIN", "CDG"]
         cf_ports = [443]
 
         for cfcolo in cfcolo_list:
@@ -287,6 +287,15 @@ def main():
         # 计算新的 MD5
         new_md5 = calculate_md5(cfip_file)
         logging.info(f"新 MD5: {new_md5 if new_md5 else '文件不存在'}")
+
+        # 执行 checker.py
+        logging.info("正在执行 IP 检查脚本...")
+        try:
+            subprocess.run([sys.executable, "checker.py"], check=True)
+            logging.info("IP检查脚本执行完成。")
+        except subprocess.CalledProcessError as e:
+            logging.error(f"执行 IP 检查脚本失败: {e}")
+            sys.exit(1)
 
         # 执行 dns_checker.py
         logging.info("正在执行 DNS 记录检查脚本...")

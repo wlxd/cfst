@@ -132,7 +132,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-o", result_file,
                 #"-httping",
                 "-cfcolo", cfcolo,
-                "-tl", "200",
+                "-tl", "150",
                 "-tll", "10",
                 "-tp", str(random_port),
                 "-dn", "10",
