@@ -176,10 +176,10 @@ def add_dns_records_bulk(ip_data):
             # 提取前缀（例如 "usv6.616049.xyz" 的前缀是 "usv6"）
             prefix = ".".join(domain.split(".")[:1])  # 提取前两部分（usv6）
             # 如果该前缀没有被删除过，则删除该前缀的所有 DNS 记录
-            #if prefix not in deleted_prefixes:
-            #    delete_dns_records_with_prefix(prefix)
-            #    deleted_prefixes.add(prefix)  # 标记该前缀已删除
-            #    prefix_counters[prefix] = 0  # 初始化计数器
+            if prefix not in deleted_prefixes:
+                delete_dns_records_with_prefix(prefix)
+                deleted_prefixes.add(prefix)  # 标记该前缀已删除
+                prefix_counters[prefix] = 0  # 初始化计数器
 
             # 如果该前缀的记录数量已经达到 5 条，则跳过
             if prefix_counters.get(prefix, 0) >= 5:
