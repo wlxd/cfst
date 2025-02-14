@@ -142,6 +142,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-tl", "150",
                 "-tll", "10",
                 "-tlr", "0.2",
+                "-sl", "3",
                 "-tp", str(random_port),
                 "-dn", "10",
                 "-p", "10"
