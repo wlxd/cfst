@@ -4,6 +4,9 @@ import subprocess
 import time
 import logging
 import re
+import sys
+import glob
+from datetime import datetime
 
 # 设置日志
 def setup_logger(log_file):
@@ -27,7 +30,7 @@ def is_ipv6(ip):
     return re.match(r"^[0-9a-fA-F:]+$", ip) is not None
 
 def extract_ip_port(line):
-    """解析 IP 和端口（IPv6 先去掉 []，IPv4 直接解析）"""
+    """解析 IP 和端口（仅在 IPv6 被 [] 包裹时去掉 []，否则保留原样）"""
     line = line.split('#')[0].strip()  # 去掉注释
     if not line:
         return None, None
@@ -35,7 +38,15 @@ def extract_ip_port(line):
     # 解析 IPv6（带 []），格式如 [IPv6]:端口
     ipv6_match = re.match(r"^\[([0-9a-fA-F:]+)\](?::(\d+))?$", line)
     if ipv6_match:
-        ip = ipv6_match.group(1)
+        ip = ipv6_match.group(1)  # 去掉 []
+        port = ipv6_match.group(2)
+        port = int(port) if port else 443  # 默认端口 443
+        return ip, port
+
+    # 解析 IPv6（不带 []），格式如 IPv6:端口
+    ipv6_match = re.match(r"^([0-9a-fA-F:]+)(?::(\d+))?$", line)
+    if ipv6_match:
+        ip = ipv6_match.group(1)  # 保留原样
         port = ipv6_match.group(2)
         port = int(port) if port else 443  # 默认端口 443
         return ip, port
@@ -139,9 +150,27 @@ def process_ip_list(input_file, log_file):
         time.sleep(1)
 
 def main():
-    input_file = "cfip/fd.txt"  # 输入文件路径
-    log_file = "logs/checker.txt"  # 日志文件路径
-    process_ip_list(input_file, log_file)
+    # 默认值为 cfip/xx.txt
+    default_file = "port/ip.txt"
+    if len(sys.argv) > 1:
+        cfip_file = sys.argv[1]  # 使用传递的参数
+    else:
+        cfip_file = default_file  # 使用默认值
+        print(f"No input file specified. Using default file: {cfip_file}")
+
+    # 删除旧的日志文件
+    log_pattern = "logs/checker_*.txt"
+    old_logs = glob.glob(log_pattern)
+    for log in old_logs:
+        os.remove(log)
+        print(f"Deleted old log file: {log}")
+
+    # 生成新的日志文件名
+    current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = f"logs/checker_{current_time}.txt"
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)  # 确保日志目录存在
+
+    process_ip_list(cfip_file, log_file)
 
 if __name__ == "__main__":
     main()

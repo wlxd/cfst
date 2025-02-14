@@ -225,7 +225,7 @@ def main():
         result_file = "csv/resultfd.csv"
         cfip_file = "cfip/fd.txt"
         output_txt = "cfip/fd.txt"
-        port_txt = "port/fdport.txt"
+        port_txt = "port/fd.txt"
         output_cf_txt = "speed/fd.txt"
 
         # 计算原始 MD5
@@ -288,13 +288,13 @@ def main():
         new_md5 = calculate_md5(cfip_file)
         logging.info(f"新 MD5: {new_md5 if new_md5 else '文件不存在'}")
 
-        # 执行 checker.py
-        logging.info("正在执行 IP 检查脚本...")
+        # 调用 checker.py 并传递 cfip_file
+        logging.info("正在调用 checker.py 检查 IP 列表...")
         try:
-            subprocess.run([sys.executable, "checker.py"], check=True)
-            logging.info("IP检查脚本执行完成。")
+            subprocess.run([sys.executable, "checker.py", cfip_file], check=True)
+            logging.info("checker.py 执行完成。")
         except subprocess.CalledProcessError as e:
-            logging.error(f"执行 IP 检查脚本失败: {e}")
+            logging.error(f"执行 checker.py 失败: {e}")
             sys.exit(1)
 
         # 执行 dns_checker.py
