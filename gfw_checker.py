@@ -156,36 +156,27 @@ def check_url(url):
 
 # 测试 URL 列表
 url_list = [
-    #"https://us.616049.xyz",
+    "https://hkg.616049.xyz",
     "https://sjc.616049.xyz",
     "https://sea.616049.xyz",
     "https://lax.616049.xyz",
-    #"https://de.616049.xyz",
     "https://fra.616049.xyz",
-    #"https://hk.616049.xyz",
-    "https://hkg.616049.xyz",
-    #"https://jp.616049.xyz",
-    #"https://nrt.616049.xyz",
-    #"https://sg.616049.xyz",
-    #"https://sin.616049.xyz",
-    #"https://kr.616049.xyz",
-    #"https://icn.616049.xyz",
-    #"https://proxy.us.616049.xyz",
+    "https://icn.616049.xyz",
+    "https://tpe.616049.xyz",
+    "https://nrt.616049.xyz",
+    "https://sin.616049.xyz",
+    "https://cdg.616049.xyz",
+    "https://proxy.hkg.616049.xyz",
     "https://proxy.sjc.616049.xyz",
     "https://proxy.sea.616049.xyz",
     "https://proxy.lax.616049.xyz",
-    #"https://proxy.de.616049.xyz",
     "https://proxy.fra.616049.xyz",
-    #"https://proxy.hk.616049.xyz",
-    "https://proxy.hkg.616049.xyz",
-    #"https://proxy.jp.616049.xyz",
-    #"https://proxy.nrt.616049.xyz",
-    #"https://proxy.sg.616049.xyz",
-    #"https://proxy.sin.616049.xyz",
-    #"https://proxy.kr.616049.xyz",
-    #"https://proxy.icn.616049.xyz",
-]
-
+    "https://proxy.icn.616049.xyz",
+    "https://proxy.tpe.616049.xyz",
+    "https://proxy.nrt.616049.xyz",
+    "https://proxy.sin.616049.xyz",
+    "https://proxy.cdg.616049.xyz",
+    ]
 # 执行检测
 for url in url_list:
     result, reason = check_url(url)
