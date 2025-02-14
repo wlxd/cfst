@@ -81,10 +81,10 @@ def write_to_file(file_path, data, mode="a"):
             logging.info(f"写入: {item}")
 
 def read_csv(file_path):
-    """读取CSV文件并返回数据"""
+    """读取CSV文件并返回数据（IP、下载速度、平均延迟）"""
     if os.path.getsize(file_path) == 0:
         logging.warning(f"文件 {file_path} 为空，跳过读取。")
-        return None, None
+        return None, None, None
     
     with open(file_path, mode="r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
@@ -92,23 +92,29 @@ def read_csv(file_path):
             header = next(reader)
         except StopIteration:
             logging.warning(f"文件 {file_path} 格式不正确或为空，跳过读取。")
-            return None, None
+            return None, None, None
         
-        if "下载速度 (MB/s)" not in header:
-            logging.error("无法找到下载速度列，请检查 CSV 文件表头。")
-            sys.exit(1)
+        # 检查必要列是否存在
+        required_columns = ["下载速度 (MB/s)", "平均延迟"]
+        for col in required_columns:
+            if col not in header:
+                logging.error(f"无法找到 {col} 列，请检查 CSV 文件表头。")
+                sys.exit(1)
         
         speed_index = header.index("下载速度 (MB/s)")
+        latency_index = header.index("平均延迟")
         ip_addresses = []
         download_speeds = []
+        latencies = []
         
         for row in reader:
             ip_addresses.append(row[0])
             download_speeds.append(row[speed_index])
+            latencies.append(row[latency_index])
             if len(ip_addresses) >= 10:
                 break
         
-        return ip_addresses, download_speeds
+        return ip_addresses, download_speeds, latencies
 
 def execute_git_pull():
     """执行 git pull 操作"""
@@ -152,27 +158,38 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
         logging.info(f"{result_file} 文件已存在，无需新建。")
 
 def process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_txt, random_port):
-    """处理测试结果并写入文件"""
-    ip_addresses, download_speeds = read_csv(result_file)
+    """处理测试结果并写入文件（增加延迟信息）"""
+    ip_addresses, download_speeds, latencies = read_csv(result_file)
     
     if not ip_addresses:
         return
     
     logging.info(f"区域 {cfcolo} 提取到的 IP 地址数量: {len(ip_addresses)}")
     
+    # 写入基础IP信息（保持不变）
     write_to_file(output_txt, [f"{ip}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}" for ip in ip_addresses])
-    logging.info(f"提取的 IP 地址和 colo 信息已保存到 {output_txt}")
+    logging.info(f"提取的 IP 地址和 colo 信息已保存到 {output_txt}") 
+       
+    # 新增延迟信息写入 port.txt（格式：IP:端口#地区┃延迟）
+    port_entries = [
+        f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}┃{latency}ms"
+        for ip, latency in zip(ip_addresses, latencies)
+    ]
+    write_to_file(port_txt, port_entries)
+    logging.info(f"IP地址、端口、colo信息及延迟已追加到 {port_txt}")
     
-    write_to_file(port_txt, [f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}" for ip, speed in zip(ip_addresses, download_speeds)])
-    logging.info(f"IP 地址、端口、colo 信息已追加到 {port_txt}")
-    
-    fast_ips = [f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}┃⚡{speed}(MB/s)" for ip, speed in zip(ip_addresses, download_speeds) if float(speed) > 10]
+    # 筛选高速IP（保持不变）
+    fast_ips = [
+        f"{ip}:{random_port}#{colo_emojis.get(cfcolo, '☁️')}{cfcolo}┃⚡{speed}(MB/s)"
+        for ip, speed in zip(ip_addresses, download_speeds)
+        if float(speed) > 10
+    ]
     if fast_ips:
         write_to_file(output_cf_txt, fast_ips)
         logging.info(f"筛选下载速度大于 10 MB/s 的 IP 已追加到 {output_cf_txt}")
     else:
         logging.info(f"区域 {cfcolo} 未找到下载速度大于 10 MB/s 的 IP，跳过写入操作。")
-
+    
     open(result_file, "w").close()
     logging.info(f"已清空 {result_file} 文件。")
 
