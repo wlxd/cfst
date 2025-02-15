@@ -144,8 +144,8 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-tlr", "0.2",
                 #"-sl", "1",
                 "-tp", str(random_port),
-                "-dn", "10",
-                "-p", "10"
+                "-dn", "5",
+                "-p", "5"
             ],
             check=True
         )
@@ -294,7 +294,7 @@ def main():
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
 
-        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA", "ICN", "TPE", "NRT", "SIN", "CDG"]
+        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA"]
         cf_ports = [443]
 
         for cfcolo in cfcolo_list:

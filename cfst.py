@@ -136,7 +136,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 f"./{cfst_path}",
                 "-f", "ip.txt",
                 "-o", result_file,
-                "-httping",
+                #"-httping",
                 "-url", "https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.3/src.tar.gz",
                 "-cfcolo", cfcolo,
                 "-tl", "200",
@@ -144,8 +144,8 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 "-tlr", "0.2",
                 #"-sl", "3",
                 "-tp", str(random_port),
-                "-dn", "10",
-                "-p", "10"
+                "-dn", "5",
+                "-p", "5"
             ],
             check=True
         )
@@ -279,7 +279,7 @@ def main():
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
 
-        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA", "ICN", "TPE", "NRT", "SIN", "CDG"]
+        cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA"]
         cf_ports = [443, 2053, 2083, 2087, 2096, 8443]
 
         for cfcolo in cfcolo_list:
