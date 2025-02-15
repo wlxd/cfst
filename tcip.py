@@ -43,15 +43,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def parse_filename(filename: str) -> str:
-    """解析文件名返回日期部分"""
+def parse_filename(filename: str) -> tuple:
+    """解析文件名返回前缀和日期部分"""
     # 文件名格式: XXXXX-YYYYMMDD-IP.csv，其中XXXXX可以是任意长度的数字
-    date_match = re.match(r'^\d+-\d{8}-IP\.csv$', filename, re.I)
+    date_match = re.match(r'^(\d+)-(\d{8})-IP\.csv$', filename, re.I)
     if date_match:
         logger.info(f"解析文件名成功: {filename} -> {date_match.group(0)}")
-        return date_match.group(0).split('-')[1]  # 提取日期部分
+        return date_match.group(1), date_match.group(2)  # 返回前缀和日期部分
     logger.error(f"文件名解析失败: {filename}")
-    return None
+    return None, None
 
 def delete_old_files():
     for csv_file in Path(DOWNLOAD_DIR).glob("*-*-IP.csv"):  # 修改为匹配 *-*-IP.csv
@@ -91,7 +91,7 @@ def main():
             channel = client.get_entity(CHANNEL)
             logger.info(f"成功接入频道: {channel.title}")
             
-            # 存储最新文件信息 {filename: (timestamp, message)}
+            # 存储最新文件信息 {prefix: (timestamp, filename, message)}
             latest_files = {}
             
             # 遍历消息筛选文件
@@ -107,21 +107,20 @@ def main():
                 if not filename:
                     continue
                 
-                # 更新最新文件记录
-                if filename not in latest_files or msg.date > latest_files[filename][0]:
-                    latest_files[filename] = (msg.date, msg)
-            
-            # 按消息时间排序，只处理最新的文件
-            latest_files = dict(sorted(latest_files.items(), key=lambda x: x[1][0], reverse=True))
-            downloaded_files = set()  # 记录已下载的文件
-            
-            # 下载最新文件
-            latest_date = None
-            for filename, (timestamp, msg) in latest_files.items():
-                if filename in downloaded_files:
-                    logger.info(f"文件已下载过: {filename}")
+                # 解析文件名
+                prefix, date = parse_filename(filename)
+                if not prefix or not date:
+                    logger.error(f"文件名格式错误: {filename}")
                     continue
                 
+                # 更新最新文件记录
+                if prefix not in latest_files or msg.date > latest_files[prefix][0]:
+                    latest_files[prefix] = (msg.date, filename, msg)
+            
+            # 下载最新文件
+            downloaded_files = set()  # 记录已下载的文件
+            
+            for prefix, (timestamp, filename, msg) in latest_files.items():
                 save_path = Path(DOWNLOAD_DIR) / filename
                 if save_path.exists():
                     logger.info(f"文件已存在: {filename}")
@@ -133,20 +132,6 @@ def main():
                 logger.info(f"下载完成: {save_path}")
                 downloaded_files.add(filename)
                 
-                # 解析文件名中的日期
-                date_part = parse_filename(filename)
-                if date_part:
-                    if latest_date is None or date_part > latest_date:
-                        latest_date = date_part
-                        # 删除旧的文件
-                        for old_file in Path(DOWNLOAD_DIR).glob("*-*-IP.csv"):
-                            if old_file.name != filename:
-                                try:
-                                    old_file.unlink()
-                                    logger.info(f"删除旧文件: {old_file.name}")
-                                except Exception as e:
-                                    logger.error(f"文件删除失败: {old_file.name} - {e}")
-        
         except Exception as e:
             logger.error(f"Telegram通信异常: {e}")
             return

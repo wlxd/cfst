@@ -1,6 +1,0 @@
-2025-02-16 01:19:56,930 - INFO: Connecting to 91.108.56.127:443/TcpFull...
-2025-02-16 01:19:56,934 - INFO: Connection to 91.108.56.127:443/TcpFull complete!
-2025-02-16 01:20:05,488 - INFO: 成功接入频道: Cloudflare优选IP
-2025-02-16 01:20:06,386 - ERROR: Telegram通信异常: no such group
-2025-02-16 01:20:06,387 - INFO: Disconnecting from 91.108.56.127:443/TcpFull...
-2025-02-16 01:20:06,390 - INFO: Disconnection from 91.108.56.127:443/TcpFull complete!
