@@ -8,6 +8,7 @@ import logging
 import platform
 import hashlib
 import glob
+import shutil
 from datetime import datetime
 from colo_emojis import colo_emojis
 from checker import process_ip_list
@@ -162,6 +163,19 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
         logging.info(f"{result_file} 文件已存在，无需新建。")
 
 def process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_txt, random_port):
+
+    # 删除 {cfcolo}.csv 文件，路径为 csv 文件夹
+    csv_folder = "csv/ip"
+    file_to_delete = os.path.join(csv_folder, f"{cfcolo}.csv")
+    
+    try:
+        os.remove(file_to_delete)
+        logging.info(f"已成功删除文件 {file_to_delete}")
+    except FileNotFoundError:
+        logging.warning(f"文件 {file_to_delete} 不存在，无法删除")
+    except Exception as e:
+        logging.error(f"删除文件 {file_to_delete} 时发生错误: {e}")
+
     """处理测试结果并写入文件（增加延迟信息）"""
     ip_addresses, download_speeds, latencies = read_csv(result_file)
     
@@ -193,6 +207,15 @@ def process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_tx
         logging.info(f"筛选下载速度大于 10 MB/s 的 IP 已追加到 {output_cf_txt}")
     else:
         logging.info(f"区域 {cfcolo} 未找到下载速度大于 10 MB/s 的 IP，跳过写入操作。")
+
+    # 确保 csv 文件夹存在
+    csv_folder = "csv/ip"
+    os.makedirs(csv_folder, exist_ok=True)
+    
+    # 在清空 result_file 前，先复制文件到指定路径
+    cfcolo_csv = os.path.join(csv_folder, f"{cfcolo}.csv")
+    shutil.copy(result_file, cfcolo_csv)
+    logging.info(f"已将 {result_file} 复制为 {cfcolo_csv}")
     
     open(result_file, "w").close()
     logging.info(f"已清空 {result_file} 文件。")
