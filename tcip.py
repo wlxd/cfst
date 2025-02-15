@@ -53,28 +53,13 @@ def parse_filename(filename: str) -> str:
     logger.error(f"文件名解析失败: {filename}")
     return None
 
-def is_target_file(filename: str) -> bool:
-    """检查是否是当日文件"""
-    date_str = parse_filename(filename)
-    if not date_str:
-        return False
-    
-    try:
-        file_date = datetime.strptime(date_str, "%Y%m%d").date()
-    except ValueError:
-        return False
-    
-    return file_date == datetime.now().date()
-
 def delete_old_files():
-    """删除非当日文件和旧版本文件"""
-    for csv_file in Path(DOWNLOAD_DIR).glob("*.csv"):
-        if not is_target_file(csv_file.name):
-            try:
-                csv_file.unlink()
-                logger.info(f"删除非当日文件: {csv_file.name}")
-            except Exception as e:
-                logger.error(f"文件删除失败: {csv_file.name} - {e}")
+    for csv_file in Path(DOWNLOAD_DIR).glob("*-*-IP.csv"):  # 修改为匹配 *-*-IP.csv
+        try:
+            csv_file.unlink()
+            logger.info(f"删除旧文件: {csv_file.name}")
+        except Exception as e:
+            logger.error(f"文件删除失败: {csv_file.name} - {e}")
 
 def extract_data_from_csv(csv_file):
     """解析CSV并返回数据列表"""
@@ -119,23 +104,48 @@ def main():
                      if isinstance(attr, DocumentAttributeFilename)),
                     None
                 )
-                if not filename or not is_target_file(filename):
+                if not filename:
                     continue
                 
                 # 更新最新文件记录
                 if filename not in latest_files or msg.date > latest_files[filename][0]:
                     latest_files[filename] = (msg.date, msg)
             
+            # 按消息时间排序，只处理最新的文件
+            latest_files = dict(sorted(latest_files.items(), key=lambda x: x[1][0], reverse=True))
+            downloaded_files = set()  # 记录已下载的文件
+            
             # 下载最新文件
+            latest_date = None
             for filename, (timestamp, msg) in latest_files.items():
+                if filename in downloaded_files:
+                    logger.info(f"文件已下载过: {filename}")
+                    continue
+                
                 save_path = Path(DOWNLOAD_DIR) / filename
                 if save_path.exists():
                     logger.info(f"文件已存在: {filename}")
+                    downloaded_files.add(filename)
                     continue
                 
                 logger.info(f"开始下载: {filename}")
                 client.download_media(msg, file=save_path)
                 logger.info(f"下载完成: {save_path}")
+                downloaded_files.add(filename)
+                
+                # 解析文件名中的日期
+                date_part = parse_filename(filename)
+                if date_part:
+                    if latest_date is None or date_part > latest_date:
+                        latest_date = date_part
+                        # 删除旧的文件
+                        for old_file in Path(DOWNLOAD_DIR).glob("*-*-IP.csv"):
+                            if old_file.name != filename:
+                                try:
+                                    old_file.unlink()
+                                    logger.info(f"删除旧文件: {old_file.name}")
+                                except Exception as e:
+                                    logger.error(f"文件删除失败: {old_file.name} - {e}")
         
         except Exception as e:
             logger.error(f"Telegram通信异常: {e}")
@@ -144,9 +154,8 @@ def main():
     # 合并数据并去重
     all_data = []
     for csv_file in Path(DOWNLOAD_DIR).glob("*.csv"):
-        if is_target_file(csv_file.name):
-            logger.info(f"正在处理: {csv_file.name}")
-            all_data.extend(extract_data_from_csv(csv_file))
+        logger.info(f"正在处理: {csv_file.name}")
+        all_data.extend(extract_data_from_csv(csv_file))
     
     # 去重并保存
     unique_data = list({line: None for line in all_data}.keys())

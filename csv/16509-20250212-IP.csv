@@ -1,0 +1,22 @@
+﻿IP地址,端口,TLS,数据中心,地区,城市,网络延迟,下载速度
+50.112.166.63,443,true,PDX,North America,Portland,214 ms,17 kB/s
+204.110.223.199,80,true,CMH,North America,Columbus,241 ms,15 kB/s
+3.98.73.243,443,true,YUL,North America,Montréal,248 ms,15 kB/s
+3.99.106.179,443,true,YUL,North America,Montréal,281 ms,14 kB/s
+204.110.220.79,80,true,SJC,North America,San Jose,178 ms,13 kB/s
+204.110.220.145,80,true,SJC,North America,San Jose,178 ms,13 kB/s
+204.110.221.138,80,true,YUL,North America,Montréal,255 ms,13 kB/s
+18.135.67.188,443,true,LHR,Europe,London,199 ms,12 kB/s
+18.135.188.86,443,true,LHR,Europe,London,198 ms,12 kB/s
+3.7.108.69,443,true,BOM,Asia Pacific,Mumbai,305 ms,12 kB/s
+44.226.147.29,443,true,PDX,North America,Portland,232 ms,11 kB/s
+3.111.155.29,443,true,BOM,Asia Pacific,Mumbai,302 ms,11 kB/s
+44.227.22.10,443,true,PDX,North America,Portland,204 ms,10 kB/s
+204.110.223.177,80,true,IAD,North America,Ashburn,233 ms,10 kB/s
+204.110.221.77,80,true,YUL,North America,Montréal,257 ms,9 kB/s
+204.110.221.40,80,true,YUL,North America,Montréal,249 ms,9 kB/s
+35.167.93.200,443,true,PDX,North America,Portland,240 ms,8 kB/s
+18.189.94.250,443,true,CMH,North America,Columbus,230 ms,8 kB/s
+15.157.7.168,443,true,YUL,North America,Montréal,268 ms,7 kB/s
+13.233.5.49,443,true,BOM,Asia Pacific,Mumbai,315 ms,5 kB/s
+13.40.128.14,8443,true,LHR,Europe,London,195 ms,0 kB/s

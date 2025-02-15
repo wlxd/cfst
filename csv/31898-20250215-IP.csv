@@ -1,0 +1,32 @@
+﻿IP地址,端口,TLS,数据中心,地区,城市,网络延迟,下载速度
+84.235.169.234,443,true,AMS,Europe,Amsterdam,291 ms,1816 kB/s
+64.181.240.173,443,true,SJC,North America,San Jose,179 ms,1670 kB/s
+40.233.70.7,8443,true,YYZ,North America,Toronto,243 ms,799 kB/s
+64.110.104.30,443,true,KIX,Asia Pacific,Osaka,217 ms,684 kB/s
+192.9.137.193,8443,true,SJC,North America,San Jose,188 ms,665 kB/s
+158.101.199.249,8443,true,AMS,Europe,Amsterdam,250 ms,432 kB/s
+158.179.207.182,8443,true,ARN,Europe,Stockholm,261 ms,412 kB/s
+152.70.123.225,8443,true,SJC,North America,San Jose,183 ms,336 kB/s
+150.230.20.156,8443,true,AMS,Europe,Amsterdam,295 ms,252 kB/s
+158.178.153.80,2096,true,AMS,Europe,Amsterdam,297 ms,137 kB/s
+150.230.20.156,2053,true,AMS,Europe,Amsterdam,293 ms,99 kB/s
+168.138.141.235,2053,true,GRU,South America,São Paulo,367 ms,83 kB/s
+168.138.50.249,443,true,KIX,Asia Pacific,Osaka,192 ms,60 kB/s
+146.235.59.153,8443,true,GRU,South America,São Paulo,365 ms,57 kB/s
+89.168.43.31,2053,true,CDG,Europe,Paris,272 ms,42 kB/s
+132.226.163.224,8443,true,GRU,South America,São Paulo,360 ms,37 kB/s
+141.147.47.32,8443,true,FRA,Europe,Frankfurt,295 ms,35 kB/s
+144.22.252.124,443,true,GRU,South America,São Paulo,369 ms,33 kB/s
+129.146.46.164,443,true,LAX,North America,Los Angeles,273 ms,28 kB/s
+158.179.207.182,2053,true,ARN,Europe,Stockholm,258 ms,27 kB/s
+132.145.54.84,8443,true,LHR,Europe,London,242 ms,27 kB/s
+155.248.196.123,443,true,YVR,North America,Vancouver,189 ms,27 kB/s
+129.151.198.3,2053,true,ARN,Europe,Stockholm,285 ms,19 kB/s
+129.151.198.3,8443,true,ARN,Europe,Stockholm,265 ms,19 kB/s
+146.235.59.153,2053,true,GRU,South America,São Paulo,357 ms,17 kB/s
+130.61.23.77,443,true,FRA,Europe,Frankfurt,298 ms,9 kB/s
+129.159.84.71,443,true,IAD,North America,Ashburn,267 ms,8 kB/s
+168.138.184.172,443,true,SIN,Asia Pacific,Singapore,347 ms,0 kB/s
+193.123.235.59,443,true,ICN,Asia Pacific,Seoul,66 ms,0 kB/s
+141.148.229.106,443,true,AMS,Europe,Amsterdam,293 ms,0 kB/s
+140.238.81.102,443,true,FRA,Europe,Frankfurt,250 ms,0 kB/s

@@ -1,0 +1,25 @@
+﻿IP地址,端口,TLS,数据中心,地区,城市,网络延迟,下载速度
+3.112.21.102,443,true,NRT,Asia Pacific,Tokyo,81 ms,236 kB/s
+43.206.192.211,443,true,NRT,Asia Pacific,Tokyo,90 ms,131 kB/s
+13.229.159.215,443,true,SIN,Asia Pacific,Singapore,113 ms,17 kB/s
+204.110.221.115,80,true,YUL,North America,Montréal,255 ms,17 kB/s
+3.98.73.243,443,true,YUL,North America,Montréal,249 ms,5 kB/s
+15.157.7.168,443,true,YUL,North America,Montréal,251 ms,3 kB/s
+3.99.106.179,443,true,YUL,North America,Montréal,249 ms,3 kB/s
+204.110.223.180,80,true,CMH,North America,Columbus,257 ms,3 kB/s
+204.110.221.48,80,true,YUL,North America,Montréal,249 ms,3 kB/s
+204.110.223.199,80,true,CMH,North America,Columbus,256 ms,3 kB/s
+18.135.188.86,443,true,LHR,Europe,London,198 ms,2 kB/s
+18.189.94.250,443,true,CMH,North America,Columbus,235 ms,0 kB/s
+204.110.221.176,80,true,YUL,North America,Montréal,260 ms,0 kB/s
+204.110.220.59,80,true,SJC,North America,San Jose,172 ms,0 kB/s
+13.233.5.49,443,true,BOM,Asia Pacific,Mumbai,302 ms,0 kB/s
+35.167.93.200,443,true,SEA,North America,Seattle,209 ms,0 kB/s
+204.110.221.192,80,true,YUL,North America,Montréal,255 ms,0 kB/s
+3.111.155.29,443,true,BOM,Asia Pacific,Mumbai,319 ms,0 kB/s
+3.7.108.69,443,true,BOM,Asia Pacific,Mumbai,348 ms,0 kB/s
+18.135.67.188,443,true,LHR,Europe,London,201 ms,0 kB/s
+44.227.22.10,443,true,SEA,North America,Seattle,198 ms,0 kB/s
+44.226.147.29,443,true,SEA,North America,Seattle,226 ms,0 kB/s
+50.112.166.63,443,true,SEA,North America,Seattle,223 ms,0 kB/s
+13.40.128.14,8443,true,LHR,Europe,London,197 ms,0 kB/s
