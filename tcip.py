@@ -45,10 +45,12 @@ logger = logging.getLogger(__name__)
 
 def parse_filename(filename: str) -> str:
     """解析文件名返回日期部分"""
-    # 文件名格式: XXXXX-YYYYMMDD-IP.csv
-    date_match = re.match(r'^\d{5}-(\d{8})-IP\.csv$', filename, re.I)
+    # 文件名格式: XXXXX-YYYYMMDD-IP.csv，其中XXXXX可以是任意长度的数字
+    date_match = re.match(r'^\d+-\d{8}-IP\.csv$', filename, re.I)
     if date_match:
-        return date_match.group(1)
+        logger.info(f"解析文件名成功: {filename} -> {date_match.group(0)}")
+        return date_match.group(0).split('-')[1]  # 提取日期部分
+    logger.error(f"文件名解析失败: {filename}")
     return None
 
 def is_target_file(filename: str) -> bool:
