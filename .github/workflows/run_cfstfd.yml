@@ -21,8 +21,8 @@ jobs:
         python-version: '3.9'  # 根据你的需求指定具体版本，例如 3.10
 
     # 3. 安装依赖（可选，如果你的脚本需要）
-     - name: Install dependencies
-       run: pip install -r requirements.txt
+    - name: Install dependencies  # 这行的缩进已修复
+      run: pip install -r requirements.txt
 
     # 4. 执行 Python 脚本
     - name: Run cfstfd.py
