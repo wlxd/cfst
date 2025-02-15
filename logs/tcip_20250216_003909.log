@@ -1,0 +1,11 @@
+2025-02-16 00:39:09,936 - INFO: 删除非当日文件: resultfd.csv
+2025-02-16 00:39:09,937 - INFO: 删除非当日文件: resultv6.csv
+2025-02-16 00:39:09,937 - INFO: 删除非当日文件: result.csv
+2025-02-16 00:39:10,001 - INFO: Connecting to 149.154.167.51:443/TcpFull...
+2025-02-16 00:39:13,395 - INFO: Connection to 149.154.167.51:443/TcpFull complete!
+2025-02-16 00:39:29,286 - INFO: Phone migrated to 1
+2025-02-16 00:39:30,178 - INFO: Reconnecting to new data center 1
+2025-02-16 00:39:31,035 - INFO: Disconnecting from 149.154.167.51:443/TcpFull...
+2025-02-16 00:39:31,042 - INFO: Disconnection from 149.154.167.51:443/TcpFull complete!
+2025-02-16 00:39:31,044 - INFO: Connecting to 149.154.175.51:443/TcpFull...
+2025-02-16 00:40:03,117 - WARNING: Server closed the connection: 0 bytes read on a total of 8 expected bytes

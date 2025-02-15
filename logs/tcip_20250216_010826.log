@@ -1,0 +1,14 @@
+2025-02-16 01:08:26,641 - INFO: Connecting to 149.154.167.51:443/TcpFull...
+2025-02-16 01:08:32,476 - INFO: Connection to 149.154.167.51:443/TcpFull complete!
+2025-02-16 01:08:47,012 - INFO: Phone migrated to 5
+2025-02-16 01:08:47,488 - INFO: Reconnecting to new data center 5
+2025-02-16 01:08:47,914 - INFO: Disconnecting from 149.154.167.51:443/TcpFull...
+2025-02-16 01:08:47,917 - INFO: Disconnection from 149.154.167.51:443/TcpFull complete!
+2025-02-16 01:08:47,918 - INFO: Connecting to 91.108.56.127:443/TcpFull...
+2025-02-16 01:08:55,868 - INFO: Connection to 91.108.56.127:443/TcpFull complete!
+2025-02-16 01:09:33,111 - INFO: 成功接入频道: Cloudflare优选IP
+2025-02-16 01:09:34,182 - INFO: Disconnecting from 91.108.56.127:443/TcpFull...
+2025-02-16 01:09:34,184 - INFO: Disconnection from 91.108.56.127:443/TcpFull complete!
+2025-02-16 01:09:34,194 - INFO: 去重后数据已保存至: cfip/tcip.txt (0条)
+2025-02-16 01:09:34,197 - INFO: 加载 0 个 IP 地址
+2025-02-16 01:09:34,197 - WARNING: 没有找到可用的 IP 地址
