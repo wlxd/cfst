@@ -24,8 +24,8 @@ API_HASH = os.getenv('API_HASH')
 SESSION_NAME = os.getenv('SESSION_NAME', 'default_session')  # 默认值为 default_session
 CHANNEL = '@cloudflareorg'
 LIMIT = 100  # 扩大限制确保覆盖当日文件
-DOWNLOAD_DIR = 'csv'
-OUTPUT_FILE = 'cfip/tcip.txt'
+DOWNLOAD_DIR = 'csv/tcip'
+OUTPUT_FILE = 'port/tcip.txt'
 LOG_DIR = 'logs'
 Path(DOWNLOAD_DIR).mkdir(exist_ok=True)
 Path(LOG_DIR).mkdir(exist_ok=True)
@@ -151,7 +151,7 @@ def main():
     # IP验证和Git提交
     process_ip_list(OUTPUT_FILE, f"logs/checker_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
     subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", f"自动更新 {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
+    subprocess.run(["git", "commit", "-m", f"cfst: 自动更新tcip.txt {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
     subprocess.run(["git", "push"])
 
 if __name__ == '__main__':
