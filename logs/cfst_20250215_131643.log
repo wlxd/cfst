@@ -1,0 +1,13 @@
+2025-02-15 13:16:43,943 - INFO - 已创建或确认目录 csv 存在。
+2025-02-15 13:16:43,943 - INFO - 已创建或确认目录 logs 存在。
+2025-02-15 13:16:43,943 - INFO - 已创建或确认目录 port 存在。
+2025-02-15 13:16:43,944 - INFO - 已创建或确认目录 cfip 存在。
+2025-02-15 13:16:43,944 - INFO - 已创建或确认目录 speed 存在。
+2025-02-15 13:16:43,944 - INFO - 原始 MD5: d41d8cd98f00b204e9800998ecf8427e
+2025-02-15 13:16:43,945 - INFO - 已清空 cfip/ip.txt 文件。
+2025-02-15 13:16:43,945 - INFO - 已清空 port/ip.txt 文件。
+2025-02-15 13:16:43,945 - INFO - 检测到系统架构为 aarch64，将下载对应的 CloudflareST 版本: https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_arm64.tar.gz
+2025-02-15 13:16:43,945 - INFO - 正在测试区域: HKG
+2025-02-15 13:18:18,151 - INFO - csv/result.csv 文件已存在，无需新建。
+2025-02-15 13:18:18,152 - WARNING - 文件 csv/result.csv 为空，跳过读取。
+2025-02-15 13:18:18,153 - INFO - 正在测试区域: SJC

@@ -136,7 +136,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 f"./{cfst_path}",
                 "-f", "ipv6.txt",
                 "-o", result_file,
-                #"-httping",
+                "-httping",
                 "-url", "https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.3/src.tar.gz",
                 "-cfcolo", cfcolo,
                 "-tl", "150",

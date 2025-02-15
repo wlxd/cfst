@@ -1,0 +1,29 @@
+name: Run CFSTFD Script
+
+on:
+  schedule:
+    # 使用 cron 语法设置定时任务 (UTC 时间)
+    - cron: '0 */6 * * *'  # 每隔6小时在0分钟执行一次
+
+jobs:
+  execute-script:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. 检出代码
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. 设置 Python 环境
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # 根据你的需求指定具体版本，例如 3.10
+
+    # 3. 安装依赖（可选，如果你的脚本需要）
+     - name: Install dependencies
+       run: pip install -r requirements.txt
+
+    # 4. 执行 Python 脚本
+    - name: Run cfstfd.py
+      run: python cfstfd.py

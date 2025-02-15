@@ -136,10 +136,10 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
                 f"./{cfst_path}",
                 "-f", "ip.txt",
                 "-o", result_file,
-                #"-httping",
+                "-httping",
                 "-url", "https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.3/src.tar.gz",
                 "-cfcolo", cfcolo,
-                "-tl", "150",
+                "-tl", "200",
                 "-tll", "10",
                 "-tlr", "0.2",
                 #"-sl", "3",
@@ -274,7 +274,7 @@ def main():
 
         logging.info(f"检测到系统架构为 {system_arch}，将下载对应的 CloudflareST 版本: {download_url}")
 
-        execute_git_pull()
+        #execute_git_pull()
 
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
