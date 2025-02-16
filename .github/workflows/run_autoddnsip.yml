@@ -1,6 +1,7 @@
 name: Run autoddnsip
 
 on:
+  workflow_call:
   push:
     branches:
       - main  # 仅在推送到 main 分支时触发，可以修改为你想要的分支
