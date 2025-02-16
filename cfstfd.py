@@ -354,9 +354,9 @@ def main():
                 logging.error(f"执行 DNS 检查脚本失败: {e}")
                 sys.exit(1)
     
-        logging.info("脚本执行完成。")
-        update_to_github(cfip_file, original_md5, new_md5)
-
+            logging.info("脚本执行完成。")
+            update_to_github(cfip_file, original_md5, new_md5)
+    
     except Exception as e:
         logging.exception("脚本执行过程中发生未捕获的异常:")
         sys.exit(1)

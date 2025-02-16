@@ -1,4 +1,4 @@
-name: Run cfstfd
+name: Run cfst
 
 on:
   workflow_call:
@@ -35,13 +35,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run cfstfd script
+    - name: Run cfst script
       run: |
-        python cfstfd.py
+        python cfst.py
 
-    - name: Run autoddnsfd script
+    - name: Run autoddns script
       run: |
-        python ddns/autoddnsfd.py  # 直接调用脚本
+        python ddns/autoddns.py  # 直接调用脚本
 
     - name: Commit and push changes
       run: |
@@ -51,6 +51,6 @@ jobs:
           echo "No changes to commit."
         else
           git add .
-          git commit -m "cfst: Auto-update fd.txt $(date +'%Y-%m-%d %H:%M')"
+          git commit -m "cfst: Auto-update ip.txt $(date +'%Y-%m-%d %H:%M')"
           git push origin main
         fi
