@@ -11,7 +11,6 @@ import glob
 import shutil
 from datetime import datetime
 from colo_emojis import colo_emojis
-from checker import process_ip_list
 
 # ------------------------------
 # 初始化设置
@@ -309,8 +308,6 @@ def main():
             random_port = random.choice(cf_ports)
             execute_cfst_test(cfst_path, cfcolo, result_file, random_port)
             process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_txt, random_port)
-
-        process_ip_list(output_cf_txt, log_file)
 
         # 计算新的 MD5
         new_md5 = calculate_md5(cfip_file)

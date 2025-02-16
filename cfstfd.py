@@ -11,7 +11,6 @@ import glob
 import shutil
 from datetime import datetime
 from colo_emojis import colo_emojis
-from checker import process_ip_list
 
 # ------------------------------
 # 初始化设置
@@ -248,6 +247,10 @@ def update_to_github(cfip_file, original_md5, new_md5):
         logging.error(f"提交 GitHub 失败: {e}")
         print(f"提交 GitHub 失败: {e}")
 
+def is_running_in_github_actions():
+    """检测是否在 GitHub Actions 环境中运行"""
+    return "GITHUB_ACTIONS" in os.environ
+
 def main():
     """主函数"""
     try:
@@ -325,29 +328,31 @@ def main():
             execute_cfst_test(cfst_path, cfcolo, result_file, random_port)
             process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_txt, random_port)
 
-        process_ip_list(output_cf_txt, log_file)
-
         # 计算新的 MD5
         new_md5 = calculate_md5(cfip_file)
         logging.info(f"新 MD5: {new_md5 if new_md5 else '文件不存在'}")
 
-        # 调用 checker.py 并传递 cfip_file
-        logging.info("正在调用 checker.py 检查 IP 列表...")
-        try:
-            subprocess.run([sys.executable, "checker.py", cfip_file], check=True)
-            logging.info("checker.py 执行完成。")
-        except subprocess.CalledProcessError as e:
-            logging.error(f"执行 checker.py 失败: {e}")
-            sys.exit(1)
+        # 检测是否在 GitHub Actions 环境中运行
+        if is_running_in_github_actions():
+            logging.info("正在 GitHub Actions 环境中运行，跳过调用 checker.py 和 dns_checker.py")
+        else:
+            # 调用 checker.py 并传递 cfip_file
+            logging.info("正在调用 checker.py 检查 IP 列表...")
+            try:
+                subprocess.run([sys.executable, "checker.py", cfip_file], check=True)
+                logging.info("checker.py 执行完成。")
+            except subprocess.CalledProcessError as e:
+                logging.error(f"执行 checker.py 失败: {e}")
+                sys.exit(1)
 
-        # 执行 dns_checker.py
-        logging.info("正在执行 DNS 记录检查脚本...")
-        try:
-            subprocess.run([sys.executable, "dns_checker.py"], check=True)
-            logging.info("DNS 记录检查脚本执行完成。")
-        except subprocess.CalledProcessError as e:
-            logging.error(f"执行 DNS 检查脚本失败: {e}")
-            sys.exit(1)
+            # 执行 dns_checker.py
+            logging.info("正在执行 DNS 记录检查脚本...")
+            try:
+                subprocess.run([sys.executable, "dns_checker.py"], check=True)
+                logging.info("DNS 记录检查脚本执行完成。")
+            except subprocess.CalledProcessError as e:
+                logging.error(f"执行 DNS 检查脚本失败: {e}")
+                sys.exit(1)
     
         logging.info("脚本执行完成。")
         update_to_github(cfip_file, original_md5, new_md5)
