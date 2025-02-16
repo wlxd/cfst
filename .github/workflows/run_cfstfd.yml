@@ -39,8 +39,9 @@ jobs:
       run: |
         python cfstfd.py
 
-    - name: Set up Environment
-      uses: ./.github/workflows/run_autoddnsfd.yml
+    - name: Run autoddnsfd script
+      run: |
+        python ddns/autoddnsfd.py  # 直接调用脚本
 
     - name: Commit and push changes
       run: |
