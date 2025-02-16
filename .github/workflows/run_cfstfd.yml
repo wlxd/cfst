@@ -1,4 +1,4 @@
-name: Run CFSTFD Script
+name: Run cfstfd
 
 on:
   schedule:

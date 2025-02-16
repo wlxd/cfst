@@ -1,4 +1,4 @@
-name: Run tcip.py Every Hour
+name: Run tcip.py
 
 on:
   schedule:
