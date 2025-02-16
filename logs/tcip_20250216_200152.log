@@ -1,0 +1,7 @@
+2025-02-16 20:01:52,577 - INFO: Connecting to 91.108.56.127:443/TcpFull...
+2025-02-16 20:01:52,692 - WARNING: Attempt 1 at connecting failed: gaierror: [Errno 7] No address associated with hostname
+2025-02-16 20:01:53,700 - WARNING: Attempt 2 at connecting failed: gaierror: [Errno 7] No address associated with hostname
+2025-02-16 20:01:54,712 - WARNING: Attempt 3 at connecting failed: gaierror: [Errno 7] No address associated with hostname
+2025-02-16 20:01:55,720 - WARNING: Attempt 4 at connecting failed: gaierror: [Errno 7] No address associated with hostname
+2025-02-16 20:01:56,728 - WARNING: Attempt 5 at connecting failed: gaierror: [Errno 7] No address associated with hostname
+2025-02-16 20:01:57,738 - WARNING: Attempt 6 at connecting failed: gaierror: [Errno 7] No address associated with hostname

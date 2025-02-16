@@ -1,0 +1,14 @@
+2025-02-16 20:01:11,424 - INFO: 删除旧文件: 16509-20250215-IP.csv
+2025-02-16 20:01:11,427 - INFO: 删除旧文件: 17849-20250214-IP.csv
+2025-02-16 20:01:11,428 - INFO: 删除旧文件: 45102-20250215-IP.csv
+2025-02-16 20:01:11,428 - INFO: 删除旧文件: 61112-20250215-IP.csv
+2025-02-16 20:01:11,429 - INFO: 删除旧文件: 40065-20250215-IP.csv
+2025-02-16 20:01:11,429 - INFO: 删除旧文件: 31898-20250215-IP.csv
+2025-02-16 20:01:11,429 - INFO: 删除旧文件: 396982-20250215-IP.csv
+2025-02-16 20:01:11,441 - INFO: Connecting to 91.108.56.127:443/TcpFull...
+2025-02-16 20:01:11,963 - WARNING: Attempt 1 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy m.vlato.us.kg:47182: [Errno 7] No address associated with hostname
+2025-02-16 20:01:12,982 - WARNING: Attempt 2 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy m.vlato.us.kg:47182: [Errno 7] No address associated with hostname
+2025-02-16 20:01:14,000 - WARNING: Attempt 3 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy m.vlato.us.kg:47182: [Errno 7] No address associated with hostname
+2025-02-16 20:01:15,011 - WARNING: Attempt 4 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy m.vlato.us.kg:47182: [Errno 7] No address associated with hostname
+2025-02-16 20:01:16,024 - WARNING: Attempt 5 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy m.vlato.us.kg:47182: [Errno 7] No address associated with hostname
+2025-02-16 20:01:17,036 - WARNING: Attempt 6 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy m.vlato.us.kg:47182: [Errno 7] No address associated with hostname

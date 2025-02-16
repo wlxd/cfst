@@ -1,0 +1,7 @@
+2025-02-16 20:22:12,937 - INFO: Connecting to 91.108.56.127:443/TcpFull...
+2025-02-16 20:22:13,246 - WARNING: Attempt 1 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy s14.serv00.com:33474: [Errno 111] Connection refused
+2025-02-16 20:22:14,553 - WARNING: Attempt 2 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy s14.serv00.com:33474: [Errno 111] Connection refused
+2025-02-16 20:22:15,846 - WARNING: Attempt 3 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy s14.serv00.com:33474: [Errno 111] Connection refused
+2025-02-16 20:22:17,171 - WARNING: Attempt 4 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy s14.serv00.com:33474: [Errno 111] Connection refused
+2025-02-16 20:22:18,483 - WARNING: Attempt 5 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy s14.serv00.com:33474: [Errno 111] Connection refused
+2025-02-16 20:22:19,798 - WARNING: Attempt 6 at connecting failed: ProxyConnectionError: Error connecting to SOCKS5 proxy s14.serv00.com:33474: [Errno 111] Connection refused

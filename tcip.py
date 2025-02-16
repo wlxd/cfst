@@ -83,10 +83,7 @@ def extract_data_from_csv(csv_file):
 def main():
     delete_old_files()
     
-    # 代理配置（如果需要）
-    proxy = None  # 根据实际情况配置 
-
-    with TelegramClient(SESSION_NAME, API_ID, API_HASH, proxy=proxy) as client:
+    with TelegramClient(SESSION_NAME, API_ID, API_HASH) as client:
         try:
             channel = client.get_entity(CHANNEL)
             logger.info(f"成功接入频道: {channel.title}")

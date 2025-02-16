@@ -1,0 +1,59 @@
+name: Run tcip.py Every Hour
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # 每小时的第0分钟触发
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  run-tcip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"  # 根据需要调整Python版本
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # 确保requirements.txt包含所有依赖
+
+      - name: Install Telethon
+        run: pip install telethon
+
+      - name: Install dotenv
+        run: pip install python-dotenv
+
+      - name: Install other dependencies
+        run: pip install pathlib2
+
+      - name: Set up environment variables
+        run: |
+          touch .env
+          echo "API_ID=${{ secrets.API_ID }}" >> .env
+          echo "API_HASH=${{ secrets.API_HASH }}" >> .env
+          echo "SESSION_NAME=${{ secrets.SESSION_NAME }}" >> .env
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          SESSION_NAME: ${{ secrets.SESSION_NAME }}
+
+      - name: Run tcip.py
+        run: python tcip.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes to commit."
+          else
+            git add .
+            git commit -m "Auto-update tcip.txt $(date +'%Y-%m-%d %H:%M')"
+            git push origin main
+          fi
