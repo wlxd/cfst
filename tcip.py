@@ -149,10 +149,10 @@ def main():
     if os.getenv('GITHUB_ACTIONS') != 'true':
         # IP验证和Git提交
         process_ip_list(OUTPUT_FILE, f"logs/checker_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
-        logger.info("检测到在 GitHub Actions 中运行，跳过 IP 验证步骤。")
-    subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", f"cfst: 自动更新tcip.txt {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
-    subprocess.run(["git", "push", "origin", "main"])
+        subprocess.run(["git", "add", "."])
+        subprocess.run(["git", "commit", "-m", f"cfst: 自动更新tcip.txt {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
+        subprocess.run(["git", "push", "origin", "main"])
+        logger.info("检测到在 GitHub Actions 中运行，跳过 IP 验证和提交代码步骤。")
 
 if __name__ == '__main__':
     main()
