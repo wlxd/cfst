@@ -44,6 +44,6 @@ jobs:
             echo "No changes to commit."
           else
             git add .
-            git commit -m "Auto-update tcip.txt $(date +'%Y-%m-%d %H:%M')"
+            git commit -m "cfst: Auto-update tcip.txt $(date +'%Y-%m-%d %H:%M')"
             git push origin main
           fi
