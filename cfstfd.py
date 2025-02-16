@@ -126,29 +126,29 @@ def execute_git_pull():
         logging.error(f"git pull 失败: {e}")
         sys.exit(1)
 
-def execute_cfst_test(cfst_path, cfcolo, result_file, random_port):
+def execute_cfst_test(cfst_path, cfcolo, result_file, random_port, ping_mode):
     """执行 CloudflareSpeedTest 测试"""
-    logging.info(f"正在测试区域: {cfcolo}")
-    
+    logging.info(f"正在测试区域: {cfcolo}，模式: {'HTTPing' if ping_mode == '-httping' else 'TCPing'}")
+
+    command = [
+        f"./{cfst_path}",
+        "-f", "proxy.txt",
+        "-o", result_file,
+        "-url", "https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.3/src.tar.gz",
+        "-cfcolo", cfcolo,
+        "-tl", "200",
+        "-tll", "10",
+        "-tlr", "0.2",
+        "-tp", str(random_port),
+        "-dn", "5",
+        "-p", "5"
+    ]
+
+    if ping_mode:  # 只有在选择 HTTPing 时才加 `-httping`
+        command.append(ping_mode)
+
     try:
-        subprocess.run(
-            [
-                f"./{cfst_path}",
-                "-f", "proxy.txt",
-                "-o", result_file,
-                "-httping",
-                "-url", "https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.3/src.tar.gz",
-                "-cfcolo", cfcolo,
-                "-tl", "200",
-                "-tll", "10",
-                "-tlr", "0.2",
-                #"-sl", "1",
-                "-tp", str(random_port),
-                "-dn", "5",
-                "-p", "5"
-            ],
-            check=True
-        )
+        subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
         logging.error(f"CloudflareSpeedTest 测试失败: {e}")
         sys.exit(1)
@@ -251,6 +251,32 @@ def is_running_in_github_actions():
     """检测是否在 GitHub Actions 环境中运行"""
     return "GITHUB_ACTIONS" in os.environ
 
+def get_ping_mode():
+    """交互式选择 ping 模式，5 秒无操作默认使用 TCPing"""
+    print("请选择 CloudflareSpeedTest 运行模式:")
+    print("1. TCPing (默认，无参数)")
+    print("2. HTTPing (-httping)")
+    print("（5 秒内未选择将默认使用 TCPing）")
+
+    try:
+        user_input = input_with_timeout(5)
+        if user_input == "2":
+            return "-httping"  # 仅在选择 2 时添加参数
+        else:
+            return ""  # 默认使用 tcping，不加参数
+    except TimeoutError:
+        print("超时，默认使用 TCPing")
+        return ""  # 默认情况下不加 -httping 参数
+
+def input_with_timeout(timeout):
+    """等待用户输入，超时返回 None"""
+    import select
+    rlist, _, _ = select.select([sys.stdin], [], [], timeout)
+    if rlist:
+        return sys.stdin.readline().strip()
+    else:
+        raise TimeoutError
+
 def main():
     """主函数"""
     try:
@@ -319,13 +345,16 @@ def main():
         # +++ 新增代码结束 +++
         if not os.path.exists(cfst_path):
             download_and_extract(download_url, cfst_path)
+        
+        # 让用户选择 TCPing 或 HTTPing 模式
+        ping_mode = get_ping_mode()
 
         cfcolo_list = ["HKG", "SJC", "SEA", "LAX", "FRA"]
         cf_ports = [443]
 
         for cfcolo in cfcolo_list:
             random_port = random.choice(cf_ports)
-            execute_cfst_test(cfst_path, cfcolo, result_file, random_port)
+            execute_cfst_test(cfst_path, cfcolo, result_file, random_port, ping_mode)
             process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_txt, random_port)
 
         # 计算新的 MD5
