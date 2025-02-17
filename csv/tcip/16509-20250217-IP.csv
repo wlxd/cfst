@@ -1,0 +1,27 @@
+﻿IP地址,端口,TLS,数据中心,地区,城市,网络延迟,下载速度
+3.112.21.102,443,true,NRT,Asia Pacific,Tokyo,82 ms,19398 kB/s
+204.110.220.189,80,true,SJC,North America,San Jose,178 ms,8140 kB/s
+204.110.220.224,80,true,SJC,North America,San Jose,170 ms,7384 kB/s
+204.110.221.78,80,true,YUL,North America,Montréal,255 ms,5284 kB/s
+44.226.147.29,443,true,SEA,North America,Seattle,228 ms,4936 kB/s
+204.110.221.77,80,true,YUL,North America,Montréal,249 ms,4439 kB/s
+204.110.221.176,80,true,YUL,North America,Montréal,256 ms,4149 kB/s
+18.189.94.250,443,true,IAD,North America,Ashburn,234 ms,3435 kB/s
+204.110.221.35,80,true,YUL,North America,Montréal,251 ms,2380 kB/s
+35.167.93.200,443,true,SEA,North America,Seattle,201 ms,2015 kB/s
+18.135.188.86,443,true,LHR,Europe,London,199 ms,1417 kB/s
+43.206.192.211,443,true,NRT,Asia Pacific,Tokyo,82 ms,1407 kB/s
+204.110.221.223,80,true,YUL,North America,Montréal,252 ms,1324 kB/s
+204.110.221.179,80,true,YUL,North America,Montréal,273 ms,1116 kB/s
+204.110.221.192,80,true,YUL,North America,Montréal,270 ms,953 kB/s
+13.229.159.215,443,true,SIN,Asia Pacific,Singapore,104 ms,409 kB/s
+50.112.166.63,443,true,SEA,North America,Seattle,221 ms,284 kB/s
+204.110.223.199,80,true,IAD,North America,Ashburn,243 ms,217 kB/s
+44.227.22.10,443,true,SEA,North America,Seattle,221 ms,188 kB/s
+3.111.155.29,443,true,BOM,Asia Pacific,Mumbai,313 ms,115 kB/s
+18.135.67.188,443,true,LHR,Europe,London,202 ms,96 kB/s
+3.7.108.69,443,true,BOM,Asia Pacific,Mumbai,299 ms,67 kB/s
+3.99.106.179,443,true,YUL,North America,Montréal,262 ms,67 kB/s
+3.98.73.243,443,true,YUL,North America,Montréal,251 ms,64 kB/s
+15.157.7.168,443,true,YUL,North America,Montréal,256 ms,61 kB/s
+13.233.5.49,443,true,BOM,Asia Pacific,Mumbai,299 ms,61 kB/s
