@@ -1,2 +1,2 @@
 ﻿IP地址,端口,TLS,数据中心,地区,城市,网络延迟,下载速度
-117.123.31.2,40005,false,ICN,Asia Pacific,Seoul,77 ms,0 kB/s
+166.0.188.128,13657,true,LAX,North America,Los Angeles,172 ms,9895 kB/s
