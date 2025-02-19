@@ -43,6 +43,10 @@ def calculate_md5(file_path):
 
 def update_to_github():
     """提交所有变更到GitHub"""
+    if os.getenv("GITHUB_ACTIONS"):  # 检查是否在GitHub Actions中运行
+        logging.info("检测到在GitHub Actions中运行，跳过提交到GitHub")
+        return
+
     try:
         logging.info("变更已提交到GitHub")
         subprocess.run(["git", "add", "."], check=True)

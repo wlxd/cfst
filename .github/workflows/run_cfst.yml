@@ -2,6 +2,9 @@ name: Run cfst
 
 on:
   workflow_call:
+  schedule:
+    # 使用 cron 语法设置定时任务 (UTC 时间)
+    - cron: '0 */12 * * *'  # 每隔12小时在0分钟执行一次
   workflow_dispatch:  # 允许手动触发
 
 jobs:

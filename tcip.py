@@ -172,11 +172,27 @@ def main():
 
     # 检测是否在 GitHub Actions 中运行
     if os.getenv('GITHUB_ACTIONS') != 'true':
-        # IP验证和Git提交
-        subprocess.run(["git", "add", "."])
-        subprocess.run(["git", "commit", "-m", f"cfst: 自动更新tcip.txt {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
-        subprocess.run(["git", "push", "origin", "main"])
-        logger.info("检测到在 GitHub Actions 中运行，跳过 IP 验证和提交代码步骤。")
-
+        # 执行 IP 验证和 Git 提交操作
+        try:
+            logging.info("开始执行 Git 操作...")
+            
+            # 添加文件到暂存区
+            logging.info("执行 git add...")
+            subprocess.run(["git", "add", "."], check=True)
+            
+            # 提交更改
+            commit_message = f"cfst: 自动更新tcip.txt {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"
+            logging.info(f"执行 git commit: {commit_message}")
+            subprocess.run(["git", "commit", "-m", commit_message], check=True)
+            
+            # 推送更改到远程仓库
+            logging.info("执行 git push...")
+            subprocess.run(["git", "push", "origin", "main"], check=True)
+            
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Git 操作失败: {e}")
+    else:
+        logging.info("检测到在 GitHub Actions 中运行，跳过 IP 验证和提交代码步骤。")
+    
 if __name__ == '__main__':
     main()
