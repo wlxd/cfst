@@ -3,7 +3,7 @@ name: Run tcip.py
 on:
   workflow_call:
   schedule:
-    - cron: "0 */2 * * *"  # 每小时的第0分钟触发
+    - cron: "0 */4 * * *"  # 每小时的第0分钟触发
   workflow_dispatch:  # 允许手动触发
 
 jobs:

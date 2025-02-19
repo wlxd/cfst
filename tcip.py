@@ -9,7 +9,6 @@ from telethon.sync import TelegramClient
 from telethon.tl.types import DocumentAttributeFilename
 import socks
 from colo_emojis import colo_emojis
-from checker import process_ip_list
 from dotenv import load_dotenv
 import os
 
@@ -141,14 +140,39 @@ def main():
     
     # 去重并保存
     unique_data = list({line: None for line in all_data}.keys())
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        f.write("\n".join(unique_data))
-    logger.info(f"去重后数据已保存至: {OUTPUT_FILE} ({len(unique_data)}条)")
+
+    # 新增：过滤排除特定地区代码
+    excluded_colos = {'YUL', 'CMH', 'KIX', 'IAD', 'GRU', 'EWR', 'ORD', 'BOM', 'PDX', 'CMH'}  # 需要排除的地区代码
+    filtered_data = []
+    for line in unique_data:
+        parts = line.split('#')
+        if len(parts) < 2:
+            continue  # 忽略格式不正确的行
+        colo_part = parts[1]
+        # 提取地区代码（如YUL、CMH）
+        colo_code = re.findall(r'[A-Z]{3}$', colo_part)
+        if colo_code and colo_code[0] in excluded_colos:
+            logger.info(f"排除行: {line}")
+            continue
+        filtered_data.append(line)
     
+    # 保存过滤后的数据
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        f.write("\n".join(filtered_data))
+    logger.info(f"过滤后数据已保存至: {OUTPUT_FILE} ({len(filtered_data)}条)")
+
+    # 调用 checker.py 并传递 cfip_file
+    logging.info("正在调用 checker.py 检查 IP 列表...")
+    try:
+        subprocess.run([sys.executable, "checker.py", OUTPUT_FILE], check=True)
+        logging.info("checker.py 执行完成。")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"执行 checker.py 失败: {e}")
+        sys.exit(1)
+
     # 检测是否在 GitHub Actions 中运行
     if os.getenv('GITHUB_ACTIONS') != 'true':
         # IP验证和Git提交
-        process_ip_list(OUTPUT_FILE, f"logs/checker_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
         subprocess.run(["git", "add", "."])
         subprocess.run(["git", "commit", "-m", f"cfst: 自动更新tcip.txt {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
         subprocess.run(["git", "push", "origin", "main"])
