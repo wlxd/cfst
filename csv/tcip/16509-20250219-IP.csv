@@ -1,27 +1,26 @@
 ﻿IP地址,端口,TLS,数据中心,地区,城市,网络延迟,下载速度
-3.112.21.102,443,true,NRT,Asia Pacific,Tokyo,82 ms,13850 kB/s
-204.110.220.152,80,true,SJC,North America,San Jose,172 ms,7716 kB/s
-204.110.220.169,80,true,SJC,North America,San Jose,173 ms,7596 kB/s
-204.110.220.55,80,true,SJC,North America,San Jose,175 ms,7455 kB/s
-35.167.93.200,443,true,PDX,North America,Portland,204 ms,7252 kB/s
-204.110.220.230,80,true,SJC,North America,San Jose,180 ms,5452 kB/s
-44.226.147.29,443,true,PDX,North America,Portland,228 ms,4585 kB/s
-204.110.223.219,80,true,IAD,North America,Ashburn,227 ms,4374 kB/s
-204.110.223.6,80,true,IAD,North America,Ashburn,260 ms,4333 kB/s
-204.110.223.255,80,true,IAD,North America,Ashburn,248 ms,3272 kB/s
-50.112.166.63,443,true,PDX,North America,Portland,219 ms,2418 kB/s
-18.189.94.250,443,true,IAD,North America,Ashburn,239 ms,1731 kB/s
-43.206.192.211,443,true,NRT,Asia Pacific,Tokyo,86 ms,1395 kB/s
-204.110.221.138,80,true,YUL,North America,Montréal,255 ms,1135 kB/s
-204.110.221.69,80,true,YUL,North America,Montréal,250 ms,875 kB/s
-44.227.22.10,443,true,PDX,North America,Portland,200 ms,272 kB/s
-15.157.7.168,443,true,YUL,North America,Montréal,250 ms,157 kB/s
-13.229.159.215,443,true,SIN,Asia Pacific,Singapore,104 ms,156 kB/s
-18.135.67.188,443,true,LHR,Europe,London,248 ms,137 kB/s
-18.135.188.86,443,true,LHR,Europe,London,199 ms,93 kB/s
-3.7.108.69,443,true,BOM,Asia Pacific,Mumbai,305 ms,77 kB/s
-3.98.73.243,443,true,YUL,North America,Montréal,249 ms,77 kB/s
-3.99.106.179,443,true,YUL,North America,Montréal,257 ms,73 kB/s
-3.111.155.29,443,true,BOM,Asia Pacific,Mumbai,306 ms,54 kB/s
-13.233.5.49,443,true,BOM,Asia Pacific,Mumbai,294 ms,51 kB/s
-204.110.223.75,80,true,IAD,North America,Ashburn,229 ms,45 kB/s
+204.110.223.255,80,true,CMH,North America,Columbus,242 ms,5141 kB/s
+13.40.128.14,8443,true,LHR,Europe,London,195 ms,5087 kB/s
+204.110.221.115,80,true,YUL,North America,Montréal,268 ms,5005 kB/s
+204.110.223.199,80,true,CMH,North America,Columbus,231 ms,3996 kB/s
+43.206.192.211,443,true,NRT,Asia Pacific,Tokyo,92 ms,1239 kB/s
+35.167.93.200,443,true,PDX,North America,Portland,205 ms,959 kB/s
+204.110.220.230,80,true,SJC,North America,San Jose,175 ms,822 kB/s
+204.110.221.223,80,true,YUL,North America,Montréal,248 ms,820 kB/s
+204.110.221.231,80,true,YUL,North America,Montréal,264 ms,687 kB/s
+18.135.188.86,443,true,LHR,Europe,London,189 ms,580 kB/s
+13.229.159.215,443,true,SIN,Asia Pacific,Singapore,113 ms,563 kB/s
+50.112.166.63,443,true,PDX,North America,Portland,224 ms,556 kB/s
+44.226.147.29,443,true,PDX,North America,Portland,240 ms,537 kB/s
+18.189.94.250,443,true,CMH,North America,Columbus,230 ms,486 kB/s
+3.112.21.102,443,true,NRT,Asia Pacific,Tokyo,86 ms,444 kB/s
+204.110.223.83,80,true,IAD,North America,Ashburn,255 ms,377 kB/s
+204.110.221.138,80,true,YUL,North America,Montréal,246 ms,333 kB/s
+18.135.67.188,443,true,LHR,Europe,London,200 ms,86 kB/s
+44.227.22.10,443,true,PDX,North America,Portland,206 ms,83 kB/s
+3.99.106.179,443,true,YUL,North America,Montréal,248 ms,80 kB/s
+15.157.7.168,443,true,YUL,North America,Montréal,250 ms,64 kB/s
+3.7.108.69,443,true,BOM,Asia Pacific,Mumbai,357 ms,54 kB/s
+3.98.73.243,443,true,YUL,North America,Montréal,249 ms,45 kB/s
+13.233.5.49,443,true,BOM,Asia Pacific,Mumbai,310 ms,43 kB/s
+3.111.155.29,443,true,BOM,Asia Pacific,Mumbai,296 ms,38 kB/s
