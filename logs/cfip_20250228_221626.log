@@ -1,0 +1,19 @@
+2025-02-28 22:16:26,788 - INFO - 处理成功: 104.18.56.238#🇺🇸IAD┃⚡36.62MB/s
+2025-02-28 22:16:26,801 - INFO - 处理成功: 104.18.131.245#🇺🇸IAD┃⚡35.34MB/s
+2025-02-28 22:16:26,815 - INFO - 处理成功: 104.17.247.86#🇺🇸IAD┃⚡35.16MB/s
+2025-02-28 22:16:26,829 - INFO - 处理成功: 198.41.192.94#🇺🇸IAD┃⚡35.04MB/s
+2025-02-28 22:16:26,843 - INFO - 处理成功: 104.18.172.23#🇺🇸IAD┃⚡34.7MB/s
+2025-02-28 22:16:26,863 - INFO - 处理成功: 104.16.219.242#🇺🇸IAD┃⚡34.61MB/s
+2025-02-28 22:16:26,887 - INFO - 处理成功: 104.18.243.54#🇺🇸IAD┃⚡34.19MB/s
+2025-02-28 22:16:36,895 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f60c472ded0>, 'Connection to 162.159.198.130 timed out. (connect timeout=10)')': /cdn-cgi/trace
+2025-02-28 22:16:48,908 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f60c472e050>, 'Connection to 162.159.198.130 timed out. (connect timeout=10)')': /cdn-cgi/trace
+2025-02-28 22:17:02,923 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f60c472e200>, 'Connection to 162.159.198.130 timed out. (connect timeout=10)')': /cdn-cgi/trace
+2025-02-28 22:17:12,934 - ERROR - 获取162.159.198.130的Trace信息失败: HTTPConnectionPool(host='162.159.198.130', port=80): Max retries exceeded with url: /cdn-cgi/trace (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f60c472e3b0>, 'Connection to 162.159.198.130 timed out. (connect timeout=10)'))
+2025-02-28 22:17:12,950 - INFO - 处理成功: 108.162.196.130#🇺🇸IAD┃⚡33.46MB/s
+2025-02-28 22:17:12,965 - INFO - 处理成功: 198.41.201.94#🇺🇸IAD┃⚡32.45MB/s
+2025-02-28 22:17:12,965 - INFO - 旧文件speed MD5哈希: be01960ea2cc758c5c8f32441b1058c4
+2025-02-28 22:17:12,965 - INFO - 旧文件cfip MD5哈希: b818e0c72d941d6bd9ce790fabdeab50
+2025-02-28 22:17:12,965 - INFO - 新文件speed MD5哈希: 6d6204142107c556f52f2ccfbb230518
+2025-02-28 22:17:12,966 - INFO - 新文件cfip MD5哈希: f50e5c96fa862535b241cf26046896f7
+2025-02-28 22:17:12,966 - INFO - 检测到变更，提交到GitHub
+2025-02-28 22:17:12,966 - INFO - 检测到在GitHub Actions中运行，跳过提交到GitHub
