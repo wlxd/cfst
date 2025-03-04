@@ -1,0 +1,8 @@
+# 示例 requirements.txt
+requests
+PySocks
+telethon
+beautifulsoup4
+python-dotenv
+dnspython
+requests[socks]
