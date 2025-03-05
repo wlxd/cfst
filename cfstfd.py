@@ -499,18 +499,6 @@ def update_to_github():
         logging.error(f"提交 GitHub 失败: {e}")
         print(f"提交 GitHub 失败: {e}")
 
-def run_git_command(command):
-    try:
-        # 使用 subprocess.run 运行命令
-        result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
-        # 打印命令的输出
-        print("命令输出：")
-        print(result.stdout)
-    except subprocess.CalledProcessError as e:
-        # 如果命令运行失败，打印错误信息
-        print("命令执行失败：")
-        print(e.stderr)
-
 # ------------------------------
 # 主函数
 # ------------------------------
@@ -692,14 +680,6 @@ def main():
             print(f"\n{COLOR_BOLD}{COLOR_GREEN}✅ 所有测试已完成！{COLOR_RESET}")
             print(f"{COLOR_CYAN}📤 正在提交结果到 GitHub...{COLOR_RESET}")
             update_to_github()
-
-        # 运行 git status
-        print("运行 git status：")
-        run_git_command("git status")
-        
-        # 运行 git diff HEAD~1 port_txt
-        print(f"\n运行 git diff HEAD~1 {port_txt}：")
-        run_git_command(f"git diff HEAD~1 {port_txt}")
 
     except Exception as e:  # 新增的异常捕获块
         print(f"\n{COLOR_BOLD}{COLOR_RED}💥 脚本执行遇到错误：{str(e)}{COLOR_RESET}")

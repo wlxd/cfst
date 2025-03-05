@@ -53,29 +53,68 @@ jobs:
           python ip_checker.py
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
+          if git diff --quiet port/ip.txt; then
             echo "No changes to commit."
           else
             git status
             git add .
-            git commit -m "cfst: Auto-update on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
+            git commit -m "cfst: Auto-update port/ip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
             git push origin main
+            git log -1 --stat origin/main
           fi
 
       - name: Proxy health check and auto-update
-        run: python proxy_checker.py
+        run: |
+          python proxy_checker.py
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet port/fd.txt; then
+            echo "No changes to commit."
+          else
+            git status
+            git add .
+            git commit -m "cfst: Auto-update port/fd.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
+            git push origin main
+            git log -1 --stat origin/main
 
       - name: Run tcip checker
-        run: python checker.py port/tcip.txt
-
-      - name: Run ip checker
-        run: python checker.py port/ip.txt
-
-      - name: Run fd checker
-        run: python checker.py port/fd.txt
+        run: |
+          python checker.py port/tcip.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet port/tcip.txt; then
+            echo "No changes to commit."
+          else
+            git status
+            git add .
+            git commit -m "cfst: Auto-update port/tcip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
+            git push origin main
+            git log -1 --stat origin/main
 
       - name: Run cfip checker
-        run: python checker.py port/cfip.txt
+        run: |
+          python checker.py speed/cfip.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet speed/cfip.txt; then
+            echo "No changes to commit."
+          else
+            git status
+            git add .
+            git commit -m "cfst: Auto-update speed/cfip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
+            git push origin main
+            git log -1 --stat origin/main
 
       - name: Run speed/ip checker
-        run: python checker.py speed/ip.txt
+        run: |
+          python checker.py speed/ip.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet speed/ip.txt; then
+            echo "No changes to commit."
+          else
+            git status
+            git add .
+            git commit -m "cfst: Auto-update speed/ip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
+            git push origin main
+            git log -1 --stat origin/main
