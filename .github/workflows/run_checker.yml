@@ -78,6 +78,7 @@ jobs:
             git commit -m "cfst: Auto-update port/fd.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
             git push origin main
             git log -1 --stat origin/main
+          fi
 
       - name: Run tcip checker
         run: |
@@ -93,6 +94,7 @@ jobs:
             git commit -m "cfst: Auto-update port/tcip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
             git push origin main
             git log -1 --stat origin/main
+          fi
 
       - name: Run cfip checker
         run: |
@@ -108,6 +110,7 @@ jobs:
             git commit -m "cfst: Auto-update speed/cfip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
             git push origin main
             git log -1 --stat origin/main
+          fi
 
       - name: Run speed/ip checker
         run: |
@@ -123,3 +126,4 @@ jobs:
             git commit -m "cfst: Auto-update speed/ip.txt on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
             git push origin main
             git log -1 --stat origin/main
+          fi
