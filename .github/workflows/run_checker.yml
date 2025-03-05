@@ -49,7 +49,18 @@ jobs:
           echo "自定义时区时间: $(TZ=Asia/Shanghai date)"
 
       - name: IP health check and auto-update
-        run: python ip_checker.py
+        run: |
+          python ip_checker.py
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes to commit."
+          else
+            git status
+            git add .
+            git commit -m "cfst: Auto-update on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
+            git push origin main
+          fi
 
       - name: Proxy health check and auto-update
         run: python proxy_checker.py
@@ -68,15 +79,3 @@ jobs:
 
       - name: Run speed/ip checker
         run: python checker.py speed/ip.txt
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
-            echo "No changes to commit."
-          else
-            git add .
-            git commit -m "cfst: Auto-update on $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 添加时区参数
-            git push origin main
-          fi
