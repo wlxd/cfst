@@ -272,7 +272,7 @@ def main():
         logging.info(f"触发更新: {codes_str}")
         try:
             # 执行CFST更新
-            result = subprocess.run(
+            cfst_result = subprocess.run(
                 ['python', 'cfst.py', codes_str, '--no-ddns'],  # 添加参数
                 check=True,
                 stdout=subprocess.PIPE,
@@ -284,10 +284,10 @@ def main():
             success_msg = format_telegram_message(
                 "更新成功",
                 f"• 地区代码: `{codes_str}`\n"
-                f"• 输出结果:\n```\n{result.stdout[:3800]}```"
+                f"• 输出结果:\n```\n{ddns_result.stdout[:3800]}```"
             )
             send_telegram_notification(success_msg)
-            logging.info(f"🔄 更新成功\n输出结果:\n{result.stdout}")
+            logging.info(f"🔄 更新成功\n输出结果:\n{ddns_result.stdout}")
 
             # 新增CSV文件检查和DDNS执行逻辑
             codes = codes_str.split(',')
@@ -330,7 +330,7 @@ def main():
                     # 执行DDNS更新（关键修改点）
                     if codes_str:
                         codes_list = codes_str.split(',')
-                        subprocess.run(
+                        ddns_result = subprocess.run(
                             ['python', 'ddns/autoddns.py', '--regions'] + codes_list,
                             check=True,
                             stdout=subprocess.PIPE,
@@ -338,7 +338,7 @@ def main():
                             text=True
                         )
                     else:
-                        subprocess.run(
+                        ddns_result = subprocess.run(
                             ['python', 'ddns/autoddns.py'],
                             check=True,
                             stdout=subprocess.PIPE,
@@ -351,10 +351,10 @@ def main():
                         "自动维护完成",
                         f"• 更新地区: `{codes_str}`\n"
                         f"• 文件状态:\n{csv_report}\n"
-                        f"• DDNS输出:\n```\n{result.stdout[:3800]}```"
+                        f"• DDNS输出:\n```\n{ddns_result.stdout[:3800]}```"
                     )
                     send_telegram_notification(combined_msg)
-                    logging.info(f"🔄 DDNS更新成功\n输出结果:\n{result.stdout}")
+                    logging.info(f"🔄 DDNS更新成功\n输出结果:\n{ddns_result.stdout}")
                     
                 except subprocess.CalledProcessError as e:
                     error_msg = format_telegram_message(

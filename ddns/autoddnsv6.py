@@ -371,6 +371,7 @@ if __name__ == "__main__":
                 filtered_ip_data.append((ip, port, loc))
         
         ip_data = filtered_ip_data
+        logging.warning(f"过滤IP记录: {ip_data}")
 
     if not ip_data:
         logging.error(f"未找到匹配 {target_regions} 的IP记录")
