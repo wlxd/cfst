@@ -1,7 +1,9 @@
+import re
 import os
 import requests
 import logging
 import sys
+import argparse
 from dotenv import load_dotenv
 from urllib.parse import urlparse  # 新增导入
 
@@ -38,6 +40,12 @@ if not all([API_KEY, EMAIL, ZONE_ID, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID]):
 
 # 在环境变量加载之后添加代理配置读取
 TELEGRAM_PROXY = os.getenv('TELEGRAM_PROXY')  # 新增代理配置
+
+# 传入区域参数
+def parse_args():
+    parser = argparse.ArgumentParser(description='自动更新DNS记录')
+    parser.add_argument('--regions', nargs='*', help='区域代码列表（如 HKG LAX）')
+    return parser.parse_args()
 
 # 修改后的发送函数
 def send_to_telegram(message):
@@ -314,9 +322,32 @@ def clear_log_file():
 
 # 主程序
 if __name__ == "__main__":
+    args = parse_args()
+    target_codes = args.regions if args.regions else None
+
     clear_log_file()
     ip_data = get_ips_from_file(f"port/{fd}.txt")
+    
+    if target_codes:
+        # 构建区域代码到location键的映射
+        code_to_locations = {}
+        for loc in LOCATION_TO_DOMAIN.keys():
+            match = re.search(r'([A-Z]{2,3})$', loc)
+            if match:
+                code = match.group(1)
+                code_to_locations.setdefault(code, []).append(loc)
+        
+        valid_locations = []
+        for code in target_codes:
+            locs = code_to_locations.get(code, [])
+            valid_locations.extend(locs)
+            if not locs:
+                logging.warning(f"区域代码 {code} 无匹配的location")
+        
+        # 过滤IP数据
+        ip_data = [(ip, port, loc) for ip, port, loc in ip_data if loc in valid_locations]
+
     if not ip_data:
-        logging.error(f"未读取到 IP 数据，请检查 port/{fd}.txt 文件格式是否正确。")
+        logging.error(f"未读取到有效IP数据，请检查文件或区域代码")
     else:
         add_dns_records_bulk(ip_data)

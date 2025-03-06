@@ -232,7 +232,6 @@ def main():
                 if success:
                     success_count += 1
                     logging.info(f"[{code}] ✅ {host}:{args.port} 连接成功")
-                    send_telegram_notification(f"[{code}] ✅ {host}:{args.port} 连接成功")
                 else:
                     fail_count += 1
                     logging.error(
@@ -248,9 +247,7 @@ def main():
 
     logging.info("\n" + "="*40)
     logging.info(f"总检测节点: {len(proxies)}")
-    send_telegram_notification(f"总检测节点: {len(proxies)}")
     logging.info(f"✅ 成功节点: {success_count}")
-    send_telegram_notification(f"✅ 成功节点: {success_count}")
     if fail_count > 0:
         logging.error(f"❌ 失败节点: {fail_count}")
         send_telegram_notification(f"❌ 失败节点: {fail_count}")
@@ -330,14 +327,24 @@ def main():
                 logging.info("检测到有效CSV文件，触发DDNS更新\n" + csv_report.replace("• ", ""))
                 
                 try:
-                    # 执行DDNS更新
-                    ddns_result = subprocess.run(
-                        ['python', 'ddns/autoddnsfd.py'],
-                        check=True,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        text=True
-                    )
+                    # 执行DDNS更新（关键修改点）
+                    if codes_str:
+                        codes_list = codes_str.split(',')
+                        ddns_result = subprocess.run(
+                            ['python', 'ddns/autoddnsfd.py', '--regions'] + codes_list,
+                            check=True,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True
+                        )
+                    else:
+                        ddns_result = subprocess.run(
+                            ['python', 'ddns/autoddnsfd.py'],
+                            check=True,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True
+                        )
                     
                     # 发送合并通知
                     combined_msg = format_telegram_message(
