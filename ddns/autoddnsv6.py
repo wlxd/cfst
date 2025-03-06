@@ -8,6 +8,16 @@ import argparse
 from dotenv import load_dotenv
 from urllib.parse import urlparse  # 新增导入
 
+# 获取当前文件的绝对路径
+current_file_path = os.path.abspath(__file__)
+# 获取当前文件所在目录的父目录
+parent_dir = os.path.dirname(os.path.dirname(current_file_path))
+
+# 将父目录下的 py 文件夹路径添加到 sys.path
+sys.path.append(os.path.join(parent_dir, 'py'))
+
+from colo_emojis import colo_emojis
+
 # 加载环境变量
 load_dotenv()
 
@@ -334,31 +344,35 @@ def clear_log_file():
 # 主程序
 if __name__ == "__main__":
     args = parse_args()
-    target_codes = args.regions if args.regions else None
+    target_regions = args.regions if args.regions else None
 
     clear_log_file()
     ip_data = get_ips_from_file(f"port/{fd}.txt")
     
-    if target_codes:
-        # 构建区域代码到location键的映射
-        code_to_locations = {}
-        for loc in LOCATION_TO_DOMAIN.keys():
-            match = re.search(r'([A-Z]{2,3})$', loc)
-            if match:
-                code = match.group(1)
-                code_to_locations.setdefault(code, []).append(loc)
+    if target_regions:
+        target_countries = set()
+        # 转换区域代码为国家代码
+        for code in target_regions:
+            if code in colo_emojis:
+                # 从映射中获取国家代码（如 "US"）
+                target_countries.add(colo_emojis[code][1])  
+            elif len(code) == 2 and code.isupper():
+                # 直接使用国家代码（如 "US"）
+                target_countries.add(code)
+            else:
+                logging.warning(f"无效区域代码: {code}，已跳过")
         
-        valid_locations = []
-        for code in target_codes:
-            locs = code_to_locations.get(code, [])
-            valid_locations.extend(locs)
-            if not locs:
-                logging.warning(f"区域代码 {code} 无匹配的location")
+        # 过滤IP记录
+        filtered_ip_data = []
+        for ip, port, loc in ip_data:
+            # 从location字段提取国家代码（如 "🇺🇸US" -> "US"）
+            country_code = loc[-2:]  
+            if country_code in target_countries:
+                filtered_ip_data.append((ip, port, loc))
         
-        # 过滤IP数据
-        ip_data = [(ip, port, loc) for ip, port, loc in ip_data if loc in valid_locations]
+        ip_data = filtered_ip_data
 
     if not ip_data:
-        logging.error(f"未读取到有效IP数据，请检查文件或区域代码")
+        logging.error(f"未找到匹配 {target_regions} 的IP记录")
     else:
         add_dns_records_bulk(ip_data)
