@@ -252,8 +252,8 @@ def main():
         logging.error(f"❌ 失败区域: {fail_count}")
         send_telegram_notification(f"❌ 失败区域: {fail_count}")
     else:
-        logging.info("🎉 所有区域检测通过！")
-        send_telegram_notification("🎉 所有区域检测通过！")
+        logging.info("🎉 CFSTFD所有区域检测通过！")
+        send_telegram_notification("🎉 CFSTFD所有区域检测通过！")
 
     unique_codes = sorted(set(failed_nodes))
 

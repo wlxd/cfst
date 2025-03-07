@@ -246,14 +246,14 @@ def main():
                 failed_nodes.append(code)
 
     logging.info("\n" + "="*40)
-    logging.info(f"总检测区域: {len(proxies)}")
+    logging.info(f"CFST总检测区域: {len(proxies)}")
     logging.info(f"✅ 成功区域: {success_count}")
     if fail_count > 0:
         logging.error(f"❌ 失败区域: {fail_count}")
         send_telegram_notification(f"❌ 失败区域: {fail_count}")
     else:
         logging.info("🎉 CFST所有区域检测通过！")
-        send_telegram_notification("🎉 所有区域检测通过！")
+        send_telegram_notification("🎉 CFST所有区域检测通过！")
 
     unique_codes = sorted(set(failed_nodes))
 
