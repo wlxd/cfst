@@ -241,29 +241,29 @@ def main():
                     )
                     failed_nodes.append(code)
             except Exception as e:
-                logging.error(f"处理节点 {host}:{args.port} 时发生异常: {str(e)}")
+                logging.error(f"处理区域 {host}:{args.port} 时发生异常: {str(e)}")
                 fail_count += 1
                 failed_nodes.append(code)
 
     logging.info("\n" + "="*40)
-    logging.info(f"总检测节点: {len(proxies)}")
-    logging.info(f"✅ 成功节点: {success_count}")
+    logging.info(f"CFSTFD总检测区域: {len(proxies)}")
+    logging.info(f"✅ 成功区域: {success_count}")
     if fail_count > 0:
-        logging.error(f"❌ 失败节点: {fail_count}")
-        send_telegram_notification(f"❌ 失败节点: {fail_count}")
+        logging.error(f"❌ 失败区域: {fail_count}")
+        send_telegram_notification(f"❌ 失败区域: {fail_count}")
     else:
-        logging.info("🎉 所有节点检测通过！")
-        send_telegram_notification("🎉 所有节点检测通过！")
+        logging.info("🎉 所有区域检测通过！")
+        send_telegram_notification("🎉 所有区域检测通过！")
 
     unique_codes = sorted(set(failed_nodes))
 
     if unique_codes:
         codes_str = ",".join(unique_codes)
         update_msg = format_telegram_message(
-            "触发节点更新", 
+            "触发区域更新", 
             f"• 失败地区: `{codes_str}`\n"
             f"• 检测端口: `{args.port}`\n"
-            f"• 失败节点数: `{fail_count}/{len(proxies)}`\n"
+            f"• 失败区域数: `{fail_count}/{len(proxies)}`\n"
             f"• 触发时间: `{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}`"
         )
         send_telegram_notification(update_msg)
