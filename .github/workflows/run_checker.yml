@@ -41,6 +41,7 @@ jobs:
           echo "CLOUDFLARE_EMAIL=${{ secrets.CLOUDFLARE_EMAIL }}" >> .env
           echo "CLOUDFLARE_ZONE_ID=${{ secrets.CLOUDFLARE_ZONE_ID }}" >> .env
           echo "TELEGRAM_PROXY=${{ secrets.TELEGRAM_PROXY }}" >> .env
+          cat .env
 
       - name: 检查时间
         run: |
