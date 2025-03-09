@@ -2,7 +2,7 @@ name: Run fdip.py
 
 on:
   schedule:
-    - cron: "10 * * * *"  # 每小时的第10分钟执行
+    - cron: "0 */6 * * *"  # 每6小时的第0分钟执行
       timezone: Asia/Shanghai  # 添加时区配置
   workflow_dispatch:  # 允许手动触发
 

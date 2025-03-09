@@ -2,7 +2,7 @@ name: Run checker
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "0 * * * *"
       timezone: Asia/Shanghai  # 添加时区配置
   workflow_dispatch:
 

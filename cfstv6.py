@@ -67,7 +67,7 @@ def setup_environment():
     """设置脚本运行环境"""
     script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     os.chdir(script_dir)
-    create_directories(["csv", "logs", "port", "cfip", "speed"])
+    create_directories(["csv", "logs", "port", "delay", "speed"])
 
 def remove_file(file_path):
     """删除指定路径的文件"""
@@ -204,6 +204,7 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port, ping_mode, dn
         "-tll", "10",
         "-tlr", "0.2",
         "-n", "500",
+        #"-allip",
         "-tp", str(random_port),
         "-dn", str(dn),
         "-p", str(p)
@@ -232,93 +233,75 @@ def execute_cfst_test(cfst_path, cfcolo, result_file, random_port, ping_mode, dn
 
 def process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_txt, random_port):
     """处理单个区域的测试结果（带详细注释版）"""
+    
     # ----------------------------
     # 初始化地区信息
     # ----------------------------
-    # 从emoji字典获取地区标识（格式：[emoji, 国家代码]）
+    # 获取地区对应的emoji标识和国家代码，格式示例：[🇭🇰, HKG]
     emoji_data = colo_emojis.get(cfcolo, ['🌐', cfcolo])
-    emoji_flag = emoji_data[0]      # 获取国旗emoji（如🇭🇰）
-    country_code = emoji_data[1]    # 获取国家代码（如HKG）
-    identifier = f"{emoji_flag}{country_code}"  # 基础标识（如🇭🇰HKG）
+    # 组合基础标识符，用于后续条目匹配（格式示例：🇭🇰HKG）
+    identifier = f"{emoji_data[0]}{emoji_data[1]}"
 
     # ----------------------------
-    # 清理旧数据
+    # 读取CSV数据（核心判断点）
     # ----------------------------
+    # 先读取结果文件，为空则直接返回不进行后续操作
+    ip_addresses, download_speeds, latencies = read_csv(result_file)
+    if not ip_addresses:
+        print(f"{COLOR_RED}⚠ 未找到有效IP数据，跳过处理{COLOR_RESET}")
+        return  # 关键返回点：确保无数据时跳过清理和写入步骤
+
+    # ----------------------------
+    # 清理旧数据（条件执行）
+    # ----------------------------
+    # 仅在确认有新数据时执行清理，避免误删有效记录
     print(f"{COLOR_CYAN}🧹 清理 {cfcolo} 的旧记录...{COLOR_RESET}")
-    # 需要清理的文件列表
+    # 目标文件列表：基础IP文件和端口文件
     target_files = [output_txt, port_txt]
     for file_path in target_files:
-        # 删除包含该地区标识的所有条目
+        # 根据标识符删除旧条目（如🇭🇰HKG开头的所有记录）
         removed = remove_entries_by_identifier(file_path, identifier)
         if removed > 0:
             print(f"  已清理 {file_path} 中的 {removed} 条旧记录")
 
     # ----------------------------
-    # 读取并处理CSV数据
+    # 处理并写入新数据
     # ----------------------------
-    # 读取结果文件（自动处理空文件情况）
-    ip_addresses, download_speeds, latencies = read_csv(result_file)
-    if not ip_addresses:
-        print(f"{COLOR_RED}⚠ 未找到有效IP数据，跳过处理{COLOR_RESET}")
-        return
-
-    # 组合数据并按延迟排序（升序）
+    # 组合数据并按延迟升序排序（延迟单位去除ms后转为浮点数比较）
     combined = list(zip(ip_addresses, download_speeds, latencies))
     combined.sort(key=lambda x: float(x[2].replace('ms', '').strip()))
 
-    # ----------------------------
-    # 生成带序号的条目（核心修改部分）
-    # ----------------------------
-    output_entries = []   # 存储基础IP条目（带序号）
-    port_entries = []     # 存储端口条目（带序号和延迟）
-    fast_ips = []         # 存储高速IP条目（带序号和速度）
+    output_entries = []
+    port_entries = []
+    fast_ips = []
     
-    # 遍历排序后的结果，生成序号
+    # 生成带序号的标识符（格式示例：🇭🇰HKG1）
     for index, (ip, speed, latency) in enumerate(combined, start=1):
-        # 生成带序号的标识符（格式：🇭🇰HKG1）
-        full_identifier = f"{identifier}{index}"
-        
-        # 构建各类条目
+        full_identifier = f"{identifier}{index}"  # 追加序号
+        # 基础IP条目格式：IP#标识符┃延迟
         output_entries.append(f"{ip}#{full_identifier}┃{latency}ms")
+        # 端口条目格式：IP:端口#标识符
         port_entries.append(f"[{ip}]:{random_port}#{full_identifier}")
-        
-        # 筛选下载速度超过10MB/s的IP
+        # 筛选下载速度>10MB/s的IP（速度值需转为浮点数比较）
         if float(speed) > 10:
             fast_ips.append(f"[{ip}]:{random_port}#{full_identifier}┃⚡{speed}MB/s")
 
-    # ----------------------------
-    # 写入处理结果
-    # ----------------------------
-    # 写入基础IP信息文件
+    # 写入处理结果（mode默认为追加，此处实际是覆盖因已清理旧数据）
     write_to_file(output_txt, output_entries)
     print(f"{COLOR_GREEN}✓ 已写入 {len(output_entries)} 条IP到 {output_txt}{COLOR_RESET}")
     
-    # 写入端口信息文件
-    write_to_file(port_txt, port_entries)
-    print(f"{COLOR_GREEN}✓ 已写入 {len(port_entries)} 条端口到 {port_txt}{COLOR_RESET}")
-    
-    # 写入高速IP文件（如果有符合条件的记录）
-    if fast_ips:
-        write_to_file(output_cf_txt, fast_ips)
-        print(f"{COLOR_GREEN}✓ 已写入 {len(fast_ips)} 条高速IP到 {output_cf_txt}{COLOR_RESET}")
-    else:
-        print(f"{COLOR_YELLOW}⚠ 未找到下载速度>10MB/s的IP，跳过写入{COLOR_RESET}")
-
     # ----------------------------
     # 归档结果文件
     # ----------------------------
+    # 按区域分类存储历史记录（路径格式：csv/ip/HKG.csv）
     csv_folder = f"csv/{fd}"
     os.makedirs(csv_folder, exist_ok=True)
-    
-    # 生成带时间戳的归档文件名（格式：csv/ip/HKG.csv）
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # 复制当前结果文件到归档目录
     archive_path = os.path.join(csv_folder, f"{cfcolo}.csv")
-    
-    # 复制结果文件到归档目录
     shutil.copy(result_file, archive_path)
     print(f"{COLOR_CYAN}📦 结果已归档到 {archive_path}{COLOR_RESET}")
     
-    # 清空原始结果文件
+    # 清空临时结果文件，为下次测试做准备
     open(result_file, "w").close()
 
 def process_results_mode1(result_file, output_txt, port_txt, output_cf_txt, random_port):
