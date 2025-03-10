@@ -196,7 +196,8 @@ def main():
         "proxy.de.616049.xyz": "FRA",
         "proxy.sg.616049.xyz": "SIN",
         "proxy.jp.616049.xyz": "NRT",
-        "proxy.kr.616049.xyz": "ICN"
+        "proxy.kr.616049.xyz": "ICN",
+        "proxy.nl.616049.xyz": "AMS"
     }
 
     ips_cache: Dict[str, List[str]] = {}

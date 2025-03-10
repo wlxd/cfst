@@ -222,7 +222,7 @@ def get_ips_from_file(file_path, limit=200):
         logging.error(f"文件未找到: {file_path}")
         return []
 
-# 批量添加 DNS 记录并同步到 ddns/ip/ip.txt
+# 批量添加 DNS 记录并同步到 ddns/ip.txt
 def add_dns_records_bulk(ip_data):
     url = f"https://api.cloudflare.com/client/v4/zones/{ZONE_ID}/dns_records"
     headers = {
@@ -269,7 +269,7 @@ def add_dns_records_bulk(ip_data):
         else:
             logging.warning(f"未找到标记 {location} 对应的域名映射，跳过。")
 
-# 删除指定前缀的 DNS 记录，并从 ddns/ip/ip.txt 删除对应 IP
+# 删除指定前缀的 DNS 记录，并从 ddns/ip.txt 删除对应 IP
 def delete_dns_records_with_prefix(prefix):
     try:
         url = f"https://api.cloudflare.com/client/v4/zones/{ZONE_ID}/dns_records"
@@ -299,27 +299,27 @@ def delete_dns_records_with_prefix(prefix):
     except requests.exceptions.RequestException as e:
         logging.error(f"请求失败: {e}")
 
-# 记录 IP、PORT、DOMAIN 到 ddns/ip/ip.txt
+# 记录 IP、PORT、DOMAIN 到 ddns/ip.txt
 def write_to_ddns(ip, port, domain):
     try:
-        with open(f"ddns/{fd}/{fd}.txt", "a", encoding="utf-8") as file:
+        with open(f"ddns/{fd}.txt", "a", encoding="utf-8") as file:
             file.write(f"{ip}:{port} -> {domain}\n")
-            logging.info(f"写入 ddns/{fd}/{fd}.txt: {ip}:{port} -> {domain}\n")
+            logging.info(f"写入 ddns/{fd}.txt: {ip}:{port} -> {domain}\n")
     except IOError as e:
-        logging.error(f"写入 ddns/{fd}/{fd}.txt 失败: {e}")
+        logging.error(f"写入 ddns/{fd}.txt 失败: {e}")
 
-# 从 ddns/ip/ip.txt 删除 IP 记录
+# 从 ddns/ip.txt 删除 IP 记录
 def remove_from_ddns(ip):
     try:
         lines = []
-        with open(f"ddns/{fd}/{fd}.txt", "r", encoding="utf-8") as file:
+        with open(f"ddns/{fd}.txt", "r", encoding="utf-8") as file:
             lines = file.readlines()
-        with open(f"ddns/{fd}/{fd}.txt", "w", encoding="utf-8") as file:
+        with open(f"ddns/{fd}.txt", "w", encoding="utf-8") as file:
             for line in lines:
                 if not line.startswith(f"{ip}:"):
                     file.write(line)
     except IOError as e:
-        logging.error(f"删除 ddns/{fd}/{fd}.txt 中的 {ip} 失败: {e}")
+        logging.error(f"删除 ddns/{fd}.txt 中的 {ip} 失败: {e}")
 
 # 清理日志文件
 def clear_log_file():

@@ -196,7 +196,8 @@ def main():
         "de.616049.xyz": "FRA",
         "sg.616049.xyz": "SIN",
         "jp.616049.xyz": "NRT",
-        "kr.616049.xyz": "ICN"
+        "kr.616049.xyz": "ICN",
+        "nl.616049.xyz": "AMS"
     }
 
     ips_cache: Dict[str, List[str]] = {}

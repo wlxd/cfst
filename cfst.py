@@ -289,6 +289,13 @@ def process_test_results(cfcolo, result_file, output_txt, port_txt, output_cf_tx
     # 写入处理结果（mode默认为追加，此处实际是覆盖因已清理旧数据）
     write_to_file(output_txt, output_entries)
     print(f"{COLOR_GREEN}✓ 已写入 {len(output_entries)} 条IP到 {output_txt}{COLOR_RESET}")
+    write_to_file(port_txt, port_entries)
+    print(f"{COLOR_GREEN}✓ 已写入 {len(port_entries)} 条IP到 {port_txt}{COLOR_RESET}")
+    if fast_ips:
+        write_to_file(output_cf_txt, fast_ips)
+        print(f"{COLOR_GREEN}✓ 已追加 {len(fast_ips)} 条高速IP到 {output_cf_txt}{COLOR_RESET}")
+    else:
+        print(f"{COLOR_YELLOW}⚠ 未找到下载速度>10MB/s的IP，跳过写入{COLOR_RESET}")
     
     # ----------------------------
     # 归档结果文件
@@ -546,7 +553,7 @@ def main():
         # 获取测试模式
         test_mode = get_test_mode()
         
-        cfcolo_list = ["HKG", "LAX", "NRT", "SIN", "FRA", "ICN"]
+        cfcolo_list = ["HKG", "LAX", "NRT", "SIN", "FRA", "ICN", "AMS"]
         cf_ports = [443]
 
         # 处理命令行参数
