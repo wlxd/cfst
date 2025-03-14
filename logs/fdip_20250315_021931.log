@@ -1,0 +1,32 @@
+2025-03-15 02:19:31,678 - INFO - Connecting to 91.108.56.127:443/TcpFull...
+2025-03-15 02:19:33,399 - INFO - Connection to 91.108.56.127:443/TcpFull complete!
+2025-03-15 02:20:15,554 - WARNING - Server closed the connection: [Errno 104] Connection reset by peer
+2025-03-15 02:20:15,555 - INFO - Connection closed while receiving data: [Errno 104] Connection reset by peer
+2025-03-15 02:20:15,556 - INFO - Closing current connection to begin reconnect...
+2025-03-15 02:20:15,556 - INFO - Connecting to 91.108.56.127:443/TcpFull...
+2025-03-15 02:20:15,556 - INFO - <class 'ConnectionResetError'> during disconnect: [Errno 104] Connection reset by peer
+2025-03-15 02:20:16,928 - INFO - Connection to 91.108.56.127:443/TcpFull complete!
+2025-03-15 02:20:18,268 - WARNING - Server resent the older message 7481731746406633473, ignoring
+2025-03-15 02:20:27,953 - INFO - === 程序启动 ===
+2025-03-15 02:20:27,954 - INFO - 已清空下载目录: txt/fdip
+2025-03-15 02:20:27,954 - INFO - 已删除旧输出文件: proxy.txt
+2025-03-15 02:20:29,551 - INFO - 开始扫描频道消息...
+2025-03-15 02:20:32,582 - INFO - 发现新版本文件: 欧洲20250314ip ¹.txt
+2025-03-15 02:20:32,583 - INFO - 发现新版本文件: 美洲20250314ip ¹.txt
+2025-03-15 02:20:32,583 - INFO - 发现新版本文件: 亚洲20250314ip ¹.txt
+2025-03-15 02:20:32,584 - INFO - 共处理 100 条消息，找到 3 个区域的最新文件
+2025-03-15 02:20:32,584 - INFO - 开始下载: 欧洲20250314ip ¹.txt
+2025-03-15 02:20:32,584 - INFO - Starting direct file download in chunks of 131072 at 0, stride 131072
+2025-03-15 02:20:39,354 - INFO - 下载成功: 欧洲20250314ip ¹.txt (72636 bytes)
+2025-03-15 02:20:39,354 - INFO - 开始下载: 美洲20250314ip ¹.txt
+2025-03-15 02:20:39,354 - INFO - Starting direct file download in chunks of 131072 at 0, stride 131072
+2025-03-15 02:20:51,140 - INFO - 下载成功: 美洲20250314ip ¹.txt (71564 bytes)
+2025-03-15 02:20:51,140 - INFO - 开始下载: 亚洲20250314ip ¹.txt
+2025-03-15 02:20:51,140 - INFO - Starting direct file download in chunks of 131072 at 0, stride 131072
+2025-03-15 02:20:52,642 - INFO - 下载成功: 亚洲20250314ip ¹.txt (20265 bytes)
+2025-03-15 02:20:52,642 - INFO - 开始合并 3 个文件
+2025-03-15 02:20:52,645 - INFO - 合并完成 → proxy.txt
+2025-03-15 02:20:52,645 - INFO - 检测到GitHub Actions环境，跳过提交步骤
+2025-03-15 02:20:52,645 - INFO - === 程序结束 ===
+2025-03-15 02:20:52,646 - INFO - Disconnecting from 91.108.56.127:443/TcpFull...
+2025-03-15 02:20:52,646 - INFO - Disconnection from 91.108.56.127:443/TcpFull complete!
