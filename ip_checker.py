@@ -140,7 +140,7 @@ def get_ips(host: str) -> List[str]:
 
 def get_ports_for_domain(domain: str) -> List[int]:
     """从 ddns/ip/ip.txt 获取指定域名的所有端口"""
-    file_path = f"ddns/{fd}/{fd}.txt"
+    file_path = f"ddns/{fd}.txt"
     ports = set()
     
     try:
