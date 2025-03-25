@@ -41,6 +41,9 @@ jobs:
           echo "CLOUDFLARE_EMAIL=${{ secrets.CLOUDFLARE_EMAIL }}" >> .env
           echo "CLOUDFLARE_ZONE_ID=${{ secrets.CLOUDFLARE_ZONE_ID }}" >> .env
           echo "TELEGRAM_PROXY=${{ secrets.TELEGRAM_PROXY }}" >> .env
+          echo "CF_ACCOUNT_ID=${{ secrets.CF_ACCOUNT_ID }}" >> .env
+          echo "CF_KV_NAMESPACE_ID=${{ secrets.CF_KV_NAMESPACE_ID }}" >> .env
+          echo "CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}" >> .env
           cat .env
 
       - name: 检查时间
@@ -80,6 +83,10 @@ jobs:
             git push origin main
             git log -1 --stat origin/main
           fi
+
+      - name: kv auto-update
+        run: |
+          python scripts/TZ5G.py
 
       - name: Run tcip checker
         run: |
