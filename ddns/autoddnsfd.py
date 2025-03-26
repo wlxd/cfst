@@ -16,6 +16,7 @@ parent_dir = os.path.dirname(os.path.dirname(current_file_path))
 sys.path.append(os.path.join(parent_dir, 'py'))
 
 from colo_emojis import colo_emojis
+from tg import send_telegram_message
 
 # 加载环境变量
 load_dotenv()
@@ -40,66 +41,40 @@ logging.basicConfig(
 API_KEY = os.getenv("CLOUDFLARE_API_KEY")
 EMAIL = os.getenv("CLOUDFLARE_EMAIL")
 ZONE_ID = os.getenv("CLOUDFLARE_ZONE_ID")
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # 确保环境变量正确加载
 if not all([API_KEY, EMAIL, ZONE_ID, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID]):
     logging.error("缺少必要的配置信息，请检查 GitHub Secrets 配置。")
     sys.exit(1)
 
-# 在环境变量加载之后添加代理配置读取
-TELEGRAM_PROXY = os.getenv('TELEGRAM_PROXY')  # 新增代理配置
-
-# 传入区域参数
 def parse_args():
     parser = argparse.ArgumentParser(description='自动更新DNS记录')
     parser.add_argument('--regions', nargs='*', help='区域代码列表（如 HKG LAX）')
     return parser.parse_args()
 
-# 修改后的发送函数
-def send_to_telegram(message):
-    """支持代理的Telegram消息发送"""
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": message,
-        "parse_mode": "Markdown"  # 新增Markdown支持
-    }
+def send_telegram_notification(message: str, parse_mode: str = 'Markdown'):
+    """通过 Cloudflare Worker 发送 Telegram 消息"""
+    worker_url = os.getenv("CF_WORKER_URL")
+    bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    secret_token = os.getenv("SECRET_TOKEN")  # 可选
     
-    # 代理配置处理
-    proxies = {}
-    if TELEGRAM_PROXY:
-        parsed = urlparse(TELEGRAM_PROXY)
-        if parsed.scheme in ('socks5', 'http', 'https'):
-            proxies = {
-                "http": TELEGRAM_PROXY,
-                "https": TELEGRAM_PROXY
-            }
-            logging.debug(f"使用代理服务器：{parsed.hostname}:{parsed.port}")
-        else:
-            logging.warning("不支持的代理协议，仅支持socks5/http/https")
-
-    try:
-        response = requests.post(
-            url,
-            json=payload,
-            proxies=proxies,
-            timeout=15  # 延长超时时间
-        )
-        response.raise_for_status()
-        logging.debug("Telegram消息发送成功")
-    except requests.exceptions.ProxyError as e:
-        logging.error(f"代理连接失败：{str(e)}")
-    except requests.exceptions.SSLError as e:
-        logging.error(f"SSL验证失败：{str(e)}")
-    except requests.exceptions.ConnectTimeout as e:
-        logging.error(f"连接超时：{str(e)}")
-    except requests.exceptions.RequestException as e:
-        logging.error(f"请求异常：{str(e)}")
-    except Exception as e:
-        logging.error(f"未知错误：{str(e)}")
-
+    if not all([worker_url, bot_token, chat_id]):
+        logging.warning("Telegram 配置不完整，跳过通知")
+        return
+    
+    # 调用 tg.py 的发送函数
+    result = send_telegram_message(
+        worker_url=worker_url,
+        bot_token=bot_token,
+        chat_id=chat_id,
+        message=message,
+        secret_token=secret_token
+    )
+    
+    if result.get("status") == "error":
+        logging.error(f"Telegram通知发送失败: {result.get('message')}")
+        
 # 修改日志处理器格式以支持Markdown
 class TelegramLogHandler(logging.Handler):
     def emit(self, record):

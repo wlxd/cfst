@@ -1,4 +1,5 @@
 import os
+import sys
 import socket
 import logging
 import argparse
@@ -10,15 +11,18 @@ import requests
 from datetime import datetime
 from dotenv import load_dotenv
 
+# 获取脚本所在目录的绝对路径
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# 将 py 目录添加到模块搜索路径
+sys.path.append(os.path.join(script_dir, "py"))
+
+from tg import send_telegram_message
+
 # 加载环境变量
 load_dotenv()
 
 # 定义全局变量
 fd = "fd"
-
-# Telegram配置
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 # 自定义颜色过滤器
 class ColorFilter(logging.Filter):
@@ -80,40 +84,27 @@ def setup_logging():
     return log_path
 
 def send_telegram_notification(message: str, parse_mode: str = 'Markdown'):
-    """发送Telegram通知（支持代理）"""
-    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
-        logging.warning("未配置Telegram通知参数，跳过通知")
+    """通过 Cloudflare Worker 发送 Telegram 消息"""
+    worker_url = os.getenv("CF_WORKER_URL")
+    bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    secret_token = os.getenv("SECRET_TOKEN")  # 可选
+    
+    if not all([worker_url, bot_token, chat_id]):
+        logging.warning("Telegram 配置不完整，跳过通知")
         return
     
-    # 从环境变量获取代理配置
-    proxy_url = os.getenv('TELEGRAM_PROXY')
-    proxies = {
-        "http": proxy_url,
-        "https": proxy_url
-    } if proxy_url else None
-
-    api_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": message,
-        "parse_mode": parse_mode
-    }
+    # 调用 tg.py 的发送函数
+    result = send_telegram_message(
+        worker_url=worker_url,
+        bot_token=bot_token,
+        chat_id=chat_id,
+        message=message,
+        secret_token=secret_token
+    )
     
-    try:
-        response = requests.post(
-            api_url, 
-            json=payload, 
-            timeout=15,
-            proxies=proxies
-        )
-        response.raise_for_status()
-        logging.debug("Telegram通知发送成功")
-    except requests.exceptions.ProxyError as e:
-        logging.error(f"代理连接失败: {str(e)}")
-    except requests.exceptions.ConnectTimeout:
-        logging.error("连接Telegram服务器超时")
-    except Exception as e:
-        logging.error(f"发送Telegram通知失败: {str(e)}")
+    if result.get("status") == "error":
+        logging.error(f"Telegram通知发送失败: {result.get('message')}")
 
 def format_telegram_message(title: str, content: str) -> str:
     """格式化Telegram消息"""
