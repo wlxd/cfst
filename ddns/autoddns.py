@@ -41,12 +41,9 @@ logging.basicConfig(
 API_KEY = os.getenv("CLOUDFLARE_API_KEY")
 EMAIL = os.getenv("CLOUDFLARE_EMAIL")
 ZONE_ID = os.getenv("CLOUDFLARE_ZONE_ID")
-
-# 确保环境变量正确加载
-if not all([API_KEY, EMAIL, ZONE_ID, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID]):
-    logging.error("缺少必要的配置信息，请检查 GitHub Secrets 配置。")
-    sys.exit(1)
-
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+ 
 # 传入区域参数
 def parse_args():
     parser = argparse.ArgumentParser(description='自动更新DNS记录')
