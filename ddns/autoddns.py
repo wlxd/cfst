@@ -74,16 +74,15 @@ def send_to_telegram(message):
     if result.get("status") == "error":
         logging.error(f"Telegram消息发送失败: {result.get('message')}")
 
-# 修改日志处理器格式以支持Markdown
 class TelegramLogHandler(logging.Handler):
     def emit(self, record):
         try:
             log_entry = self.format(record)
-            # 添加Markdown格式化
             formatted_msg = f"`[DNS-UPDATE]` **{record.levelname}**\n{log_entry}"
             send_to_telegram(formatted_msg)
         except Exception as e:
-            logging.error(f"日志发送失败：{str(e)}")
+            # 使用标准错误输出代替 logging.error 防止递归
+            print(f"[ERROR] 日志发送失败：{str(e)}", file=sys.stderr)
 
 # 添加 Telegram 日志处理器
 telegram_handler = TelegramLogHandler()
