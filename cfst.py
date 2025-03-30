@@ -344,7 +344,7 @@ class CFSpeedTester:
             
             # 推送
             subprocess.run(
-                ["git", "push"],
+                ["git", "push", "-f"],
                 cwd=BASE_DIR,
                 check=True
             )

@@ -1,0 +1,45 @@
+2025-03-31 05:04:29,497 - root - INFO - [1m启动 IPV4 测试[0m
+2025-03-31 05:04:30,931 - root - INFO - [96m正在测试 HKG (端口: 443)...[0m
+2025-03-31 05:05:41,686 - root - INFO - [92m已保存最佳结果到: /data/data/com.termux/files/home/cfst/speed/ipv4/HKG.json[0m
+2025-03-31 05:05:41,687 - root - INFO - [写入HKG.txt] 172.64.146.232:443#🇭🇰HK┃⚡7.60MB/s
+2025-03-31 05:05:41,688 - root - INFO - [写入HKG.txt] 172.64.153.203:443#🇭🇰HK┃⚡7.46MB/s
+2025-03-31 05:05:41,688 - root - INFO - [写入HKG.txt] 190.93.244.60:443#🇭🇰HK┃⚡7.33MB/s
+2025-03-31 05:05:41,688 - root - INFO - [写入HKG.txt] 104.25.252.11:443#🇭🇰HK┃⚡7.13MB/s
+2025-03-31 05:05:41,689 - root - INFO - [写入HKG.txt] 190.93.246.166:443#🇭🇰HK┃⚡7.11MB/s
+2025-03-31 05:05:41,689 - root - INFO - [92m已生成节点信息文件: /data/data/com.termux/files/home/cfst/speed/ipv4/HKG.txt[0m
+2025-03-31 05:05:41,692 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv4/HKG_20250331-045729.csv[0m
+2025-03-31 05:05:54,877 - root - INFO - [96m正在测试 LAX (端口: 443)...[0m
+2025-03-31 05:07:08,316 - root - INFO - [92m已保存最佳结果到: /data/data/com.termux/files/home/cfst/speed/ipv4/LAX.json[0m
+2025-03-31 05:07:08,318 - root - INFO - [写入LAX.txt] 104.23.115.30:443#🇺🇸US┃⚡7.10MB/s
+2025-03-31 05:07:08,318 - root - INFO - [写入LAX.txt] 104.27.43.60:443#🇺🇸US┃⚡6.89MB/s
+2025-03-31 05:07:08,319 - root - INFO - [写入LAX.txt] 104.20.127.68:443#🇺🇸US┃⚡6.59MB/s
+2025-03-31 05:07:08,319 - root - INFO - [写入LAX.txt] 172.64.41.210:443#🇺🇸US┃⚡6.27MB/s
+2025-03-31 05:07:08,319 - root - INFO - [写入LAX.txt] 104.20.121.35:443#🇺🇸US┃⚡5.31MB/s
+2025-03-31 05:07:08,320 - root - INFO - [92m已生成节点信息文件: /data/data/com.termux/files/home/cfst/speed/ipv4/LAX.txt[0m
+2025-03-31 05:07:08,324 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv4/LAX_20250331-045855.csv[0m
+2025-03-31 05:07:23,886 - root - INFO - [96m正在测试 NRT (端口: 443)...[0m
+2025-03-31 05:08:34,730 - root - INFO - [92m已保存最佳结果到: /data/data/com.termux/files/home/cfst/speed/ipv4/NRT.json[0m
+2025-03-31 05:08:34,732 - root - INFO - [写入NRT.txt] 162.159.152.0:443#🇯🇵JP┃⚡7.02MB/s
+2025-03-31 05:08:34,733 - root - INFO - [写入NRT.txt] 162.159.135.244:443#🇯🇵JP┃⚡6.13MB/s
+2025-03-31 05:08:34,733 - root - INFO - [写入NRT.txt] 162.159.136.20:443#🇯🇵JP┃⚡6.11MB/s
+2025-03-31 05:08:34,734 - root - INFO - [写入NRT.txt] 162.159.133.159:443#🇯🇵JP┃⚡6.09MB/s
+2025-03-31 05:08:34,735 - root - INFO - [写入NRT.txt] 162.159.153.239:443#🇯🇵JP┃⚡5.08MB/s
+2025-03-31 05:08:34,735 - root - INFO - [92m已生成节点信息文件: /data/data/com.termux/files/home/cfst/speed/ipv4/NRT.txt[0m
+2025-03-31 05:08:34,741 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv4/NRT_20250331-050028.csv[0m
+2025-03-31 05:08:50,621 - root - INFO - [96m正在测试 SIN (端口: 443)...[0m
+2025-03-31 05:09:10,754 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv4/SIN_20250331-050850.csv[0m
+2025-03-31 05:09:10,756 - root - INFO - [96m正在测试 FRA (端口: 443)...[0m
+2025-03-31 05:10:20,612 - root - INFO - [92m已保存最佳结果到: /data/data/com.termux/files/home/cfst/speed/ipv4/FRA.json[0m
+2025-03-31 05:10:20,613 - root - INFO - [写入FRA.txt] 172.67.4.20:443#🇩🇪DE┃⚡7.62MB/s
+2025-03-31 05:10:20,613 - root - INFO - [写入FRA.txt] 172.67.9.162:443#🇩🇪DE┃⚡5.82MB/s
+2025-03-31 05:10:20,614 - root - INFO - [写入FRA.txt] 172.67.141.17:443#🇩🇪DE┃⚡5.39MB/s
+2025-03-31 05:10:20,614 - root - INFO - [写入FRA.txt] 172.67.10.144:443#🇩🇪DE┃⚡5.33MB/s
+2025-03-31 05:10:20,614 - root - INFO - [写入FRA.txt] 172.67.14.155:443#🇩🇪DE┃⚡4.92MB/s
+2025-03-31 05:10:20,614 - root - INFO - [92m已生成节点信息文件: /data/data/com.termux/files/home/cfst/speed/ipv4/FRA.txt[0m
+2025-03-31 05:10:20,618 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv4/FRA_20250329-013412.csv[0m
+2025-03-31 05:10:20,620 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv4/FRA_20250331-050213.csv[0m
+2025-03-31 05:10:31,952 - root - INFO - [96m正在测试 ICN (端口: 443)...[0m
+2025-03-31 05:10:52,678 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv4/ICN_20250331-051031.csv[0m
+2025-03-31 05:10:52,680 - root - INFO - [96m正在测试 AMS (端口: 443)...[0m
+2025-03-31 05:11:13,275 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv4/AMS_20250331-051052.csv[0m
+2025-03-31 05:11:13,276 - root - INFO - [96m正在提交结果到Git仓库...[0m

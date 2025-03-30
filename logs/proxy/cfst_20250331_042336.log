@@ -40,3 +40,5 @@
 2025-03-31 04:29:24,686 - root - INFO - [96m正在测试 AMS (端口: 443)...[0m
 2025-03-31 04:29:44,758 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/proxy/AMS_20250331-042924.csv[0m
 2025-03-31 04:29:44,759 - root - INFO - [96m正在提交结果到Git仓库...[0m
+2025-03-31 04:29:51,392 - root - ERROR - [91mGit操作失败: Command '['git', 'push']' returned non-zero exit status 1.[0m
+2025-03-31 04:29:52,929 - root - INFO - [96m=== 测试流程结束 ===[0m
