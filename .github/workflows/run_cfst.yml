@@ -17,7 +17,7 @@ on:
           - proxy
 
 jobs:
-  run-autoddns:
+  cfst:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai

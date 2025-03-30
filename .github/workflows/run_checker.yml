@@ -1,4 +1,4 @@
-name: Run cfst.py
+name: Run ip_checker.py
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:        # 允许手动触发
 
 jobs:
-  run-autoddns:
+  ip_checker:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai  # 设置为你本地的时区
@@ -47,7 +47,7 @@ jobs:
     
     - name: Run ip_checker.py script
       run: |
-        python ip_checker
+        python ip_checker.py
 
     - name: Commit and push changes
       run: |

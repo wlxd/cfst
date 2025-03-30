@@ -1,4 +1,4 @@
-name: Run cfst.py
+name: Run tz5g.py
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:        # 允许手动触发
 
 jobs:
-  run-autoddns:
+  tz5g:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai  # 设置为你本地的时区
