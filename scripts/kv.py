@@ -105,7 +105,7 @@ if __name__ == "__main__":
         subscription_url = sys.argv[1]
         
         # 删除包含"otcopusvpn"的行
-        delete_from_kv(mode='content', keyword="otcopusvpn")
+        delete_from_kv(mode='content', keyword="subscribe")
 
         # 追加新的订阅地址
         append_to_kv(subscription_url)

@@ -45,9 +45,17 @@ jobs:
         echo "CF_KV_NAMESPACE_ID=${{ secrets.CF_KV_NAMESPACE_ID }}" >> .env
         echo "CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}" >> .env
     
-    - name: Run ip_checker.py script
+    - name: Run ip_checker.py ipv4 script
       run: |
-        python ip_checker.py
+        python ip_checker.py -t ipv4
+
+    - name: Run ip_checker.py ipv6 script
+      run: |
+        python ip_checker.py -t ipv6
+
+    - name: Run ip_checker.py proxy script
+      run: |
+        python ip_checker.py -t proxy
 
     - name: Commit and push changes
       run: |
