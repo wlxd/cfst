@@ -1,8 +1,6 @@
-# 示例 requirements.txt
+# requirements.txt
 requests
-PySocks
-telethon
-beautifulsoup4
 python-dotenv
-dnspython
-requests[socks]
+colorama
+telethon
+urllib3

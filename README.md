@@ -1,103 +1,126 @@
 ```markdown
-# Cloudflare IP 优选与代理管理工具集
+# Cloudflare 节点测速与DNS管理工具
 
-## 📖 项目简介
-本项目包含多个自动化脚本，用于Cloudflare IP优选、代理管理、DNS自动更新及健康检测。支持Telegram通知、多地区测速、IPv6适配等功能，适用于CDN优化和代理服务器维护。
+自动化测试Cloudflare节点速度，动态更新DNS记录，并提供健康检查与通知功能。
 
----
+## 功能特性
 
-## 🛠️ 功能列表
-- **IP优选**：自动抓取并测试Cloudflare各节点IP（支持IPv4/IPv6）
-- **代理管理**：从Telegram频道获取代理IP并生成配置文件
-- **健康检测**：实时检测节点连通性，自动触发更新
-- **DNS同步**：通过Cloudflare API自动更新DNS记录
-- **通知系统**：Telegram实时通知运行状态和故障告警
-- **日志管理**：自动清理旧日志，记录详细运行信息
+- **多协议支持**：IPv4/IPv6/Proxy
+- **节点测速**：按地区码批量测试并筛选最优节点
+- **DNS管理**：自动更新/删除Cloudflare DNS记录
+- **健康检查**：代理连通性检测与自动修复
+- **多平台通知**：Telegram实时通知测试结果
+- **日志追踪**：分类存储测速日志与操作记录
 
----
+## 环境要求
 
-## 📦 安装依赖
-```bash
-pip install -r requirements.txt
-```
+- Python 3.8+
+- 依赖库：
+  ```bash
+  pip install colorama python-dotenv requests
+  ```
 
----
+## 快速开始
 
-## ⚙️ 配置说明
-1. 复制环境模板文件：
-```bash
-cp .env.example .env
-```
+### 1. 环境配置
 
-2. 编辑`.env`文件：
+创建 `.env` 文件：
 ```ini
-# Telegram
-API_ID=123456
-API_HASH=your_telegram_api_hash
-SESSION_NAME=cf_bot
-TELEGRAM_BOT_TOKEN=your_bot_token
-TELEGRAM_CHAT_ID=your_chat_id
-
-# Cloudflare
-CLOUDFLARE_API_KEY=your_cf_api_key
-CLOUDFLARE_EMAIL=your_account@email.com
-CLOUDFLARE_ZONE_ID=your_zone_id
-
-# 代理配置（可选）
-TELEGRAM_PROXY=socks5://127.0.0.1:1080
+CLOUDFLARE_EMAIL=您的Cloudflare邮箱
+CLOUDFLARE_API_KEY=您的Global API Key
+CLOUDFLARE_ZONE_ID=域名区域ID
+TELEGRAM_BOT_TOKEN=Telegram机器人Token
+TELEGRAM_CHAT_ID=您的Chat ID
+CF_WORKER_URL=Telegram消息转发Worker地址（可选）
+SECRET_TOKEN=消息验证Token（可选）
 ```
 
----
+### 2. 核心脚本说明
 
-## 🚀 使用指南
-
-### 基础测速（IPv4）
+#### 测速主程序 (`cfst.py`)
 ```bash
-python cfst.py
+# 基本用法
+python cfst.py -t <协议类型> [--git-commit]
+
+# 示例：测试香港、洛杉矶的IPv4节点并提交Git
+python cfst.py -t ipv4 -c HKG,LAX --git-commit
 ```
 
-### 代理专用测速
+#### 健康检查 (`ip_checker.py`)
 ```bash
-python cfstfd.py
+# 检查IPv4代理状态并自动修复
+python ip_checker.py -t ipv4 --git-commit
 ```
 
-### IPv6测速
+#### DNS管理 (`ddns.py`)
 ```bash
-python cfstv6.py
+# 更新指定colo的DNS记录
+python ddns.py -t ipv4 --colos HKG,LAX
 ```
 
-### 代理列表更新
+#### 记录删除 (`delete_dns.py`)
 ```bash
-python fdip.py
+# 删除指定国家代码的DNS记录
+python delete_dns.py -t ipv4 --sub HK,US
 ```
 
-### 健康监测（主节点）
-```bash
-python ip_checker.py
+### 3. 参数说明
+
+| 参数 | 说明 |
+|------|------|
+| `-t/--type` | 协议类型 (ipv4/ipv6/proxy) |
+| `-c/--colos` | 地区码列表（逗号分隔） |
+| `--git-commit` | 自动提交结果到Git仓库 |
+
+## 文件结构
+
+```
+.
+├── cfst.py                # 主测速程序
+├── ddns.py                # DNS记录更新
+├── delete_dns.py          # DNS记录删除
+├── ip_checker.py          # 健康检查
+├── colo_emojis.py         # 地区码映射
+├── tg.py                  # Telegram通知模块
+├── py/                    # 工具模块
+│   ├── colo_emojis.py
+│   └── tg.py
+├── logs/                  # 日志目录
+├── results/               # 原始测速结果
+└── speed/                 # 处理后的节点数据
 ```
 
-### 健康监测（代理节点）
-```bash
-python proxy_checker.py
-```
+## 示例场景
 
----
-
-## 📌 注意事项
-1. 脚本依赖环境变量配置，请确保`.env`文件正确设置
-2. 首次使用Telethon需要验证手机号：
+### 日常维护流程
+1. **定时测速**  
    ```bash
-   python -m telethon -c "your_phone_number"
+   python cfst.py -t ipv4 --git-commit
    ```
-3. Cloudflare API需要Zone级别的权限
-4. 建议配置cron定时任务：
+2. **健康检查**  
    ```bash
-   # 每天凌晨执行测速
-   0 0 * * * /usr/bin/python3 /path/to/cfst.py
+   python ip_checker.py -t ipv4 --timeout 2 --retries 5
+   ```
+3. **查看日志**  
+   ```bash
+   tail -f logs/ipv4/cfst_*.log
    ```
 
----
+## 注意事项
 
-## 📄 许可证
-MIT License | Copyright © 2023 你的名字
+1. **权限要求**：
+   - Cloudflare API需要`DNS:Edit`权限
+   - 系统需要安装`curl`和`git`命令行工具
+
+2. **特殊处理**：
+   - IPv6地址会自动添加`[]`包裹
+   - 代理类型使用`proxy.{国家码}`子域名格式
+
+3. **错误处理**：
+   - 测速失败时自动清理临时文件
+   - API错误自动重试3次
+
+## 许可证
+
+MIT License
 ```

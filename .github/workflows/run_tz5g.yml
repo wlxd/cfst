@@ -3,7 +3,7 @@ name: Run cfst.py
 on:
   schedule:
     # 使用 cron 语法设置定时任务 (UTC 时间)
-    - cron: '0 * * * *'  # 每隔1小时第0分钟执行一次
+    - cron: '10 * * * *'  # 每隔1小时第10分钟执行一次
   workflow_dispatch:        # 允许手动触发
 
 jobs:
@@ -45,18 +45,6 @@ jobs:
         echo "CF_KV_NAMESPACE_ID=${{ secrets.CF_KV_NAMESPACE_ID }}" >> .env
         echo "CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}" >> .env
     
-    - name: Run ip_checker.py script
+    - name: Run TZ5G.py script
       run: |
-        python ip_checker
-
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        if git diff --quiet; then
-          echo "No changes to commit."
-        else
-          git add .
-          git commit -m "Auto-Update speed results - $(date +'%Y-%m-%d %H:%M:%S')"
-          git push origin main
-        fi
+        python scripts/TZ5G.py
