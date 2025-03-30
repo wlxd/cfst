@@ -307,7 +307,8 @@ class CFSpeedTester:
                     except Exception as e:
                         logging.error(f"{Color.RED}清理失败: {old_file} - {str(e)}{Color.RESET}")
 
-    # ---------------------------- 新增Git提交功能 ----------------------------
+# ---------------------------- 新增Git提交功能 ----------------------------
+    @staticmethod
     def git_commit_and_push(ip_type: str):
         """执行Git提交操作"""
         try:
@@ -406,7 +407,7 @@ def main():
         # Git提交
         if args.git_commit and success_count > 0:
             logging.info(f"{Color.CYAN}正在提交结果到Git仓库...{Color.RESET}")
-            git_success = git_commit_and_push(args.type)
+            git_success = CFSpeedTester.git_commit_and_push(args.type)
 
         # 构造包含失败详细信息的状态消息
         total = len(selected_colos)
