@@ -1,0 +1,64 @@
+2025-03-31 22:20:39,966 - INFO - 日志文件已创建: logs/ipv6/ip_check_20250331_222039.log
+2025-03-31 22:20:39,977 - ERROR - DNS解析失败 hkv6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:39,977 - INFO - [HKG] 域名解析 hkv6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:39,987 - ERROR - DNS解析失败 usv6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:39,987 - INFO - [LAX] 域名解析 usv6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:39,999 - ERROR - DNS解析失败 dev6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:39,999 - INFO - [FRA] 域名解析 dev6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:40,010 - ERROR - DNS解析失败 sgv6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:40,010 - INFO - [SIN] 域名解析 sgv6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:40,019 - ERROR - DNS解析失败 jpv6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:40,019 - INFO - [NRT] 域名解析 jpv6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:40,039 - ERROR - DNS解析失败 krv6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:40,039 - INFO - [ICN] 域名解析 krv6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:40,049 - ERROR - DNS解析失败 nlv6.616049.xyz: [Errno -2] Name or service not known
+2025-03-31 22:20:40,049 - INFO - [AMS] 域名解析 nlv6.616049.xyz => 
+  - 无IP地址
+2025-03-31 22:20:40,050 - WARNING - 端口文件不存在: ddns/ipv6/HKG.txt
+2025-03-31 22:20:40,051 - WARNING - 端口文件不存在: ddns/ipv6/LAX.txt
+2025-03-31 22:20:40,051 - WARNING - 端口文件不存在: ddns/ipv6/FRA.txt
+2025-03-31 22:20:40,051 - WARNING - 端口文件不存在: ddns/ipv6/SIN.txt
+2025-03-31 22:20:40,052 - WARNING - 端口文件不存在: ddns/ipv6/NRT.txt
+2025-03-31 22:20:40,052 - WARNING - 端口文件不存在: ddns/ipv6/ICN.txt
+2025-03-31 22:20:40,052 - WARNING - 端口文件不存在: ddns/ipv6/AMS.txt
+2025-03-31 22:20:40,080 - ERROR - [HKG] ❌ hkv6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,084 - ERROR - [FRA] ❌ dev6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,086 - ERROR - [AMS] ❌ nlv6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,093 - ERROR - [LAX] ❌ usv6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,094 - ERROR - [NRT] ❌ jpv6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,103 - ERROR - [ICN] ❌ krv6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,131 - ERROR - [SIN] ❌ sgv6.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -2] Name or service not known
+2025-03-31 22:20:40,132 - INFO - 
+========================================
+2025-03-31 22:20:40,132 - INFO - 总检测区域: 7
+2025-03-31 22:20:40,132 - INFO - ✅ 成功区域: 0
+2025-03-31 22:20:40,132 - ERROR - ❌ 失败区域: 7
+2025-03-31 22:20:40,132 - INFO - 触发更新区域: AMS,FRA,HKG,ICN,LAX,NRT,SIN
+2025-03-31 22:20:41,875 - ERROR - CFST更新失败，退出码: 1
