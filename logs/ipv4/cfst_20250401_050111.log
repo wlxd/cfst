@@ -1,0 +1,4 @@
+2025-04-01 05:01:11,141 - root - INFO - [1m启动 IPV4 测试[0m
+2025-04-01 05:01:12,297 - root - INFO - [96m正在测试 HKG (端口: 443)...[0m
+2025-04-01 05:01:13,114 - root - ERROR - [91mTelegram 通知发送失败: cannot access local variable 'status_msg' where it is not associated with a value[0m
+2025-04-01 05:01:13,115 - root - INFO - [96m=== 测试流程结束 ===[0m

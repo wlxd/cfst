@@ -1,0 +1,24 @@
+2025-04-01 05:01:27,326 - root - INFO - [1m启动 IPV6 测试[0m
+2025-04-01 05:01:28,677 - root - INFO - [96m正在测试 AMS (端口: 443)...[0m
+2025-04-01 05:02:31,398 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv6/AMS_20250401-050128.csv[0m
+2025-04-01 05:02:31,400 - root - INFO - [96m正在测试 FRA (端口: 443)...[0m
+2025-04-01 05:03:11,534 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv6/FRA_20250401-050231.csv[0m
+2025-04-01 05:03:11,535 - root - INFO - [96m正在测试 HKG (端口: 443)...[0m
+2025-04-01 05:03:59,698 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv6/HKG_20250401-050311.csv[0m
+2025-04-01 05:03:59,703 - root - INFO - [96m正在测试 ICN (端口: 443)...[0m
+2025-04-01 05:05:11,402 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv6/ICN_20250401-050359.csv[0m
+2025-04-01 05:05:11,405 - root - INFO - [96m正在测试 LAX (端口: 443)...[0m
+2025-04-01 05:06:38,884 - root - INFO - [92m已保存最佳结果到: /data/data/com.termux/files/home/cfst/speed/ipv6/LAX.json[0m
+2025-04-01 05:06:38,886 - root - INFO - [写入LAX.txt] [2606:4700:0:12:e455:90ca:6805:604d]:443#🇺🇸US┃⚡5.32MB/s
+2025-04-01 05:06:38,887 - root - INFO - [写入LAX.txt] [2606:4700::e5:2a54:cdf8]:443#🇺🇸US┃⚡5.21MB/s
+2025-04-01 05:06:38,887 - root - INFO - [写入LAX.txt] [2606:4700:0:12:e47b:1837:c824:4f8c]:443#🇺🇸US┃⚡5.13MB/s
+2025-04-01 05:06:38,887 - root - INFO - [写入LAX.txt] [2606:4700:0:12:167e:576e:fbc8:8540]:443#🇺🇸US┃⚡4.75MB/s
+2025-04-01 05:06:38,887 - root - INFO - [写入LAX.txt] [2606:4700:14:8ef4:8f3b:bca4:82e5:3403]:443#🇺🇸US┃⚡0.11MB/s
+2025-04-01 05:06:38,888 - root - INFO - [92m已生成节点信息文件: /data/data/com.termux/files/home/cfst/speed/ipv6/LAX.txt[0m
+2025-04-01 05:06:38,894 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv6/LAX_20250329-022932.csv[0m
+2025-04-01 05:06:38,895 - root - INFO - [93m已清理旧文件: /data/data/com.termux/files/home/cfst/results/ipv6/LAX_20250331-041817.csv[0m
+2025-04-01 05:06:48,411 - root - INFO - [96m正在测试 NRT (端口: 443)...[0m
+2025-04-01 05:07:36,524 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv6/NRT_20250401-050648.csv[0m
+2025-04-01 05:07:36,528 - root - INFO - [96m正在测试 SIN (端口: 443)...[0m
+2025-04-01 05:08:19,916 - root - WARNING - [93m结果文件为空，删除: /data/data/com.termux/files/home/cfst/results/ipv6/SIN_20250401-050736.csv[0m
+2025-04-01 05:08:21,112 - root - INFO - [96m=== 测试流程结束 ===[0m
