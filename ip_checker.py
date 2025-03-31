@@ -6,13 +6,15 @@ import logging
 import argparse
 import glob
 import subprocess
-from typing import Dict, List, Tuple
 import concurrent.futures
+from typing import Dict, List, Tuple
 from datetime import datetime
 
-# 获取脚本所在目录的绝对路径
-script_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(script_dir, "py"))
+from dotenv import load_dotenv
+from py.tg import send_telegram_message
+
+# 加载环境变量
+load_dotenv()
 
 # 自定义颜色过滤器
 class ColorFilter(logging.Filter):
@@ -250,7 +252,13 @@ def main():
 
     unique_codes = sorted(set(failed_nodes))
 
+# 在 main() 函数中找到以下代码块：
     # 触发CFST更新
+    triggered_optimization = False
+    trigger_failure = False  # 新增标志
+    error_msg = ""  # 新增错误信息存储
+    unique_codes = sorted(set(failed_nodes))
+    
     if unique_codes:
         codes_str = ",".join(unique_codes)
         logging.info(f"触发更新区域: {codes_str}")
@@ -261,14 +269,51 @@ def main():
             subprocess.run(
                 cfst_cmd,
                 check=True,
-                # 关键修改：将输出直接连接到主进程的标准流
                 stdout=sys.stdout,
                 stderr=sys.stderr,
                 text=True
             )
             logging.info("CFST更新已触发")
+            triggered_optimization = True
         except subprocess.CalledProcessError as e:
-            logging.error(f"CFST更新失败，退出码: {e.returncode}")
+            error_msg = f"CFST更新失败，退出码: {e.returncode}"
+            logging.error(error_msg)
+            trigger_failure = True
+        except Exception as e:
+            error_msg = f"意外错误: {str(e)}"
+            logging.error(error_msg)
+            trigger_failure = True
+
+    # 构建Telegram消息
+    timestamp = datetime.now().strftime("%m/%d %H:%M")
+    
+    # 维护状态描述
+    maintenance_status = []
+    if triggered_optimization:
+        maintenance_status.append("⚡ 维护已触发")
+    if trigger_failure:
+        maintenance_status.append(f"❌ 失败: {error_msg}")
+    if not maintenance_status:
+        maintenance_status.append("🛠 无需维护")
+
+    message = [
+        f"🌐 代理节点状态 - {timestamp}",
+        "├─ 健康检查",
+        f"│  ├─ 类型: {args.type.upper()}",
+        f"│  ├─ ✅ 正常: {success_count}/{len(proxies)}",
+        f"│  └─ ❌ 故障: {', '.join(unique_codes) if unique_codes else '无'}",
+        "└─ 自动维护",
+        f"   └─ {' | '.join(maintenance_status)}"
+    ]
+
+    # 发送通知
+    send_telegram_message(
+        worker_url=os.getenv("CF_WORKER_URL"),
+        bot_token=os.getenv("TELEGRAM_BOT_TOKEN"),
+        chat_id=os.getenv("TELEGRAM_CHAT_ID"),
+        message="\n".join(message),
+        secret_token=os.getenv("SECRET_TOKEN")
+    )
 
 if __name__ == '__main__':
     main()

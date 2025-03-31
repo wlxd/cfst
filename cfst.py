@@ -163,11 +163,14 @@ class CFSpeedTester:
     
             self._clean_old_files_except_current(cfcolo, result_file)
             # 更新DNS记录
-            try:
-                subprocess.run([sys.executable, "-u", "ddns.py", "-t", self.ip_type, "--colos", cfcolo], check=True)
-            except subprocess.CalledProcessError as e:
-                logging.error(f"{Color.RED}DNS更新失败: {cfcolo} - {str(e)}{Color.RESET}")
-            
+            if result_file.exists() and result_file.stat().st_size > 0:
+                try:
+                    subprocess.run([sys.executable, "-u", "ddns.py", "-t", self.ip_type, "--colos", cfcolo], check=True)
+                except subprocess.CalledProcessError as e:
+                    logging.error(f"{Color.RED}DNS更新失败: {cfcolo} - {str(e)}{Color.RESET}")
+            else:
+                logging.warning(f"{Color.YELLOW}跳过DNS更新: {result_file} 为空或不存在{Color.RESET}")
+    
             return True
         except Exception as e:
             self._clean_all_colo_files(cfcolo)
@@ -380,12 +383,13 @@ def main():
     error_message = None
     git_success = False
     failed_colos = []
+    success_colos = []  # 新增：记录成功的colo列表
 
     try:
         setup_logging(args.type)
         logging.info(f"{Color.BOLD}启动 {args.type.upper()} 测试{Color.RESET}")
         
-        # 发送开始通知（可选）
+        # 发送开始通知
         start_msg = f"🚀 开始 {args.type.upper()} 测试，地区码: {', '.join(selected_colos)}"
         send_telegram_message(
             worker_url=os.getenv("CF_WORKER_URL"),
@@ -400,29 +404,33 @@ def main():
         for cfcolo in selected_colos:
             if tester._test_single_colo(cfcolo):
                 success_count += 1
+                success_colos.append(cfcolo)  # 记录成功colo
             else:
-                failed_colos.append(cfcolo)  # 记录失败colo
-                print(f"{Fore.RED}❌ {cfcolo} 测试失败{Style.RESET_ALL}")  # 实时打印失败信息
+                failed_colos.append(cfcolo)
+                print(f"{Fore.RED}❌ {cfcolo} 测试失败{Style.RESET_ALL}")
 
         # Git提交
         if args.git_commit and success_count > 0:
             logging.info(f"{Color.CYAN}正在提交结果到Git仓库...{Color.RESET}")
             git_success = CFSpeedTester.git_commit_and_push(args.type)
 
-        # 构造包含失败详细信息的状态消息
-        total = len(selected_colos)
-        status_msg = (
-            f"✅ {args.type.upper()} 测试完成\n"
-            f"成功: {success_count}/{total}\n"
-            f"失败: {total - success_count}"
-            f"{' (已提交Git)' if git_success else ''}"
-            f"\n🚫 失败节点: {', '.join(failed_colos) if failed_colos else '无'}"
-        )
-        
+        # 构造状态消息
+        timestamp = datetime.now().strftime("%m/%d %H:%M")
+        ddns_triggered = success_count > 0  # 判断是否有触发DNS更新
+        status_msg = [
+            f"🌐 CFST更新维护 - {timestamp}",
+            "├─ 更新区域",
+            f"│  ├─ 类型: {args.type.upper()}",
+            f"│  ├─ ✅ 成功({success_count}/{len(selected_colos)}): {', '.join(success_colos) if success_colos else '无'}",
+            f"│  └─ ❌ 失败({len(failed_colos)}/{len(selected_colos)}): {', '.join(failed_colos) if failed_colos else '无'}",
+            "└─ 自动维护",
+            f"   └─ {'⚡ 已触发DDNS更新' if ddns_triggered else '🛠️ 无可用更新'}"
+        ]
+
     except Exception as e:
         error_message = f"❌ {args.type.upper()} 测试异常: {str(e)}"
         logging.error(f"{Color.RED}{error_message}{Color.RESET}", exc_info=True)
-        status_msg = error_message
+        status_msg = [error_message]
         return 1
         
     finally:
@@ -432,13 +440,13 @@ def main():
                 worker_url=os.getenv("CF_WORKER_URL"),
                 bot_token=os.getenv("TELEGRAM_BOT_TOKEN"),
                 chat_id=os.getenv("TELEGRAM_CHAT_ID"),
-                message=status_msg,
+                message="\n".join(status_msg),
                 secret_token=os.getenv("SECRET_TOKEN")
             )
         except Exception as e:
             logging.error(f"{Color.RED}Telegram 通知发送失败: {str(e)}{Color.RESET}")
+        
         logging.info(f"{Color.CYAN}=== 测试流程结束 ==={Color.RESET}")
-        # 终端彩色输出失败列表
         if failed_colos:
             print(f"\n{Fore.RED}=== 失败地区码 ==={Style.RESET_ALL}")
             for colo in failed_colos:

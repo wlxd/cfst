@@ -49,10 +49,6 @@ jobs:
       run: |
         python ip_checker.py -t ipv4
 
-    - name: Run ip_checker.py ipv6 script
-      run: |
-        python ip_checker.py -t ipv6
-
     - name: Run ip_checker.py proxy script
       run: |
         python ip_checker.py -t proxy

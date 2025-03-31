@@ -1,0 +1,55 @@
+2025-04-01 04:55:55,648 - INFO - 日志文件已创建: logs/ipv4/ip_check_20250401_045555.log
+2025-04-01 04:55:55,653 - ERROR - DNS解析失败 hk.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,653 - INFO - [HKG] 域名解析 hk.616049.xyz => 
+  - 无IP地址
+2025-04-01 04:55:55,656 - ERROR - DNS解析失败 us.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,657 - INFO - [LAX] 域名解析 us.616049.xyz => 
+  - 无IP地址
+2025-04-01 04:55:55,685 - INFO - [FRA] 域名解析 de.616049.xyz => 
+  - 172.67.14.155
+  - 172.67.10.144
+  - 172.67.141.17
+  - 172.67.4.20
+  - 172.67.9.162
+2025-04-01 04:55:55,688 - ERROR - DNS解析失败 sg.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,689 - INFO - [SIN] 域名解析 sg.616049.xyz => 
+  - 无IP地址
+2025-04-01 04:55:55,713 - INFO - [NRT] 域名解析 jp.616049.xyz => 
+  - 172.64.229.128
+2025-04-01 04:55:55,717 - ERROR - DNS解析失败 kr.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,717 - INFO - [ICN] 域名解析 kr.616049.xyz => 
+  - 无IP地址
+2025-04-01 04:55:55,744 - INFO - [AMS] 域名解析 nl.616049.xyz => 
+  - 172.67.156.222
+  - 172.67.192.185
+  - 172.67.184.240
+  - 172.67.255.84
+  - 172.67.217.1
+2025-04-01 04:55:55,763 - WARNING - 端口文件不存在: ddns/ipv4/SIN.txt
+2025-04-01 04:55:55,769 - WARNING - 端口文件不存在: ddns/ipv4/ICN.txt
+2025-04-01 04:55:55,772 - WARNING - 端口文件不存在: ddns/ipv4/AMS.txt
+2025-04-01 04:55:55,773 - ERROR - [HKG] ❌ hk.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,779 - ERROR - [LAX] ❌ us.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,793 - ERROR - [SIN] ❌ sg.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,796 - ERROR - [ICN] ❌ kr.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno 7] No address associated with hostname
+2025-04-01 04:55:55,965 - INFO - [AMS] ✅ nl.616049.xyz 连接成功
+2025-04-01 04:55:56,009 - INFO - [FRA] ✅ de.616049.xyz 连接成功
+2025-04-01 04:55:56,029 - INFO - [NRT] ✅ jp.616049.xyz 连接成功
+2025-04-01 04:55:56,031 - INFO - 
+========================================
+2025-04-01 04:55:56,032 - INFO - 总检测区域: 7
+2025-04-01 04:55:56,033 - INFO - ✅ 成功区域: 3
+2025-04-01 04:55:56,034 - ERROR - ❌ 失败区域: 4
+2025-04-01 04:55:56,034 - INFO - 触发更新区域: HKG,ICN,LAX,SIN
