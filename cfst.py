@@ -404,7 +404,7 @@ def main():
         for cfcolo in selected_colos:
             if tester._test_single_colo(cfcolo):
                 success_count += 1
-                success_colos.append(cfcolo)  # 记录成功colo
+                success_colos.append(cfcolo)
             else:
                 failed_colos.append(cfcolo)
                 print(f"{Fore.RED}❌ {cfcolo} 测试失败{Style.RESET_ALL}")
@@ -414,9 +414,9 @@ def main():
             logging.info(f"{Color.CYAN}正在提交结果到Git仓库...{Color.RESET}")
             git_success = CFSpeedTester.git_commit_and_push(args.type)
 
-        # 构造状态消息
+        # 构造状态消息（无论成功与否）
         timestamp = datetime.now().strftime("%m/%d %H:%M")
-        ddns_triggered = success_count > 0  # 判断是否有触发DNS更新
+        ddns_triggered = success_count > 0
         status_msg = [
             f"🌐 CFST更新维护 - {timestamp}",
             "├─ 更新区域",
@@ -434,6 +434,10 @@ def main():
         return 1
         
     finally:
+        # 确保 status_msg 被定义（处理未进入 try 块的情况）
+        if 'status_msg' not in locals():
+            status_msg = [f"🌐 CFST更新维护 - 未完成测试（严重错误）"]
+
         # 发送结果通知
         try:
             send_message_with_fallback(
