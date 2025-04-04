@@ -7,7 +7,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from colorama import init, Fore, Style
 
-from py.tg import send_telegram_message
+from py.tg import send_message_with_fallback
 
 # 初始化颜色输出
 init(autoreset=True)
@@ -221,7 +221,7 @@ if __name__ == '__main__':
         )
         
         # 发送通知
-        send_telegram_message(
+        send_message_with_fallback(
             worker_url=os.getenv("CF_WORKER_URL"),
             bot_token=os.getenv("TELEGRAM_BOT_TOKEN"),
             chat_id=os.getenv("TELEGRAM_CHAT_ID"),

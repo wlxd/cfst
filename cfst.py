@@ -33,7 +33,7 @@ from subprocess import CompletedProcess
 
 # 从本地模块导入
 from py.colo_emojis import colo_emojis
-from py.tg import send_telegram_message
+from py.tg import send_message_with_fallback
 
 # ---------------------------- 配置参数 ----------------------------
 ARCH_MAP = {
@@ -391,7 +391,7 @@ def main():
         
         # 发送开始通知
         start_msg = f"🚀 开始 {args.type.upper()} 测试，地区码: {', '.join(selected_colos)}"
-        send_telegram_message(
+        send_message_with_fallback(
             worker_url=os.getenv("CF_WORKER_URL"),
             bot_token=os.getenv("TELEGRAM_BOT_TOKEN"),
             chat_id=os.getenv("TELEGRAM_CHAT_ID"),
@@ -436,7 +436,7 @@ def main():
     finally:
         # 发送结果通知
         try:
-            send_telegram_message(
+            send_message_with_fallback(
                 worker_url=os.getenv("CF_WORKER_URL"),
                 bot_token=os.getenv("TELEGRAM_BOT_TOKEN"),
                 chat_id=os.getenv("TELEGRAM_CHAT_ID"),

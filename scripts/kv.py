@@ -3,6 +3,16 @@ import os
 import sys
 import time  # 新增导入time模块
 from dotenv import load_dotenv
+# 在文件顶部添加以下代码
+from pathlib import Path
+
+# 动态添加py目录到系统路径
+current_dir = Path(__file__).parent  # scripts目录
+project_root = current_dir.parent    # 项目根目录
+sys.path.append(str(project_root / "py"))  # 添加py目录
+
+# 然后导入tg模块
+from tg import send_message_with_fallback
 
 load_dotenv()
 
@@ -88,6 +98,21 @@ def append_to_kv(content):
     
     if response.ok:
         print("KV更新成功.")
+        # 新增：发送KV内容到Telegram
+        BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+        CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+        WORKER_URL = os.getenv("CF_WORKER_URL")
+        SECRET_TOKEN = os.getenv("SECRET_TOKEN")
+        if BOT_TOKEN and CHAT_ID:
+            # 直接使用更新后的内容
+            message = f"*KV更新成功*\n当前内容:\n```\n{updated_value}\n```"
+            send_message_with_fallback(
+                worker_url=WORKER_URL,
+                bot_token=BOT_TOKEN,
+                chat_id=CHAT_ID,
+                message=message,
+                secret_token=SECRET_TOKEN
+            )
     else:
         print(f"失败: {response.status_code}, {response.text}")
 

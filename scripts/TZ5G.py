@@ -5,6 +5,17 @@ import re
 import uuid
 import random
 import subprocess
+import os
+import sys
+from pathlib import Path
+
+# 动态添加py目录到系统路径
+current_dir = Path(__file__).parent  # scripts目录
+project_root = current_dir.parent    # 项目根目录
+sys.path.append(str(project_root / "py"))  # 添加py目录
+
+# 然后导入tg模块
+from tg import send_message_with_fallback
 
 def pad_data(data):
     padding_length = 16 - (len(data) % 16)
@@ -87,6 +98,7 @@ def main():
     if extracted_phone_number:
         register_user(data)
         subscription_url = login(extracted_phone_number)
+        # 在main函数中找到以下代码段
         if subscription_url:
             print(f"最终获取到的订阅地址: {subscription_url}")
             # 调用kv.py并传递订阅地址
@@ -94,8 +106,21 @@ def main():
                 subprocess.run(["python", "scripts/kv.py", subscription_url], check=True)
             except subprocess.CalledProcessError as e:
                 print(f"调用kv.py失败: {e}")
-        else:
-            print("未能获取订阅地址")
+            # 新增：发送订阅地址到Telegram
+            BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+            CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+            WORKER_URL = os.getenv("CF_WORKER_URL")
+            SECRET_TOKEN = os.getenv("SECRET_TOKEN")
+            if BOT_TOKEN and CHAT_ID:
+                send_message_with_fallback(
+                    worker_url=WORKER_URL,
+                    bot_token=BOT_TOKEN,
+                    chat_id=CHAT_ID,
+                    message=f"*新订阅地址*\n`{subscription_url}`",
+                    secret_token=SECRET_TOKEN
+                )
+            else:
+                print("未配置Telegram环境变量，跳过发送")
 
 if __name__ == "__main__":
     main()

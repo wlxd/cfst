@@ -11,7 +11,7 @@ from typing import Dict, List, Tuple
 from datetime import datetime
 
 from dotenv import load_dotenv
-from py.tg import send_telegram_message
+from py.tg import send_message_with_fallback
 
 # 加载环境变量
 load_dotenv()
@@ -307,7 +307,7 @@ def main():
     ]
 
     # 发送通知
-    send_telegram_message(
+    send_message_with_fallback(
         worker_url=os.getenv("CF_WORKER_URL"),
         bot_token=os.getenv("TELEGRAM_BOT_TOKEN"),
         chat_id=os.getenv("TELEGRAM_CHAT_ID"),
