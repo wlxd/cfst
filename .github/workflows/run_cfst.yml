@@ -69,4 +69,5 @@ jobs:
           git add .
           git commit -m "Auto-Update ${{ github.event.inputs.ip_type }} speed results - $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin main
+          git log -1 --stat
         fi
