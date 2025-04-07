@@ -3,7 +3,7 @@ name: Run proxy.py
 on:
   schedule:
     # 使用 cron 语法设置定时任务 (UTC 时间)
-    - cron: '5 * * * *'  # 每隔1小时第5分钟执行一次
+    - cron: '0 0 * * *'  # 每天0点0分执行一次
   workflow_dispatch:        # 允许手动触发
 
 jobs:
