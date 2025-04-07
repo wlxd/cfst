@@ -1,9 +1,9 @@
 name: Run tz5g.py
 
 on:
-  schedule:
+  # schedule:
     # 使用 cron 语法设置定时任务 (UTC 时间)
-    - cron: '10 * * * *'  # 每隔1小时第10分钟执行一次
+   #  - cron: '10 * * * *'  # 每隔1小时第10分钟执行一次
   workflow_dispatch:        # 允许手动触发
 
 jobs:
