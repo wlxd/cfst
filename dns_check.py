@@ -90,11 +90,11 @@ PROXY_MAP = {
     "ipv4": {
         "hk.616049.xyz": "HKG",
         "us.616049.xyz": "LAX",
-        "de.616049.xyz": "FRA",
-        "sg.616049.xyz": "SIN",
-        "jp.616049.xyz": "NRT",
-        "kr.616049.xyz": "ICN",
-        "nl.616049.xyz": "AMS"
+        "de.616049.xyz": "FRA"
+        #"sg.616049.xyz": "SIN",
+        #"jp.616049.xyz": "NRT",
+        #"kr.616049.xyz": "ICN",
+        #"nl.616049.xyz": "AMS"
     },
     "ipv6": {
         "hkv6.616049.xyz": "HKG",

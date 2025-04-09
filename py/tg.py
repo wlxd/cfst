@@ -30,7 +30,7 @@ def send_direct_telegram_message(bot_token, chat_id, message):
                 "text": message,
                 "parse_mode": "Markdown"  # 可选：支持Markdown格式
             },
-            timeout=10  # 设置10秒超时
+            timeout=3  # 设置3秒超时
         )
         
         # 检查响应状态码
@@ -81,7 +81,7 @@ def send_via_cloudflare_worker(worker_url, bot_token, chat_id, message, secret_t
             worker_url,
             data=json.dumps(payload),
             headers=headers,
-            timeout=15  # 设置稍长的超时时间
+            timeout=5  # 设置5秒超时时间
         )
         
         if response.status_code == 200:

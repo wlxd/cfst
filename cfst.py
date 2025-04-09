@@ -42,7 +42,7 @@ ARCH_MAP = {
     "armv7l": "armv7"
 }
 
-CFCOLO_LIST = ["HKG", "LAX", "NRT", "SIN", "FRA", "ICN", "AMS"]  # 支持单个或多个地区码
+CFCOLO_LIST = ["HKG", "LAX", "FRA"]  # 支持单个或多个地区码
 CLOUDFLARE_PORTS = [443]  # 支持单个或多个端口
 DEFAULT_PARAMS = {
     "tl": 500, "tll": 30, "tlr": 0.2,
