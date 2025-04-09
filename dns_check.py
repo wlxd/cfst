@@ -152,19 +152,23 @@ def get_port_from_speed(ip: str, ip_type: str, colo: str) -> int:
         return 443
 
 def test_connectivity(ip: str, port: int, timeout: float, retries: int) -> (bool, str):
-    """增加端口扫描前的ICMP ping检查"""
-    try:
-        # 先进行ICMP ping检测
-        subprocess.run(
-            ["ping", "-c", "1", "-W", "1", ip],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            check=True
-        )
-    except subprocess.CalledProcessError:
-        return False, "ICMP不可达"
-
     """测试IP端口连通性，返回状态和错误信息"""
+    github_actions = os.getenv('GITHUB_ACTIONS', 'false').lower() == 'true'
+    
+    if not github_actions:
+        try:
+            # 在非GitHub环境进行ICMP ping检测
+            subprocess.run(
+                ["ping", "-c", "1", "-W", "1", ip],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=True
+            )
+        except subprocess.CalledProcessError:
+            return False, "ICMP不可达"
+        except FileNotFoundError:
+            logging.warning("Ping命令不可用，跳过ICMP检测")
+    
     errors = []
     for _ in range(retries):
         try:
@@ -176,7 +180,7 @@ def test_connectivity(ip: str, port: int, timeout: float, retries: int) -> (bool
             errors.append(f"连接被拒绝")
         except OSError as e:
             errors.append(f"系统错误: {str(e)}")
-    return False, "，".join(errors[-1:])  # 仅返回最后一次错误
+    return False, "，".join(errors[-1:])
 
 def delete_cloudflare_record(host: str, ip: str, ip_type: str) -> bool:
     """删除Cloudflare DNS记录
