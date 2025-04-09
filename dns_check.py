@@ -353,11 +353,11 @@ def process_host(host: str, colo: str, args) -> dict:
             else:
                 # 删除DNS记录
                 if delete_cloudflare_record(host, ip, args.type):
-                    log(f"清理失效记录 {ip}", logging.WARNING, indent=3)
+                    log(f"清理失效DNS记录 {ip}", logging.WARNING, indent=3)
                     clean_data_files(ip, port, host, args.type, colo)
                     result["deleted"] += 1
                 else:
-                    log(f"删除记录失败 {ip}", logging.ERROR, indent=3)
+                    log(f"删除DNS记录失败 {ip}", logging.ERROR, indent=3)
                 result["failed_ips"].add(ip)
 
         # 节点健康状态判断
