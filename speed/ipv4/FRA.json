@@ -1,20 +1,11 @@
 [
   {
-    "ip": "104.19.235.95",
+    "ip": "104.18.19.223",
     "port": 443,
-    "speed": 0.0,
-    "emoji": "\ud83c\udde9\ud83c\uddea",
+    "speed": 4.3,
+    "emoji": "🇩🇪",
     "colo": "FRA",
     "country": "DE",
-    "timestamp": "2025-04-10T05:00:20.807781"
-  },
-  {
-    "ip": "104.20.63.122",
-    "port": 443,
-    "speed": 0.0,
-    "emoji": "\ud83c\udde9\ud83c\uddea",
-    "colo": "FRA",
-    "country": "DE",
-    "timestamp": "2025-04-10T05:00:20.807802"
+    "timestamp": "2025-04-10T06:13:24.931636"
   }
 ]

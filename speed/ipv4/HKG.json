@@ -3,45 +3,9 @@
     "ip": "104.17.130.47",
     "port": 443,
     "speed": 6.49,
-    "emoji": "🇭🇰",
+    "emoji": "\ud83c\udded\ud83c\uddf0",
     "colo": "HKG",
     "country": "HK",
     "timestamp": "2025-04-10T06:06:21.200109"
-  },
-  {
-    "ip": "104.17.189.242",
-    "port": 443,
-    "speed": 6.04,
-    "emoji": "🇭🇰",
-    "colo": "HKG",
-    "country": "HK",
-    "timestamp": "2025-04-10T06:06:21.200189"
-  },
-  {
-    "ip": "104.18.185.209",
-    "port": 443,
-    "speed": 0.0,
-    "emoji": "🇭🇰",
-    "colo": "HKG",
-    "country": "HK",
-    "timestamp": "2025-04-10T06:06:21.200218"
-  },
-  {
-    "ip": "104.19.209.172",
-    "port": 443,
-    "speed": 0.0,
-    "emoji": "🇭🇰",
-    "colo": "HKG",
-    "country": "HK",
-    "timestamp": "2025-04-10T06:06:21.200243"
-  },
-  {
-    "ip": "104.17.176.193",
-    "port": 443,
-    "speed": 0.0,
-    "emoji": "🇭🇰",
-    "colo": "HKG",
-    "country": "HK",
-    "timestamp": "2025-04-10T06:06:21.200267"
   }
 ]

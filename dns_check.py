@@ -90,8 +90,8 @@ PROXY_MAP = {
     "ipv4": {
         "hk.616049.xyz": "HKG",
         "us.616049.xyz": "LAX",
-        "de.616049.xyz": "FRA",
-        "sg.616049.xyz": "SIN"
+        "de.616049.xyz": "FRA"
+        #"sg.616049.xyz": "SIN",
         #"jp.616049.xyz": "NRT",
         #"kr.616049.xyz": "ICN",
         #"nl.616049.xyz": "AMS"
@@ -398,6 +398,7 @@ def main():
     # 初始化日志
     log_path = setup_logging(args.type)
     logging.info(f"启动维护任务 | 协议类型: {args.type.upper()}")
+    logging.info("-" * 50)
 
     # 获取代理配置
     proxies = PROXY_MAP[args.type]
