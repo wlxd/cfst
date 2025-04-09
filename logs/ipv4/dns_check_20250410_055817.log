@@ -1,0 +1,69 @@
+2025-04-10 05:58:17,408 - INFO - 启动维护任务 | 协议类型: IPV4
+2025-04-10 05:58:17,409 - INFO - [hk.616049.xyz (HKG)] 开始处理节点维护
+2025-04-10 05:58:27,423 - DEBUG - DNS解析重试中 hk.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-10 05:58:28,904 - INFO - [hk.616049.xyz (HKG)] ├─ 解析到 4 个IP: 162.159.34.112, 104.19.145.142, 104.18.175.93, 104.17.138.210
+2025-04-10 05:58:30,812 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [162.159.34.112:443] ✓
+2025-04-10 05:58:33,945 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [104.19.145.142:443] ✓
+2025-04-10 05:58:38,536 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [104.18.175.93:443] ✗ (超时: timed out)
+2025-04-10 05:58:38,541 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:39,762 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=hk.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 05:58:39,771 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:40,638 - DEBUG - https://api.cloudflare.com:443 "DELETE /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records/d0cc57e6b015a3af13e74c8941577df3 HTTP/1.1" 200 None
+2025-04-10 05:58:40,640 - INFO - 已删除 A 记录: 104.18.175.93
+2025-04-10 05:58:40,642 - WARNING - [hk.616049.xyz (HKG)] └─ 清理失效DNS记录 104.18.175.93
+2025-04-10 05:58:40,647 - INFO - 清理ddns/txt文件: 移除 104.18.175.93:443 相关条目
+2025-04-10 05:58:40,651 - INFO - 清理speed/json文件: 移除 104.18.175.93 相关条目
+2025-04-10 05:58:40,653 - INFO - 清理speed/txt文件: 移除 104.18.175.93:443 相关条目
+2025-04-10 05:58:40,752 - INFO - [hk.616049.xyz (HKG)] └─ 检测 [104.17.138.210:443] ✓
+2025-04-10 05:58:40,753 - INFO - [hk.616049.xyz (HKG)] ├─ 节点状态 ✓ 存活IP: 3
+2025-04-10 05:58:40,753 - INFO - ------------------------------
+2025-04-10 05:58:40,753 - INFO - [us.616049.xyz (LAX)] 开始处理节点维护
+2025-04-10 05:58:40,770 - INFO - [us.616049.xyz (LAX)] ├─ 解析到 1 个IP: 104.25.161.239
+2025-04-10 05:58:41,191 - INFO - [us.616049.xyz (LAX)] └─ 检测 [104.25.161.239:443] ✓
+2025-04-10 05:58:41,192 - INFO - [us.616049.xyz (LAX)] ├─ 节点状态 ✓ 存活IP: 1
+2025-04-10 05:58:41,192 - INFO - ------------------------------
+2025-04-10 05:58:41,192 - INFO - [de.616049.xyz (FRA)] 开始处理节点维护
+2025-04-10 05:58:41,215 - INFO - [de.616049.xyz (FRA)] ├─ 解析到 5 个IP: 104.16.98.225, 104.19.229.192, 104.20.63.122, 104.19.226.115, 104.19.235.95
+2025-04-10 05:58:45,980 - INFO - [de.616049.xyz (FRA)] │  └─ 检测 [104.16.98.225:443] ✗ (超时: timed out)
+2025-04-10 05:58:45,983 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:47,016 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=de.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 05:58:47,023 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:48,018 - DEBUG - https://api.cloudflare.com:443 "DELETE /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records/a638ec5d242d00afc6e57828b9bc6603 HTTP/1.1" 200 None
+2025-04-10 05:58:48,021 - INFO - 已删除 A 记录: 104.16.98.225
+2025-04-10 05:58:48,022 - WARNING - [de.616049.xyz (FRA)] └─ 清理失效DNS记录 104.16.98.225
+2025-04-10 05:58:48,026 - INFO - 清理ddns/txt文件: 移除 104.16.98.225:443 相关条目
+2025-04-10 05:58:48,027 - INFO - 清理speed/json文件: 移除 104.16.98.225 相关条目
+2025-04-10 05:58:48,029 - INFO - 清理speed/txt文件: 移除 104.16.98.225:443 相关条目
+2025-04-10 05:58:49,045 - INFO - [de.616049.xyz (FRA)] │  └─ 检测 [104.19.229.192:443] ✗ (ICMP不可达)
+2025-04-10 05:58:49,051 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:50,100 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=de.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 05:58:50,110 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:51,201 - DEBUG - https://api.cloudflare.com:443 "DELETE /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records/09a4181532b64d466e16eadc3a141d21 HTTP/1.1" 200 None
+2025-04-10 05:58:51,207 - INFO - 已删除 A 记录: 104.19.229.192
+2025-04-10 05:58:51,209 - WARNING - [de.616049.xyz (FRA)] └─ 清理失效DNS记录 104.19.229.192
+2025-04-10 05:58:51,210 - INFO - 清理ddns/txt文件: 移除 104.19.229.192:443 相关条目
+2025-04-10 05:58:51,212 - INFO - 清理speed/json文件: 移除 104.19.229.192 相关条目
+2025-04-10 05:58:51,213 - INFO - 清理speed/txt文件: 移除 104.19.229.192:443 相关条目
+2025-04-10 05:58:51,752 - INFO - [de.616049.xyz (FRA)] │  └─ 检测 [104.20.63.122:443] ✓
+2025-04-10 05:58:56,588 - INFO - [de.616049.xyz (FRA)] │  └─ 检测 [104.19.226.115:443] ✗ (超时: timed out)
+2025-04-10 05:58:56,591 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:57,581 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=de.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 05:58:57,587 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 05:58:58,553 - DEBUG - https://api.cloudflare.com:443 "DELETE /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records/3656e2fc5d1690a330c4e9b198a5e09c HTTP/1.1" 200 None
+2025-04-10 05:58:58,556 - INFO - 已删除 A 记录: 104.19.226.115
+2025-04-10 05:58:58,558 - WARNING - [de.616049.xyz (FRA)] └─ 清理失效DNS记录 104.19.226.115
+2025-04-10 05:58:58,560 - INFO - 清理ddns/txt文件: 移除 104.19.226.115:443 相关条目
+2025-04-10 05:58:58,561 - INFO - 清理speed/json文件: 移除 104.19.226.115 相关条目
+2025-04-10 05:58:58,562 - INFO - 清理speed/txt文件: 移除 104.19.226.115:443 相关条目
+2025-04-10 05:58:59,112 - INFO - [de.616049.xyz (FRA)] └─ 检测 [104.19.235.95:443] ✓
+2025-04-10 05:58:59,112 - INFO - [de.616049.xyz (FRA)] ├─ 节点状态 ✓ 存活IP: 2
+2025-04-10 05:58:59,113 - INFO - ------------------------------
+2025-04-10 05:58:59,113 - INFO - [sg.616049.xyz (SIN)] 开始处理节点维护
+2025-04-10 05:58:59,118 - DEBUG - DNS解析重试中 sg.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-10 05:59:00,122 - DEBUG - DNS解析重试中 sg.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-10 05:59:01,126 - DEBUG - DNS解析重试中 sg.616049.xyz: [Errno 7] No address associated with hostname
+2025-04-10 05:59:02,127 - WARNING - [sg.616049.xyz (SIN)] ├─ 无有效DNS记录，触发紧急更新
+2025-04-10 05:59:42,912 - ERROR - CFST更新失败: None
+2025-04-10 05:59:42,914 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2025-04-10 05:59:48,930 - DEBUG - Starting new HTTPS connection (1): tg.eytan.cn:443
+2025-04-10 05:59:51,173 - DEBUG - https://tg.eytan.cn:443 "POST / HTTP/1.1" 200 25

@@ -90,8 +90,8 @@ PROXY_MAP = {
     "ipv4": {
         "hk.616049.xyz": "HKG",
         "us.616049.xyz": "LAX",
-        "de.616049.xyz": "FRA"
-        #"sg.616049.xyz": "SIN",
+        "de.616049.xyz": "FRA",
+        "sg.616049.xyz": "SIN"
         #"jp.616049.xyz": "NRT",
         #"kr.616049.xyz": "ICN",
         #"nl.616049.xyz": "AMS"
@@ -429,11 +429,11 @@ def main():
         
         # 添加分隔线（最后一个节点后不加）
         if idx < len(proxies)-1:
-            logging.info("-" * 30)
+            logging.info("-" * 50)
 
     # 重构后的中文通知模板
     message = [
-        f"🌐 代理节点状态报告 - {timestamp}",
+        f"🌐 节点状态报告 - {timestamp}",
         "├─ 健康检查汇总",
         f"│  ├─ 协议类型: {args.type.upper()}",
         f"│  ├─ 正常节点: {report['success_nodes']}/{report['total_nodes']}",

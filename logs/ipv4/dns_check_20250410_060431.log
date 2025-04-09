@@ -1,0 +1,25 @@
+2025-04-10 06:04:31,109 - INFO - 启动维护任务 | 协议类型: IPV4
+2025-04-10 06:04:31,109 - INFO - [hk.616049.xyz (HKG)] 开始处理节点维护
+2025-04-10 06:04:31,357 - INFO - [hk.616049.xyz (HKG)] ├─ 解析到 5 个IP: 104.17.199.144, 104.17.179.62, 104.18.73.112, 104.17.171.192, 190.93.244.224
+2025-04-10 06:04:35,953 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [104.17.199.144:443] ✗ (超时: timed out)
+2025-04-10 06:04:35,958 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 06:04:37,117 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=hk.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 06:04:37,125 - ERROR - [hk.616049.xyz (HKG)] └─ 删除DNS记录失败 104.17.199.144
+2025-04-10 06:04:41,720 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [104.17.179.62:443] ✗ (超时: timed out)
+2025-04-10 06:04:41,724 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 06:04:42,612 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=hk.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 06:04:42,620 - ERROR - [hk.616049.xyz (HKG)] └─ 删除DNS记录失败 104.17.179.62
+2025-04-10 06:04:47,197 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [104.18.73.112:443] ✗ (超时: timed out)
+2025-04-10 06:04:47,204 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 06:04:48,105 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=hk.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 06:04:48,108 - ERROR - [hk.616049.xyz (HKG)] └─ 删除DNS记录失败 104.18.73.112
+2025-04-10 06:04:52,692 - INFO - [hk.616049.xyz (HKG)] │  └─ 检测 [104.17.171.192:443] ✗ (超时: timed out)
+2025-04-10 06:04:52,695 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 06:04:53,586 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=hk.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 06:04:53,590 - ERROR - [hk.616049.xyz (HKG)] └─ 删除DNS记录失败 104.17.171.192
+2025-04-10 06:04:58,182 - INFO - [hk.616049.xyz (HKG)] └─ 检测 [190.93.244.224:443] ✗ (超时: timed out)
+2025-04-10 06:04:58,187 - DEBUG - Starting new HTTPS connection (1): api.cloudflare.com:443
+2025-04-10 06:04:59,108 - DEBUG - https://api.cloudflare.com:443 "GET /client/v4/zones/c5d4bbdadb56798a835983d5b6673760/dns_records?name=hk.616049.xyz&type=A HTTP/1.1" 200 None
+2025-04-10 06:04:59,115 - ERROR - [hk.616049.xyz (HKG)] └─ 删除DNS记录失败 190.93.244.224
+2025-04-10 06:04:59,116 - WARNING - [hk.616049.xyz (HKG)] ├─ 节点状态 ✗ 存活IP: 0
+2025-04-10 06:04:59,116 - WARNING - [hk.616049.xyz (HKG)] ├─ 尝试触发自动更新...
