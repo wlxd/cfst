@@ -1,126 +1,132 @@
 ```markdown
-# Cloudflare 节点测速与DNS管理工具
+# Cloudflare 智能节点测速与维护系统
 
-自动化测试Cloudflare节点速度，动态更新DNS记录，并提供健康检查与通知功能。
+![GitHub](https://img.shields.io/badge/License-MIT-blue) ![Python](https://img.shields.io/badge/Python-3.8%2B-green) ![Cloudflare](https://img.shields.io/badge/Cloudflare-Workers-orange)
 
-## 功能特性
+一个自动化管理Cloudflare节点的工具集，支持测速、DNS动态更新、健康检查与失效清理。
 
-- **多协议支持**：IPv4/IPv6/Proxy
-- **节点测速**：按地区码批量测试并筛选最优节点
-- **DNS管理**：自动更新/删除Cloudflare DNS记录
-- **健康检查**：代理连通性检测与自动修复
-- **多平台通知**：Telegram实时通知测试结果
-- **日志追踪**：分类存储测速日志与操作记录
+---
 
-## 环境要求
+## 🌟 核心功能
 
-- Python 3.8+
-- 依赖库：
-  ```bash
-  pip install colorama python-dotenv requests
-  ```
+- **多协议测速**  
+  支持 `IPv4`/`IPv6`/`Proxy` 协议，覆盖全球主流Cloudflare节点。
+- **智能DNS更新**  
+  根据测速结果动态更新最优节点，支持多地区、多端口配置。
+- **节点健康监控**  
+  定时检测节点可用性，自动清理失效DNS记录。
+- **多平台通知**  
+  集成Telegram通知（直连或通过Cloudflare Worker转发）。
+- **Git集成**  
+  支持测速结果自动提交至Git仓库。
 
-## 快速开始
+---
 
-### 1. 环境配置
+## 📁 文件说明
 
-创建 `.env` 文件：
+| 文件名          | 功能描述                                                                 |
+|-----------------|------------------------------------------------------------------------|
+| `_worker.js`    | Cloudflare Worker脚本，用于安全转发Telegram通知。                       |
+| `cfst.py`       | 主测速脚本，支持多地区、多协议测速与DNS更新。                           |
+| `colo_emojis.py`| 地区代码与国旗Emoji的映射数据。                                        |
+| `ddns.py`       | 动态DNS记录管理，根据测速结果更新Cloudflare DNS。                      |
+| `delete_dns.py` | 批量删除指定DNS记录的工具。                                            |
+| `dns_check.py`  | 节点健康检查与自动维护脚本。                                           |
+| `tg.py`         | Telegram消息通知模块，支持直连和代理发送。                             |
+
+---
+
+## ⚙️ 环境配置
+
+### 依赖安装
+```bash
+pip install -r requirements.txt
+```
+
+### 环境变量
+在项目根目录创建 `.env` 文件，配置以下参数：
 ```ini
-CLOUDFLARE_EMAIL=您的Cloudflare邮箱
-CLOUDFLARE_API_KEY=您的Global API Key
-CLOUDFLARE_ZONE_ID=域名区域ID
-TELEGRAM_BOT_TOKEN=Telegram机器人Token
-TELEGRAM_CHAT_ID=您的Chat ID
-CF_WORKER_URL=Telegram消息转发Worker地址（可选）
-SECRET_TOKEN=消息验证Token（可选）
+# Cloudflare API
+CLOUDFLARE_EMAIL = "your_cloudflare_email@example.com"
+CLOUDFLARE_API_KEY = "your_cloudflare_api_key"
+CLOUDFLARE_ZONE_ID = "your_zone_id"
+
+# Telegram 通知
+TELEGRAM_BOT_TOKEN = "your_bot_token"
+TELEGRAM_CHAT_ID = "your_chat_id"
+CF_WORKER_URL = "https://your-worker.subdomain.workers.dev"  # 可选
+SECRET_TOKEN = "your_secure_token"  # 与_worker.js中的SECRET_TOKEN一致
 ```
 
-### 2. 核心脚本说明
+---
 
-#### 测速主程序 (`cfst.py`)
+## 🚀 使用指南
+
+### 1. 启动测速任务
 ```bash
-# 基本用法
-python cfst.py -t <协议类型> [--git-commit]
-
-# 示例：测试香港、洛杉矶的IPv4节点并提交Git
-python cfst.py -t ipv4 -c HKG,LAX --git-commit
+# 测试IPv4节点（示例）
+python cfst.py -t ipv4 --colos HKG,LAX,NRT --git-commit
 ```
+**参数说明**：
+- `-t`: 协议类型 (`ipv4`/`ipv6`/`proxy`)
+- `--colos`: 指定地区码（逗号分隔）
+- `--git-commit`: 自动提交结果至Git仓库
 
-#### 健康检查 (`ip_checker.py`)
+---
+
+### 2. 手动更新DNS记录
 ```bash
-# 检查IPv4代理状态并自动修复
-python ip_checker.py -t ipv4 --git-commit
+# 更新IPv4香港节点
+python ddns.py -t ipv4 --colos HKG
 ```
 
-#### DNS管理 (`ddns.py`)
+---
+
+### 3. 节点健康检查
 ```bash
-# 更新指定colo的DNS记录
-python ddns.py -t ipv4 --colos HKG,LAX
+# 检查IPv4节点状态
+python dns_check.py -t ipv4 --timeout 2 --retries 3 --git-commit
 ```
+**参数说明**：
+- `--timeout`: 连接超时时间（秒）
+- `--retries`: 最大重试次数
 
-#### 记录删除 (`delete_dns.py`)
+---
+
+### 4. 删除指定DNS记录
 ```bash
-# 删除指定国家代码的DNS记录
-python delete_dns.py -t ipv4 --sub HK,US
+# 删除IPv4美国节点
+python delete_dns.py -t ipv4 --sub US
 ```
 
-### 3. 参数说明
+---
 
-| 参数 | 说明 |
-|------|------|
-| `-t/--type` | 协议类型 (ipv4/ipv6/proxy) |
-| `-c/--colos` | 地区码列表（逗号分隔） |
-| `--git-commit` | 自动提交结果到Git仓库 |
+## 📊 通知示例
 
-## 文件结构
-
+成功测速后，Telegram将收到如下格式通知：
 ```
-.
-├── cfst.py                # 主测速程序
-├── ddns.py                # DNS记录更新
-├── delete_dns.py          # DNS记录删除
-├── ip_checker.py          # 健康检查
-├── colo_emojis.py         # 地区码映射
-├── tg.py                  # Telegram通知模块
-├── py/                    # 工具模块
-│   ├── colo_emojis.py
-│   └── tg.py
-├── logs/                  # 日志目录
-├── results/               # 原始测速结果
-└── speed/                 # 处理后的节点数据
+🌐 CFST更新维护 - 08/25 14:30
+├─ 更新区域
+│  ├─ 类型: IPV4
+│  ├─ ✅ 成功(3/3): HKG, LAX, NRT
+│  └─ ❌ 失败(0/3): 无
+└─ 自动维护
+   └─ ⚡ 已触发DDNS更新
 ```
 
-## 示例场景
+---
 
-### 日常维护流程
-1. **定时测速**  
-   ```bash
-   python cfst.py -t ipv4 --git-commit
-   ```
-2. **健康检查**  
-   ```bash
-   python ip_checker.py -t ipv4 --timeout 2 --retries 5
-   ```
-3. **查看日志**  
-   ```bash
-   tail -f logs/ipv4/cfst_*.log
-   ```
+## 📝 注意事项
 
-## 注意事项
+1. **地区码支持**  
+   修改 `CFCOLO_LIST`（在 `cfst.py` 中）以扩展支持的节点地区。
+2. **端口配置**  
+   默认测速端口为 `443`，可在 `CLOUDFLARE_PORTS` 中修改。
+3. **日志管理**  
+   日志文件保存在 `logs/` 目录，按协议类型分类。
 
-1. **权限要求**：
-   - Cloudflare API需要`DNS:Edit`权限
-   - 系统需要安装`curl`和`git`命令行工具
+---
 
-2. **特殊处理**：
-   - IPv6地址会自动添加`[]`包裹
-   - 代理类型使用`proxy.{国家码}`子域名格式
+## 📜 开源协议
 
-3. **错误处理**：
-   - 测速失败时自动清理临时文件
-   - API错误自动重试3次
-
-## 许可证
-
-MIT License
-```
+本项目基于 [MIT License](LICENSE) 开源。

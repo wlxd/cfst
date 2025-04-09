@@ -1,4 +1,4 @@
-name: Run ip_checker.py
+name: Run dns_check.py
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:        # 允许手动触发
 
 jobs:
-  ip_checker:
+  dns_check:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai  # 设置为你本地的时区
@@ -45,13 +45,13 @@ jobs:
         echo "CF_KV_NAMESPACE_ID=${{ secrets.CF_KV_NAMESPACE_ID }}" >> .env
         echo "CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}" >> .env
     
-    - name: Run ip_checker.py ipv4 script
+    - name: Run dns_check.py ipv4 script
       run: |
-        python ip_checker.py -t ipv4
+        python dns_check.py -t ipv4
 
-    - name: Run ip_checker.py proxy script
+    - name: Run dns_check.py proxy script
       run: |
-        python ip_checker.py -t proxy
+        python dns_check.py -t proxy
 
     - name: Commit and push changes
       run: |

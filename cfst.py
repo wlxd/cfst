@@ -45,7 +45,7 @@ ARCH_MAP = {
 CFCOLO_LIST = ["HKG", "LAX", "NRT", "SIN", "FRA", "ICN", "AMS"]  # 支持单个或多个地区码
 CLOUDFLARE_PORTS = [443]  # 支持单个或多个端口
 DEFAULT_PARAMS = {
-    "tl": 300, "tll": 30, "tlr": 0.2,
+    "tl": 500, "tll": 30, "tlr": 0.2,
     "n": 500, "dn": 5, "p": 5
 }
 
