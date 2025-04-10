@@ -1,0 +1,51 @@
+2025-04-11 04:32:03,580 - root - INFO - [1m启动 PROXY 测试[0m
+2025-04-11 04:32:04,123 - root - INFO - [96m正在测试 HKG (端口: 443)...[0m
+2025-04-11 04:32:37,403 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/HKG.json[0m
+2025-04-11 04:32:37,403 - root - INFO - [写入HKG.txt] 62.192.175.250:443#🇭🇰HK┃⚡15.49MB/s
+2025-04-11 04:32:37,403 - root - INFO - [写入HKG.txt] 156.254.114.104:443#🇭🇰HK┃⚡12.96MB/s
+2025-04-11 04:32:37,403 - root - INFO - [写入HKG.txt] 47.76.218.163:443#🇭🇰HK┃⚡0.42MB/s
+2025-04-11 04:32:37,404 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/HKG.txt[0m
+2025-04-11 04:32:37,404 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/HKG_20250331-055024.csv[0m
+2025-04-11 04:32:39,424 - root - INFO - [96m正在测试 LAX (端口: 443)...[0m
+2025-04-11 04:32:57,542 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/LAX.json[0m
+2025-04-11 04:32:57,543 - root - INFO - [写入LAX.txt] 74.48.125.113:443#🇺🇸US┃⚡69.58MB/s
+2025-04-11 04:32:57,543 - root - INFO - [写入LAX.txt] 74.48.46.35:443#🇺🇸US┃⚡67.29MB/s
+2025-04-11 04:32:57,543 - root - INFO - [写入LAX.txt] 74.48.136.105:443#🇺🇸US┃⚡64.35MB/s
+2025-04-11 04:32:57,543 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/LAX.txt[0m
+2025-04-11 04:32:57,544 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/LAX_20250331-055123.csv[0m
+2025-04-11 04:33:01,510 - root - INFO - [96m正在测试 NRT (端口: 443)...[0m
+2025-04-11 04:33:36,684 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/NRT.json[0m
+2025-04-11 04:33:36,684 - root - INFO - [写入NRT.txt] 45.77.28.75:443#🇯🇵JP┃⚡34.88MB/s
+2025-04-11 04:33:36,684 - root - INFO - [写入NRT.txt] 54.199.222.232:443#🇯🇵JP┃⚡22.40MB/s
+2025-04-11 04:33:36,685 - root - INFO - [写入NRT.txt] 185.39.31.39:443#🇯🇵JP┃⚡12.03MB/s
+2025-04-11 04:33:36,685 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/NRT.txt[0m
+2025-04-11 04:33:36,685 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/NRT_20250331-055149.csv[0m
+2025-04-11 04:33:38,692 - root - INFO - [96m正在测试 SIN (端口: 443)...[0m
+2025-04-11 04:34:17,640 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/SIN.json[0m
+2025-04-11 04:34:17,640 - root - INFO - [写入SIN.txt] 160.22.79.179:443#🇸🇬SG┃⚡15.70MB/s
+2025-04-11 04:34:17,640 - root - INFO - [写入SIN.txt] 104.248.145.216:443#🇸🇬SG┃⚡15.05MB/s
+2025-04-11 04:34:17,641 - root - INFO - [写入SIN.txt] 188.64.108.9:443#🇸🇬SG┃⚡0.01MB/s
+2025-04-11 04:34:17,641 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/SIN.txt[0m
+2025-04-11 04:34:17,641 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/SIN_20250331-055243.csv[0m
+2025-04-11 04:34:21,035 - root - INFO - [96m正在测试 FRA (端口: 443)...[0m
+2025-04-11 04:34:51,942 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/FRA.json[0m
+2025-04-11 04:34:51,942 - root - INFO - [写入FRA.txt] 89.185.84.32:443#🇩🇪DE┃⚡38.68MB/s
+2025-04-11 04:34:51,942 - root - INFO - [写入FRA.txt] 37.48.90.120:443#🇩🇪DE┃⚡36.08MB/s
+2025-04-11 04:34:51,943 - root - INFO - [写入FRA.txt] 139.162.191.101:443#🇩🇪DE┃⚡33.09MB/s
+2025-04-11 04:34:51,943 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/FRA.txt[0m
+2025-04-11 04:34:51,943 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/FRA_20250331-055344.csv[0m
+2025-04-11 04:34:53,998 - root - INFO - [96m正在测试 ICN (端口: 443)...[0m
+2025-04-11 04:35:30,925 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/ICN.json[0m
+2025-04-11 04:35:30,925 - root - INFO - [写入ICN.txt] 4.230.8.95:443#🇰🇷KR┃⚡24.10MB/s
+2025-04-11 04:35:30,925 - root - INFO - [写入ICN.txt] 158.180.82.186:443#🇰🇷KR┃⚡20.11MB/s
+2025-04-11 04:35:30,925 - root - INFO - [写入ICN.txt] 158.179.171.53:443#🇰🇷KR┃⚡19.18MB/s
+2025-04-11 04:35:30,926 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/ICN.txt[0m
+2025-04-11 04:35:30,926 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/ICN_20250331-055442.csv[0m
+2025-04-11 04:35:33,193 - root - INFO - [96m正在测试 AMS (端口: 443)...[0m
+2025-04-11 04:36:08,566 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/proxy/AMS.json[0m
+2025-04-11 04:36:08,567 - root - INFO - [写入AMS.txt] 23.94.217.248:443#🇳🇱NL┃⚡38.25MB/s
+2025-04-11 04:36:08,567 - root - INFO - [写入AMS.txt] 193.93.153.82:443#🇳🇱NL┃⚡20.74MB/s
+2025-04-11 04:36:08,567 - root - INFO - [写入AMS.txt] 185.246.152.79:443#🇳🇱NL┃⚡17.84MB/s
+2025-04-11 04:36:08,567 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/proxy/AMS.txt[0m
+2025-04-11 04:36:08,567 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/proxy/AMS_20250331-055541.csv[0m
+2025-04-11 04:36:11,249 - root - INFO - [96m=== 测试流程结束 ===[0m

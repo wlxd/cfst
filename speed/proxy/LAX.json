@@ -1,47 +1,29 @@
 [
   {
-    "ip": "74.48.98.159",
+    "ip": "74.48.125.113",
     "port": 443,
-    "speed": 84.48,
-    "emoji": "\ud83c\uddfa\ud83c\uddf8",
+    "speed": 69.58,
+    "emoji": "🇺🇸",
     "colo": "LAX",
     "country": "US",
-    "timestamp": "2025-03-31T05:51:47.066450"
+    "timestamp": "2025-04-11T04:32:57.542296"
   },
   {
-    "ip": "72.18.81.240",
+    "ip": "74.48.46.35",
     "port": 443,
-    "speed": 76.02,
-    "emoji": "\ud83c\uddfa\ud83c\uddf8",
+    "speed": 67.29,
+    "emoji": "🇺🇸",
     "colo": "LAX",
     "country": "US",
-    "timestamp": "2025-03-31T05:51:47.066475"
+    "timestamp": "2025-04-11T04:32:57.542323"
   },
   {
-    "ip": "72.18.80.159",
+    "ip": "74.48.136.105",
     "port": 443,
-    "speed": 74.45,
-    "emoji": "\ud83c\uddfa\ud83c\uddf8",
+    "speed": 64.35,
+    "emoji": "🇺🇸",
     "colo": "LAX",
     "country": "US",
-    "timestamp": "2025-03-31T05:51:47.066481"
-  },
-  {
-    "ip": "66.103.210.62",
-    "port": 443,
-    "speed": 70.69,
-    "emoji": "\ud83c\uddfa\ud83c\uddf8",
-    "colo": "LAX",
-    "country": "US",
-    "timestamp": "2025-03-31T05:51:47.066486"
-  },
-  {
-    "ip": "74.48.168.143",
-    "port": 443,
-    "speed": 41.14,
-    "emoji": "\ud83c\uddfa\ud83c\uddf8",
-    "colo": "LAX",
-    "country": "US",
-    "timestamp": "2025-03-31T05:51:47.066490"
+    "timestamp": "2025-04-11T04:32:57.542329"
   }
 ]
