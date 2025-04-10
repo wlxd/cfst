@@ -57,7 +57,7 @@ jobs:
 
     - name: Run cfst script based on ip_type
       run: |
-        python cfst.py -t ${{ github.event.inputs.ip_type }}
+        python cfst.py -t ${{ github.event.inputs.ip_type }} -a
 
     - name: Commit and push changes
       run: |

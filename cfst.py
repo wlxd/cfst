@@ -124,12 +124,14 @@ def setup_logging(ip_type: str):
 class CFSpeedTester:
     """Cloudflare 测速操作器（支持多协议类型）"""
     
-    def __init__(self, ip_type: str):
+    def __init__(self, ip_type: str, args):
         """初始化测速器
         参数:
             ip_type: 协议类型 (ipv4/ipv6/proxy)
+            args: 命令行参数
         """
         self.ip_type = ip_type
+        self.args = args  # 存储命令行参数
         # 结果文件存储路径
         self.results_dir = RESULTS_DIR / ip_type
         self.speed_dir = SPEED_DIR / ip_type
@@ -182,11 +184,11 @@ class CFSpeedTester:
             result_file = self._generate_result_path(cfcolo)
             result_file.touch()  # 创建空文件标记开始
             
-            # 执行测速测试
-            if not self._run_cfst_test(cfcolo, port, result_file):
+            # 执行测速测试（传递allip参数）
+            if not self._run_cfst_test(cfcolo, port, result_file, args.allip):
                 self._clean_all_colo_files(cfcolo)
                 return False
-    
+
             # 检查结果文件有效性
             if result_file.stat().st_size == 0:
                 logging.warning(f"{Color.YELLOW}结果文件为空，删除: {result_file}{Color.RESET}")
@@ -220,18 +222,19 @@ class CFSpeedTester:
             logging.error(f"{Color.RED}{cfcolo} 测试失败: {str(e)}{Color.RESET}")
             return False
 
-    def _run_cfst_test(self, cfcolo: str, port: int, result_file: Path) -> bool:
+    def _run_cfst_test(self, cfcolo: str, port: int, result_file: Path, allip: bool = False) -> bool:
         """执行CFST测速命令
         参数:
             cfcolo: 地区码
             port: 测试端口
             result_file: 结果文件路径
+            allip: 是否使用-allip参数
         返回:
             bool: 命令是否执行成功
         """
         cfst_path = self._get_cfst_binary()
         ip_file = BASE_DIR / f"{self.ip_type}.txt"  # IP列表文件
-
+    
         # 构建命令参数
         cmd = [
             str(cfst_path),
@@ -244,12 +247,15 @@ class CFSpeedTester:
             "-tlr", str(DEFAULT_PARAMS["tlr"]), # 丢包率阈值
             "-n", str(DEFAULT_PARAMS["n"]),     # 测速线程数
             "-tp", str(port),                   # 测试端口
-            "-allip", # 测速全部的IP
             "-dn", str(DEFAULT_PARAMS["dn"]),   # 下载测速数量
             "-p", str(DEFAULT_PARAMS["p"]),     # 显示结果数量
             "-httping"                          # 启用HTTPing测试
         ]
-
+        
+        # 根据参数添加-allip选项
+        if allip:
+            cmd.append("-allip")
+    
         try:
             logging.info(f"{Color.CYAN}正在测试 {cfcolo} (端口: {port})...{Color.RESET}")
             # 执行测速命令
@@ -447,6 +453,8 @@ def parse_arguments():
                         help="测试协议类型")
     parser.add_argument("-c", "--colos", default="HKG,LAX,NRT,SIN,FRA,ICN,AMS",
                         help="逗号分隔的colo地区码列表")
+    parser.add_argument("-a", "--allip", action="store_true",
+                        help="测速全部的IP（添加-allip参数到cfst命令）")
     parser.add_argument("--git-commit", action="store_true",
                         help="测试完成后提交结果到Git仓库")
     return parser.parse_args()
@@ -481,7 +489,7 @@ def main():
         )
 
         # 初始化测速器并执行测试
-        tester = CFSpeedTester(args.type)
+        tester = CFSpeedTester(args.type, args)
         for cfcolo in selected_colos:
             if tester._test_single_colo(cfcolo):
                 success_count += 1

@@ -302,7 +302,7 @@ def trigger_cfst_update(colo: str, ip_type: str, git_commit: bool) -> bool:
         是否成功触发
     """
     try:
-        cmd = ["python", "cfst.py", "-t", ip_type, "-c", colo]
+        cmd = ["python", "cfst.py", "-t", ip_type, "-c", colo, "-a"]
         if git_commit:
             cmd.append("--git-commit")
         subprocess.run(cmd, check=True, stdout=sys.stdout, stderr=sys.stderr)
