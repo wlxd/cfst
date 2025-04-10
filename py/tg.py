@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 import json
 from dotenv import load_dotenv
@@ -6,32 +7,22 @@ from dotenv import load_dotenv
 # 加载 .env 文件中的环境变量
 load_dotenv()
 
+def escape_markdown(text):
+    escape_chars = r'_*[]()~`>#+-=|{}.!'
+    return re.sub(f'([{re.escape(escape_chars)}])', r'\\\1', text)
+
 def send_direct_telegram_message(bot_token, chat_id, message):
-    """
-    直接通过Telegram API发送消息（不经过代理）
-    
-    参数：
-        bot_token: Telegram机器人的令牌
-        chat_id:  目标聊天频道的ID
-        message:  要发送的文本消息
-    
-    返回：
-        dict: 包含状态和响应信息的字典
-    """
-    # 构造Telegram API的URL
-    api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    
-    try:
-        # 发送POST请求到Telegram API
-        response = requests.post(
-            api_url,
-            json={
-                "chat_id": chat_id,
-                "text": message,
-                "parse_mode": "Markdown"  # 可选：支持Markdown格式
-            },
-            timeout=3  # 设置3秒超时
-        )
+    # 转义消息内容
+    escaped_message = escape_markdown(message)
+    response = requests.post(
+        api_url,
+        json={
+            "chat_id": chat_id,
+            "text": escaped_message,
+            "parse_mode": "MarkdownV2"  # 使用更严格的 MarkdownV2
+        },
+        timeout=3
+    )
         
         # 检查响应状态码
         if response.status_code == 200:
@@ -43,9 +34,9 @@ def send_direct_telegram_message(bot_token, chat_id, message):
                 "code": response.status_code,
                 "message": response.text
             }
-    
+
     except requests.exceptions.RequestException as e:
-        # 处理网络请求异常
+        print(f"原始消息内容：{message}")  # 调试日志
         return {
             "status": "error",
             "method": "direct",
