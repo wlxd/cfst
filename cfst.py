@@ -185,7 +185,8 @@ class CFSpeedTester:
             result_file.touch()  # 创建空文件标记开始
             
             # 执行测速测试（传递allip参数）
-            if not self._run_cfst_test(cfcolo, port, result_file, args.allip):
+            if not self._run_cfst_test(cfcolo, port, result_file, self.args.allip):
+
                 self._clean_all_colo_files(cfcolo)
                 return False
 
