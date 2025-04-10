@@ -1,0 +1,14 @@
+2025-04-10 18:20:10,631 - root - INFO - [1m启动 IPV4 测试[0m
+2025-04-10 18:20:10,632 - root - INFO - [96m正在测试 AMS (端口: 443)...[0m
+2025-04-10 18:20:24,527 - root - WARNING - [93m结果文件为空，删除: /home/runner/work/cfst/cfst/results/ipv4/AMS_20250410-182010.csv[0m
+2025-04-10 18:20:24,528 - root - INFO - [96m正在测试 ICN (端口: 443)...[0m
+2025-04-10 18:20:38,487 - root - WARNING - [93m结果文件为空，删除: /home/runner/work/cfst/cfst/results/ipv4/ICN_20250410-182024.csv[0m
+2025-04-10 18:20:38,488 - root - INFO - [96m正在测试 NRT (端口: 443)...[0m
+2025-04-10 18:20:54,633 - root - INFO - [92m已保存最佳结果到: /home/runner/work/cfst/cfst/speed/ipv4/NRT.json[0m
+2025-04-10 18:20:54,633 - root - INFO - [写入NRT.txt] 172.65.90.14:443#🇯🇵JP┃⚡115.85MB/s
+2025-04-10 18:20:54,634 - root - INFO - [92m已生成节点信息文件: /home/runner/work/cfst/cfst/speed/ipv4/NRT.txt[0m
+2025-04-10 18:20:54,634 - root - INFO - [93m已清理旧文件: /home/runner/work/cfst/cfst/results/ipv4/NRT_20250410-131855.csv[0m
+2025-04-10 18:20:54,785 - root - ERROR - [91mDNS更新失败: NRT - Command '['/opt/hostedtoolcache/Python/3.9.21/x64/bin/python', '-u', 'ddns.py', '-t', 'ipv4', '--colos', 'NRT']' returned non-zero exit status 1.[0m
+2025-04-10 18:20:54,786 - root - INFO - [96m正在测试 SIN (端口: 443)...[0m
+2025-04-10 18:21:08,679 - root - WARNING - [93m结果文件为空，删除: /home/runner/work/cfst/cfst/results/ipv4/SIN_20250410-182054.csv[0m
+2025-04-10 18:21:08,681 - root - INFO - [96m=== 测试流程结束 ===[0m
