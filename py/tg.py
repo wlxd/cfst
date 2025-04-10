@@ -12,17 +12,21 @@ def escape_markdown(text):
     return re.sub(f'([{re.escape(escape_chars)}])', r'\\\1', text)
 
 def send_direct_telegram_message(bot_token, chat_id, message):
-    # 转义消息内容
-    escaped_message = escape_markdown(message)
-    response = requests.post(
-        api_url,
-        json={
-            "chat_id": chat_id,
-            "text": escaped_message,
-            "parse_mode": "MarkdownV2"  # 使用更严格的 MarkdownV2
-        },
-        timeout=3
-    )
+    """直接发送Telegram消息"""
+    escape_chars = r'_*[]()~`>#+-=|{}.!'
+    escaped_message = re.sub(f'([{re.escape(escape_chars)}])', r'\\\1', message)
+    api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+
+    try:
+        response = requests.post(
+            api_url,
+            json={
+                "chat_id": chat_id,
+                "text": escaped_message,
+                "parse_mode": "MarkdownV2"
+            },
+            timeout=3
+        )
         
         # 检查响应状态码
         if response.status_code == 200:
@@ -36,11 +40,11 @@ def send_direct_telegram_message(bot_token, chat_id, message):
             }
 
     except requests.exceptions.RequestException as e:
-        print(f"原始消息内容：{message}")  # 调试日志
+        print(f"原始消息内容：{message}")
         return {
             "status": "error",
             "method": "direct",
-            "message": f"Request failed: {str(e)}"
+            "message": f"请求失败: {str(e)}"
         }
 
 def send_via_cloudflare_worker(worker_url, bot_token, chat_id, message, secret_token=None):
