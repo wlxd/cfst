@@ -1,0 +1,46 @@
+2025-04-11 22:18:20,626 - INFO - 日志文件已创建: logs/ipv4/ip_check_20250411_221820.log
+2025-04-11 22:18:20,644 - INFO - [HKG] 域名解析 hk.616049.xyz => 
+  - 104.17.130.47
+2025-04-11 22:18:20,660 - INFO - [LAX] 域名解析 us.616049.xyz => 
+  - 104.25.161.239
+2025-04-11 22:18:20,667 - INFO - [FRA] 域名解析 de.616049.xyz => 
+  - 104.18.19.223
+2025-04-11 22:18:20,678 - ERROR - DNS解析失败 sg.616049.xyz: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,678 - INFO - [SIN] 域名解析 sg.616049.xyz => 
+  - 无IP地址
+2025-04-11 22:18:20,700 - ERROR - DNS解析失败 jp.616049.xyz: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,701 - INFO - [NRT] 域名解析 jp.616049.xyz => 
+  - 无IP地址
+2025-04-11 22:18:20,709 - ERROR - DNS解析失败 kr.616049.xyz: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,710 - INFO - [ICN] 域名解析 kr.616049.xyz => 
+  - 无IP地址
+2025-04-11 22:18:20,727 - ERROR - DNS解析失败 nl.616049.xyz: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,727 - INFO - [AMS] 域名解析 nl.616049.xyz => 
+  - 无IP地址
+2025-04-11 22:18:20,738 - WARNING - 端口文件不存在: ddns/ipv4/AMS.txt
+2025-04-11 22:18:20,752 - INFO - [FRA] ✅ de.616049.xyz 连接成功
+2025-04-11 22:18:20,753 - INFO - [LAX] ✅ us.616049.xyz 连接成功
+2025-04-11 22:18:20,756 - INFO - [HKG] ✅ hk.616049.xyz 连接成功
+2025-04-11 22:18:20,780 - ERROR - [SIN] ❌ sg.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,786 - ERROR - [ICN] ❌ kr.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,794 - ERROR - [AMS] ❌ nl.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,816 - ERROR - [NRT] ❌ jp.616049.xyz 检测失败
+  解析IP:
+  - 无IP地址
+  错误原因: gaierror: [Errno -5] No address associated with hostname
+2025-04-11 22:18:20,816 - INFO - 
+========================================
+2025-04-11 22:18:20,816 - INFO - 总检测区域: 7
+2025-04-11 22:18:20,816 - INFO - ✅ 成功区域: 3
+2025-04-11 22:18:20,817 - ERROR - ❌ 失败区域: 4
+2025-04-11 22:18:20,817 - INFO - 触发更新区域: AMS,ICN,NRT,SIN
+2025-04-11 22:19:16,905 - ERROR - CFST更新失败，退出码: 1
